@@ -14,5 +14,10 @@ public class Pokemon {
 	private int sp_defBase;
 	private int velBase;
 	
+	private int hpMax;
+	private int hpActual;
+	private int atq;
+	private int def;
+	
 	private int exp;
 }
