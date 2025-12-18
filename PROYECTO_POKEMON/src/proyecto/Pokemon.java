@@ -2,11 +2,13 @@ package proyecto;
 
 public class Pokemon {
 	
-	
+	private int numPokedex;
 	private String nombre;
 	private String tipoPrimario;
 	private String tipoSecundario;
 	private int nivel;
+	private double peso;
+	private double altura;
 	
 	//Estadísticas base
 	private int hpBase;

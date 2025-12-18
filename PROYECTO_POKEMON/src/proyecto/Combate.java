@@ -1,11 +1,11 @@
 package proyecto;
 
-public class Combate {
+public abstract class Combate {
 	
-	private Pokemon miPokemon;
-	private Pokemon pokemonRival;
+	protected Pokemon miPokemon;
+	protected Pokemon pokemonRival;
 	
-	private Movimiento movimiento;
+	protected Movimiento movimiento;
 	
 	public void atacar(Pokemon yo, Pokemon rival, Movimiento ataque){
 		
@@ -20,6 +20,9 @@ public class Combate {
 	}
 	
 	public void huir() {
+		
+		System.out.println("No se puede huir de un combate contra un entrenador!!");
+	
 		
 	}
 
