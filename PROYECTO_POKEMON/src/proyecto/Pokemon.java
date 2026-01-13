@@ -1,12 +1,19 @@
 package proyecto;
 
-import java.util.random.*;
 
 public class Pokemon {
 	
+	private int idPokemon;
+	private int numPokedex;
+	
 	private String nombre;
 	private String mote;
+	
+	private Tipo tipo1;
+	private Tipo tipo2;
+	
 	private int vitalidad;
+	private int vitalidadActual;
 	private int ataque;
 	private int defensa;
 	private int ataqueEspecial;
@@ -14,6 +21,8 @@ public class Pokemon {
 	private int velocidad;
 	private int estamina;
 	private int nivel;
+	
+	private int experiencia;
 	
 	//COLECCION DE MOVIMIENTOS
 	
@@ -24,7 +33,11 @@ public class Pokemon {
 	//COLECCION DE TIPOS
 	
 	//ESTADOS
-	
+	private enum estados{
+		PARALIZADO, QUEMADO, ENVENENADO, GRAVEMENTE_ENVENENADO, DORMIDO, SOMNOLIENTO,
+		CONGELADO, HELADO,POKERUS, CONFUSO, ENAMORADO, ATRAPADO, MALDITO, DRENADORAS,
+		CANTO_MORTAL, CENTRO_DE_ATENCION, AMEDRENTADO, DEBILITADO
+	}
 	
 	// SETTERS Y GETTERS
 	
