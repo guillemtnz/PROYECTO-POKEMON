@@ -162,5 +162,39 @@ public class Pokemon {
 		this.fertilidad = p.fertilidad;
 		this.sexo = p.sexo;
 	}
+	
+	// Método que mejora las stats al subir de nivel
+	public void subirNivel(){	
+		
+		this.experiencia -= 10 * this.nivel;
+		
+		this.vitalidad += (int)(Math.random() * 5) + 1;
+		this.ataque += (int)(Math.random() * 5) + 1;
+		this.defensa += (int)(Math.random() * 5) + 1;
+		this.ataqueEspecial += (int)(Math.random() * 5) + 1;
+		this.defensaEspecial += (int)(Math.random() * 5) + 1;
+		this.velocidad += (int)(Math.random() * 5) + 1;
+		
+		this.nivel++;
+		
+	}
+	
+	public void atacar(Pokemon objetivo, Movimiento movimiento) {
+		
+	}
+	
+	public String comprobarEfectividad() {
+		String efectividad = "NEUTRO";
+		
+		return efectividad;
+	}
+	
+	public void descansar() {
+		
+	}
+	
+	public void aprenderMovimiento() {
+		
+	}
 
 }
