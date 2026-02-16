@@ -12,7 +12,7 @@ public class Pokemon {
 	private String nombre;
 	private String mote;
 
-	//ESTADÍSTICAS POKEMON (creo la que tendrá el pokemon en sí y las que tendrá el pokemon durante el combate, que pueden variar.)
+	//ESTADÍSTICAS POKEMON 
 	
 	private int vitalidad;
 	private int ataque;
@@ -29,11 +29,11 @@ public class Pokemon {
 	//COLECCION DE MOVIMIENTOS
 	private Movimiento[] movimientos = new Movimiento[4]; //4 movimientos como máximo
 	
-	//Fertilidad (para la crianza)
+	//FERTILIDAD
 	private int fertilidad;
 	
 	
-	//defino el enumerado sexo y creo sexo como un atributo
+	//SEXO
 	public enum Sexo{MACHO, HEMBRA};
 	private Sexo sexo;
 	
