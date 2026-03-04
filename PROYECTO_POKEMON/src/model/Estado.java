@@ -1,4 +1,4 @@
-package proyecto;
+package model;
 
 public enum Estado {
 	PARALIZADO, QUEMADO, ENVENENADO, GRAVEMENTE_ENVENENADO, DORMIDO, SOMNOLIENTO,

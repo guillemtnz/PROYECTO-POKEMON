@@ -1,4 +1,4 @@
-package proyecto;
+package model;
 
 
 public class Pokemon {
@@ -7,7 +7,7 @@ public class Pokemon {
 	private int idPokemon;
 	private int numPokedex;
 	
-	//idEntrenador va aqui
+	private int idEntrenador;
 	
 	private String nombre;
 	private String mote;

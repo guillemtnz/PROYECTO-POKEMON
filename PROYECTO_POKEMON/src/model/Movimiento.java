@@ -1,4 +1,4 @@
-package proyecto;
+package model;
 
 public abstract class Movimiento {
 	

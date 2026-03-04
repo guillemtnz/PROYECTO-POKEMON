@@ -1,4 +1,4 @@
-package proyecto;
+package model;
 
 public enum Tipo {
 	ACERO, AGUA, BICHO, DRAGON, ELECTRICO, FANTASMA, FUEGO, HADA,
