@@ -44,17 +44,17 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <Button layoutX="227.0" layoutY="237.0" mnemonicParsing="false" text="Button" />
-            <Button layoutX="401.0" layoutY="224.0" mnemonicParsing="false" text="Button" />
-            <TextField alignment="CENTER" layoutX="246.0" layoutY="123.0" />
-            <TextField alignment="CENTER_RIGHT" layoutX="246.0" layoutY="165.0" />
-            <Label layoutX="122.0" layoutY="127.0" text="Nombre de Usuario" textFill="#00cd7b" />
-            <Label layoutX="167.0" layoutY="169.0" text="Contraseña" />
-            <ImageView fitHeight="432.0" fitWidth="686.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="444.0" fitWidth="782.0" layoutX="-14.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Documents/GitHub/PROYECTO-POKEMON/PROYECTO_POKEMON/Media/Background/350px-Artwork_de_Pokémon_de_tercera_generación.png" />
+                  <Image url="@../../Media/Img/atardecer.png" />
                </image>
             </ImageView>
+            <Button layoutX="232.0" layoutY="224.0" mnemonicParsing="false" text="Log in" />
+            <Button layoutX="353.0" layoutY="224.0" mnemonicParsing="false" text="Limpiar" />
+            <TextField alignment="CENTER" layoutX="304.0" layoutY="123.0" />
+            <TextField alignment="CENTER_RIGHT" layoutX="304.0" layoutY="165.0" />
+            <Label layoutX="175.0" layoutY="127.0" text="Nombre de Usuario" textFill="WHITE" />
+            <Label layoutX="198.0" layoutY="169.0" text="Contraseña" textFill="WHITE" />
       </children>
     </AnchorPane>
   </children>
