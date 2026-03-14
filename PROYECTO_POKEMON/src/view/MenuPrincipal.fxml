@@ -17,15 +17,14 @@
       </ImageView>
 
       <!-- Título -->
-      <Label layoutX="80.0" layoutY="20.0" text="POKEMON SIMULATOR" textFill="#f5c518">
+      <Label layoutX="120.0" layoutY="14.0" text="POKEMON SIMULATOR" textFill="#f5c518">
          <font>
             <Font name="Press Start 2P" size="22.0" />
          </font>
       </Label>
 
       <!-- Botón Jugar -->
-      <Button layoutX="260.0" layoutY="330.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="JUGAR"
-              style="-fx-background-color: #e94560; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 8;">
+      <Button layoutX="260.0" layoutY="330.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #e94560; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 8;" text="JUGAR">
          <font>
             <Font name="Press Start 2P" size="10.0" />
          </font>
