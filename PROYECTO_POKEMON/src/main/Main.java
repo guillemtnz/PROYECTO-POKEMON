@@ -17,7 +17,7 @@ public class Main extends Application {
             Parent root = loader.load();
 
             // 2. Crear la escena con el contenido del FXML
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 640, 400);
 
             // 3. Configurar y mostrar la ventana
             primaryStage.setTitle("Pokedex - Inicio de Sesión");
@@ -25,7 +25,7 @@ public class Main extends Application {
             
             // Si quieres que no se pueda cambiar el tamaño de la ventana:
             primaryStage.setResizable(false);
-            
+   
             primaryStage.show();
             
         } catch (Exception e) {

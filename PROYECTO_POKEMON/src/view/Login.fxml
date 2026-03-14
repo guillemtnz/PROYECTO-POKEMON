@@ -9,21 +9,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
-  <children>
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController" style="-fx-background-color: black;">  <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <ImageView fitHeight="444.0" fitWidth="782.0" layoutX="-14.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../Media/Img/atardecer.png" />
+<ImageView fitHeight="400.0" fitWidth="640.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="false">               <image>
+                  <Image url="@../../Media/Background/fondoLogin.png" />
                </image>
             </ImageView>
-            <Button layoutX="227.0" layoutY="224.0" mnemonicParsing="false" onAction="#handleLogin" text="Log in" />
-            <Button layoutX="353.0" layoutY="224.0" mnemonicParsing="false" text="Limpiar" />
-            <TextField fx:id="txtUsuario" alignment="CENTER" layoutX="304.0" layoutY="123.0" />
-            <PasswordField fx:id="txtPassword" layoutX="304.0" layoutY="165.0" />
-            <Label layoutX="175.0" layoutY="127.0" text="Nombre de Usuario" textFill="WHITE" />
-            <Label layoutX="198.0" layoutY="169.0" text="Contraseña" textFill="WHITE" />
+            <Button layoutX="220.0" layoutY="224.0" mnemonicParsing="false" onAction="#handleLogin" text="Log in"
+      		style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+
+			<Button layoutX="340.0" layoutY="224.0" mnemonicParsing="false" text="Limpiar"
+       		 style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+            <TextField fx:id="txtUsuario" alignment="CENTER" layoutX="270.0" layoutY="123.0" />
+            <PasswordField fx:id="txtPassword" layoutX="270.0" layoutY="165.0" />
+            <Label layoutX="150.0" layoutY="127.0" text="Nombre de Usuario" textFill="WHITE" style="-fx-background-color: rgba(0,0,0,0.5); -fx-padding: 5; -fx-background-radius: 5;"/>
+			<Label layoutX="150.0" layoutY="169.0" text="Contraseña" textFill="WHITE" style="-fx-background-color: rgba(0,0,0,0.5); -fx-padding: 5; -fx-background-radius: 5;"/>
       </children>
     </AnchorPane>
   </children>

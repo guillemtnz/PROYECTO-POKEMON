@@ -22,29 +22,30 @@
       </ImageView>
 
       <!-- Título -->
-      <Label layoutX="190.0" layoutY="25.0" text="POKEMON SIMULATOR" textFill="#f7f7f7">
+      <Label layoutX="190.0" layoutY="25.0" text="POKEMON SIMULATOR" textFill="#f7f7f7"
+       style="-fx-effect: dropshadow(gaussian, black, 4, 0.8, 0, 0);">
          <font>
-            <Font name="Freestyle Script" size="37.0" />
+            <Font name="Freestyle Script" size="40.0" />
          </font>
       </Label>
 
       <!-- Botón Jugar -->
       <Button fx:id="btnJugar" layoutX="260.0" layoutY="310.0" mnemonicParsing="false" 
-              prefHeight="40.0" prefWidth="120.0" text="JUGAR"
-              onAction="#handleJugar"
-              style="-fx-background-color: #e94560; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;">
-         <font>
+        prefHeight="40.0" prefWidth="120.0" text="JUGAR"
+        onAction="#handleJugar"
+        style="-fx-background-color: #C9A227; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: #8B6914; -fx-border-radius: 8; -fx-border-width: 2;">
+      	<font>
             <Font name="Press Start 2P" size="10.0" />
          </font>
       </Button>
 
       <!-- Barra de carga (oculta al inicio) -->
-      <ProgressBar fx:id="progressBar" layoutX="80.0" layoutY="355.0" 
+      <ProgressBar fx:id="progressBar" layoutX="100.0" layoutY="355.0" 
                    prefWidth="400.0" prefHeight="20.0" progress="0.0"
                    visible="false"
                    style="-fx-accent: #e94560;"/>
       <!-- Pokéball giratoria -->
-<ImageView fx:id="pokeball" layoutX="500.0" layoutY="345.0" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
+<ImageView fx:id="pokeball" layoutX="520.0" layoutY="345.0" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
    <image>
       <Image url="@../../Media/Img/pokeball.png" />
    </image>
