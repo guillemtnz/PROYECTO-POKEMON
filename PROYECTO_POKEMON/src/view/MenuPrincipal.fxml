@@ -17,9 +17,9 @@
       </ImageView>
 
       <!-- Título -->
-      <Label layoutX="120.0" layoutY="14.0" text="POKEMON SIMULATOR" textFill="#f5c518">
+      <Label layoutX="190.0" layoutY="25.0" text="POKEMON SIMULATOR" textFill="#f7f7f7">
          <font>
-            <Font name="Press Start 2P" size="22.0" />
+            <Font name="Freestyle Script" size="37.0" />
          </font>
       </Label>
 
