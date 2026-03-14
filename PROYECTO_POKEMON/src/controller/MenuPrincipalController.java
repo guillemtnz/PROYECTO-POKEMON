@@ -25,7 +25,7 @@ public class MenuPrincipalController {
 
     @FXML
     public void handleEquipo(ActionEvent event) {
-        mostrarAviso("Mi Equipo - Próximamente");
+        navegarA("/view/Equipo.fxml", event);
     }
 
     @FXML
@@ -56,5 +56,16 @@ public class MenuPrincipalController {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+    
+    private void navegarA(String ruta, ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(ruta));
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
