@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controller.LoginController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -19,7 +18,7 @@
                   <Image url="@../../Media/Img/atardecer.png" />
                </image>
             </ImageView>
-            <Button layoutX="232.0" layoutY="224.0" mnemonicParsing="false" text="Log in" onAction="#handleLogin"/>
+            <Button layoutX="227.0" layoutY="224.0" mnemonicParsing="false" onAction="#handleLogin" text="Log in" />
             <Button layoutX="353.0" layoutY="224.0" mnemonicParsing="false" text="Limpiar" />
             <TextField fx:id="txtUsuario" alignment="CENTER" layoutX="304.0" layoutY="123.0" />
             <PasswordField fx:id="txtPassword" layoutX="304.0" layoutY="165.0" />

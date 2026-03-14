@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" 
+            prefHeight="400.0" prefWidth="640.0" 
+            xmlns="http://javafx.com/javafx/25" 
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.PantallaCargaController">
+   <children>
+      <!-- Imagen de fondo -->
+      <ImageView fitHeight="400.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="false">
+         <image>
+            <Image url="@../../Media/Background/tyranitar_epico.png" />
+         </image>
+      </ImageView>
+
+      <!-- Título -->
+      <Label layoutX="190.0" layoutY="25.0" text="POKEMON SIMULATOR" textFill="#f7f7f7">
+         <font>
+            <Font name="Freestyle Script" size="37.0" />
+         </font>
+      </Label>
+
+      <!-- Botón Jugar -->
+      <Button fx:id="btnJugar" layoutX="260.0" layoutY="310.0" mnemonicParsing="false" 
+              prefHeight="40.0" prefWidth="120.0" text="JUGAR"
+              onAction="#handleJugar"
+              style="-fx-background-color: #e94560; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;">
+         <font>
+            <Font name="Press Start 2P" size="10.0" />
+         </font>
+      </Button>
+
+      <!-- Barra de carga (oculta al inicio) -->
+      <ProgressBar fx:id="progressBar" layoutX="80.0" layoutY="355.0" 
+                   prefWidth="400.0" prefHeight="20.0" progress="0.0"
+                   visible="false"
+                   style="-fx-accent: #e94560;"/>
+      <!-- Pokéball giratoria -->
+<ImageView fx:id="pokeball" layoutX="500.0" layoutY="345.0" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
+   <image>
+      <Image url="@../../Media/Img/pokeball.png" />
+   </image>
+</ImageView>
+   </children>
+</AnchorPane>

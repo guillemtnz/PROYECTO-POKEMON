@@ -22,7 +22,7 @@ public class LoginController {
     public void handleLogin(ActionEvent event) {
         System.out.println("Botón Login pulsado");
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/MenuPrincipal.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/PantallaCarga.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
