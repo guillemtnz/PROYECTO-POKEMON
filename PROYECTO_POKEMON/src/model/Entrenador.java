@@ -148,6 +148,10 @@ public class Entrenador {
     
     //CAPTURAR
     
+    public boolean capturar(Pokemon pokemonSalvaje) {
+    	return true;
+    }
+    
     //CRIANZA
     
    
