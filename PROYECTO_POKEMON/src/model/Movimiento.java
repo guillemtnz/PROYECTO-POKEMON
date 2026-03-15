@@ -30,7 +30,7 @@ public abstract class Movimiento {
 	public Movimiento(String nombre, TipoMovimiento tipoMovimiento) {
 		this.nombre = nombre;
 		this.tipoMovimiento = tipoMovimiento;
-		this.costePP = 1; //Todos los movimientos, ya sean de ataque mejora o estado cuestan un punto de poder
+		this.costePP = 1; //Todos los movimientos, ya sean de ataque mejora o estado cuestan 1 PP
 	}
 
 	public String getNombre() {

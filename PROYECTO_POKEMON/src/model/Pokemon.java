@@ -326,6 +326,8 @@ public class Pokemon {
 		this.velocidad += (int)(Math.random() * 5) + 1;
 		
 		this.nivel++;
+		
+		//checkear la base de datos a ver si aprende un movimiento
 	}
 	
 	
@@ -333,7 +335,7 @@ public class Pokemon {
 
 
 	public void atacar(Pokemon objetivo, Movimiento movimiento) {
-		
+		//calcular efectividad
 	}
 	
 	public String comprobarEfectividad() {

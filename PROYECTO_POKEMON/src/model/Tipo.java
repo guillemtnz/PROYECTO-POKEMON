@@ -30,7 +30,7 @@ public enum Tipo {
 	      {0.5,1,  1.5,1,  0.5,1,  1,  1,  1,  1.5,1,  1.5,1,  0.5,1,  1,  1,  1}  // VOLADOR			
 	};
 	
-	public double efectividadContra(Tipo defensor) {
+	public double calcularEfectividad(Tipo defensor) {
 	    return EFECTIVIDAD[this.ordinal()][defensor.ordinal()];
 	}
 	
@@ -39,12 +39,12 @@ public enum Tipo {
 			
 			//Atributos privados(te miro y te encapsulo)
 			private String nombre;
-			private Tipo tipo;
+			private Tipo tipoPokemon;
 			private int potencia;
 			
-			public Ataque(String nombre, Tipo tipo, int potencia) {
+			public Ataque(String nombre, Tipo tipoP, int potencia) {
 				this.nombre = nombre;
-				this.tipo = tipo;
+				this.tipoPokemon = tipoP;
 				this.potencia = potencia;
 			}
 			
@@ -53,7 +53,7 @@ public enum Tipo {
 			}
 			
 			public Tipo getTipo() {
-				return tipo;
+				return tipoPokemon;
 			}
 			
 			public int getPotencia() {

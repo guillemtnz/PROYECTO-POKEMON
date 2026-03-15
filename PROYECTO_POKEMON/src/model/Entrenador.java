@@ -95,9 +95,9 @@ public class Entrenador {
 
         if (pokedollars >= coste) {
             pokedollars -= coste;
-            p.aumentarDefensa(5);
-            p.aumentarDefensaEspecial(5);
-            p.aumentarVitalidad(5);
+            p.setDefensa(p.getDefensa() + 5);
+            p.setDefensaEspecial(p.getDefensaEspecial() + 5);
+            p.setVitalidad(p.getVitalidad() + 5);
             return true;
         }
         return false;
@@ -108,9 +108,9 @@ public class Entrenador {
 
         if (pokedollars >= coste) {
             pokedollars -= coste;
-            p.aumentarAtaque(5);
-            p.aumentarAtaqueEspecial(5);
-            p.aumentarVelocidad(5);
+            p.setAtaque(p.getAtaque() + 5);
+            p.setAtaqueEspecial(p.getAtaqueEspecial() + 5);
+            p.setVelocidad(p.getVelocidad() + 5);
             return true;
         }
         return false;
@@ -121,10 +121,10 @@ public class Entrenador {
 
         if (pokedollars >= coste) {
             pokedollars -= coste;
-            p.aumentarVelocidad(5);
-            p.aumentarAtaque(5);
-            p.aumentarDefensa(5);
-            p.aumentarVitalidad(5);
+            p.setVelocidad(p.getVelocidad() + 5);
+            p.setAtaque(p.getAtaque() + 5);
+            p.setDefensa(p.getDefensa() + 5);
+            p.setVitalidad(p.getVitalidad() + 5);
             return true;
         }
         return false;
@@ -135,15 +135,21 @@ public class Entrenador {
 
         if (pokedollars >= coste) {
             pokedollars -= coste;
-            p.aumentarVelocidad(5);
-            p.aumentarAtaqueEspecial(5);
-            p.aumentarDefensaEspecial(5);
-            p.aumentarVitalidad(5);
+            p.setVelocidad(p.getVelocidad() + 5);
+            p.setAtaqueEspecial(p.getAtaqueEspecial() + 5);
+            p.setDefensaEspecial(p.getDefensaEspecial() + 5);
+            p.setVitalidad(p.getVitalidad() + 5);
             return true;
         }
         return false;
     }
- // CRIAR POKÉMON (fumadita)
+    
+    //COMBATIR
+    
+    //CAPTURAR
+    
+    //CRIANZA
+    
    
 }
 
