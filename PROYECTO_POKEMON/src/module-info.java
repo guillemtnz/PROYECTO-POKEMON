@@ -2,6 +2,7 @@ module PROYECTO_POKEMON {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
+	requires java.sql;
 
     // Solo deja los paquetes que tengan al menos una clase .java dentro
     opens main to javafx.graphics, javafx.fxml;
