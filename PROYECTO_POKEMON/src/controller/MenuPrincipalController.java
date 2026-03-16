@@ -20,7 +20,7 @@ public class MenuPrincipalController {
 
     @FXML
     public void handleCapturar(ActionEvent event) {
-        mostrarAviso("Capturar Pokémon - Próximamente");
+        navegarA("/view/Captura.fxml", event);
     }
 
     @FXML
