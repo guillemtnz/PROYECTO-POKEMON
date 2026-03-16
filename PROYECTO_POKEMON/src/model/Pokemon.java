@@ -232,7 +232,7 @@ public class Pokemon {
 
 
 	
-	//CONSTRUCTORES  (int)(Math.random()*10)+1;
+	//CONSTRUCTORES  
 	
 	//todos los parámetros
 	
@@ -344,9 +344,6 @@ public class Pokemon {
 		return efectividad;
 	}
 	
-	public void descansar() {
-		
-	}
 	
 	public void aprenderMovimiento() {
 		

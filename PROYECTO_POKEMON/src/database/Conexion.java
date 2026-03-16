@@ -16,10 +16,10 @@ public class Conexion {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, login, password);
-            System.out.println("✅ Conexión establecida");
+            System.out.println("Conexión establecida");
 
         } catch (SQLException | ClassNotFoundException e) {
-            System.out.println("❌ Error al conectar");
+            System.out.println("Error al conectar");
             e.printStackTrace();
         }
         
