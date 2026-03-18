@@ -229,6 +229,15 @@ public class Pokemon {
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
+	
+	public int getIdEntrenador() {
+		return idEntrenador;
+	}
+
+
+	public void setIdEntrenador(int idEntrenador) {
+		this.idEntrenador = idEntrenador;
+	}
 
 
 	
@@ -236,12 +245,13 @@ public class Pokemon {
 	
 	//todos los parámetros
 	
-	public Pokemon(int idPokemon, int numPokedex, String nombre, String mote, int vitalidad, int ataque, int defensa,
+	public Pokemon(int idPokemon, int numPokedex, int idEntrenador, String nombre, String mote, int vitalidad, int ataque, int defensa,
 			int ataqueEspecial, int defensaEspecial, int velocidad, int nivel, int experiencia,
 			Movimiento[] movimientos, int fertilidad, Sexo sexo, Tipo tipo1, Tipo tipo2, Estado estado) {
 		super();
 		this.idPokemon = idPokemon;
 		this.numPokedex = numPokedex;
+		this.idEntrenador = idEntrenador;
 		this.nombre = nombre;
 		this.mote = mote;
 		this.vitalidad = vitalidad;
@@ -266,6 +276,7 @@ public class Pokemon {
 		super();
 		this.idPokemon = 0;
 		this.numPokedex = 0;
+		this.idEntrenador = 0;
 		this.nombre = "";
 		this.mote = "";
 		this.vitalidad = (int)(Math.random()*10)+1;
@@ -290,6 +301,7 @@ public class Pokemon {
 		super();
 		this.idPokemon = p.idPokemon;
 		this.numPokedex = p.numPokedex;
+		this.idEntrenador = p.idEntrenador;
 		this.nombre = p.nombre;
 		this.mote = p.mote;
 		this.vitalidad = p.vitalidad;
@@ -308,7 +320,6 @@ public class Pokemon {
 		this.estado = p.estado;
 	}
 
-	//el que más se va a usar (AÚN POR HACER)
 	
 	
 	
@@ -344,9 +355,17 @@ public class Pokemon {
 		return efectividad;
 	}
 	
-	
-	public void aprenderMovimiento() {
-		
+	//el método sustituye también uno de los movimientos si el pokemon ya conoce los 4
+	public boolean aprenderMovimiento(Movimiento nuevoMovimiento) {
+		for (int i = 0; i < movimientos.length; i++) {
+	        if (movimientos[i] == null) {
+	            movimientos[i] = nuevoMovimiento;
+	            System.out.println("¡" + nombre + " ha aprendido " + nuevoMovimiento.getNombre() + "!");
+	            return true; 
+	        }
+	    }
+		return false;
 	}
+
 
 }

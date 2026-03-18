@@ -1,5 +1,8 @@
 package model;
 
+//HAY QUE MODIFICAR TANTO LA TABLA MOVIMIENTO COMO SU IMPLEMENTACIÓN EN EL PROGRAMA
+
+
 public abstract class Movimiento {
 	
 	public enum TipoMovimiento {

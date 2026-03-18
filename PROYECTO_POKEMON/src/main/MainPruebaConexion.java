@@ -7,7 +7,7 @@ public class MainPruebaConexion {
 	
 	public static void main(String[] args) {
 		
-PokemonDAO dao = new PokemonDAO();
+		PokemonDAO dao = new PokemonDAO();
         
         System.out.println("--- BUSCANDO POKÉMON SALVAJE ---");
         
