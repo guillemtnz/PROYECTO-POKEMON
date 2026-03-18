@@ -9,7 +9,7 @@ public class Conexion {
     // 1. Creamos un método para que el código tenga un "hogar"
     public static Connection conectar() {
         Connection connection = null;
-        String url = "jdbc:mysql://localhost:3306/pokemon_db";
+        String url = "jdbc:mysql://localhost:3306/pokemon";
         String login = "root";
         String password = "";
         
