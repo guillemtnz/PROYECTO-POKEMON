@@ -1,42 +1,125 @@
 package controller;
 
+import dao.PokemonDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import model.Pokemon;
+import java.io.File;
 
 public class CapturaController {
 
     @FXML private Label lblNombreSalvaje;
     @FXML private Label lblMensaje;
-    @FXML private Label lblPokedollars;
+    @FXML private Label lblPokeballs;
     @FXML private ImageView imgPokemonSalvaje;
-    @FXML private AnchorPane barraVida;
+    @FXML private Button btnCapturar;
+    @FXML private Button btnRandomizar;
+    @FXML private TextField txtMote;
+    @FXML private Button btnConfirmarMote;
+
+    private Pokemon pokemonActual = null;
+    private int pokeballs = 5;
+    private boolean capturado = false;
+    private PokemonDAO pokemonDAO = new PokemonDAO();
 
     @FXML
     public void initialize() {
-        lblMensaje.setText("¡Un TORCHIC salvaje apareció!");
+        lblMensaje.setText("Pulsa Randomizar para encontrar un Pokemon");
+        btnCapturar.setDisable(true);
     }
 
     @FXML
-    public void handleLanzarPokeball(ActionEvent event) {
-        double probabilidad = Math.random();
-        if (probabilidad > 0.5) {
-            lblMensaje.setText("¡Pokémon capturado con éxito! 🎉");
-            lblMensaje.setStyle("-fx-background-color: rgba(0,100,0,0.8); -fx-padding: 5; -fx-font-size: 11px; -fx-font-weight: bold;");
+    public void handleRandomizar(ActionEvent event) {
+        pokemonActual = pokemonDAO.generarPokemonAleatorio();
+
+        if (pokemonActual == null) {
+            lblMensaje.setText("Error al conectar con la base de datos.");
+            return;
+        }
+
+        lblNombreSalvaje.setText(pokemonActual.getNombre().toUpperCase() + "  Nv.1");
+
+        // Buscar sprite por ruta de archivo
+        String rutaSprite = "Media/Front/" + pokemonActual.getNumPokedex() + "f.png";
+        File archivoSprite = new File(rutaSprite);
+        
+        if (archivoSprite.exists()) {
+            Image sprite = new Image(archivoSprite.toURI().toString());
+            imgPokemonSalvaje.setImage(sprite);
         } else {
-            lblMensaje.setText("¡El Pokémon escapó! Inténtalo de nuevo.");
-            lblMensaje.setStyle("-fx-background-color: rgba(100,0,0,0.8); -fx-padding: 5; -fx-font-size: 11px; -fx-font-weight: bold;");
+            System.out.println("Sprite no encontrado: " + rutaSprite);
+        }
+
+        lblMensaje.setText("Un " + pokemonActual.getNombre().toUpperCase() + " salvaje aparecio!");
+        btnCapturar.setDisable(false);
+        capturado = false;
+        txtMote.setVisible(false);
+        btnConfirmarMote.setVisible(false);
+    }
+
+    @FXML
+    public void handleCapturar(ActionEvent event) {
+        if (pokemonActual == null) {
+            lblMensaje.setText("Primero randomiza un Pokemon!");
+            return;
+        }
+        if (pokeballs <= 0) {
+            lblMensaje.setText("No te quedan Pokeballs!");
+            return;
+        }
+
+        pokeballs--;
+        lblPokeballs.setText("Pokeballs: " + pokeballs);
+
+        double probabilidad = Math.random();
+        if (probabilidad <= 0.66) {
+            capturado = true;
+            lblMensaje.setText(pokemonActual.getNombre().toUpperCase() + " capturado! Ponle un mote:");
+            btnCapturar.setDisable(true);
+            btnRandomizar.setDisable(true);
+            txtMote.setVisible(true);
+            btnConfirmarMote.setVisible(true);
+        } else {
+            lblMensaje.setText(pokemonActual.getNombre().toUpperCase() + " escapo! Intentalo de nuevo.");
         }
     }
 
     @FXML
-    public void handleHuir(ActionEvent event) {
+    public void handleConfirmarMote(ActionEvent event) {
+        String mote = txtMote.getText().trim();
+
+        if (!mote.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ]+")) {
+            lblMensaje.setText("El mote solo puede tener letras, sin espacios ni numeros.");
+            return;
+        }
+
+        String[] palabrasProhibidas = {"tonto", "idiota", "maldito", "estupido"};
+        for (String palabra : palabrasProhibidas) {
+            if (mote.toLowerCase().matches(".*" + palabra + ".*")) {
+                lblMensaje.setText("Ese mote contiene palabras no permitidas.");
+                return;
+            }
+        }
+
+        pokemonActual.setMote(mote);
+        lblMensaje.setText(pokemonActual.getNombre().toUpperCase() + " añadido a tu caja con el mote: " + mote);
+        txtMote.setVisible(false);
+        btnConfirmarMote.setVisible(false);
+        pokemonActual = null;
+        btnRandomizar.setDisable(false);
+    }
+
+    @FXML
+    public void handleVolver(ActionEvent event) {
         navegarA("/view/MenuPrincipal.fxml", event);
     }
 

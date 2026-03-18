@@ -8,6 +8,7 @@ module PROYECTO_POKEMON {
     opens main to javafx.graphics, javafx.fxml;
     opens controller to javafx.fxml;
     opens view to javafx.fxml;
+    opens dao to javafx.fxml;
     
     // Si la carpeta 'proyecto' tiene a Pokemon.java, déjala:
     opens model to javafx.base;

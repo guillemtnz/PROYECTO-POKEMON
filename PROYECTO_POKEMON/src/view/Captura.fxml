@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,60 +20,62 @@
          <image><Image url="@../../Media/Background/fondoCaptura.png"/></image>
       </ImageView>
 
-      <!-- Barra de vida del Pokemon salvaje -->
-      <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="60.0" prefWidth="250.0"
-                  style="-fx-background-color: rgba(0,0,0,0.6); -fx-background-radius: 10;">
-         <Label fx:id="lblNombreSalvaje" layoutX="10.0" layoutY="8.0"
-                text="TORCHIC  Nv.5" textFill="white">
-            <font><Font name="Press Start 2P" size="9.0"/></font>
+      <!-- Nombre del Pokemon salvaje -->
+      <AnchorPane layoutX="20.0" layoutY="15.0" prefHeight="40.0" prefWidth="220.0"
+                  style="-fx-background-color: rgba(0,0,0,0.6); -fx-background-radius: 8;">
+         <Label fx:id="lblNombreSalvaje" layoutX="10.0" layoutY="10.0"
+                text="???" textFill="white">
+            <font><Font name="Press Start 2P" size="11.0"/></font>
          </Label>
-         <!-- Barra de vida -->
-         <AnchorPane layoutX="10.0" layoutY="30.0" prefHeight="12.0" prefWidth="220.0"
-                     style="-fx-background-color: #333; -fx-background-radius: 5;">
-            <AnchorPane fx:id="barraVida" prefHeight="12.0" prefWidth="180.0"
-                        style="-fx-background-color: #44dd44; -fx-background-radius: 5;"/>
-         </AnchorPane>
       </AnchorPane>
 
       <!-- Imagen del Pokemon salvaje -->
-      <ImageView fx:id="imgPokemonSalvaje" fitHeight="150.0" fitWidth="150.0"
-                 layoutX="400.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
-         <image><Image url="@../../Media/Front/torchic.png"/></image>
-      </ImageView>
+      <ImageView fx:id="imgPokemonSalvaje" fitHeight="160.0" fitWidth="160.0"
+                 layoutX="380.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true"/>
 
-      <!-- Barra de vida del jugador -->
-      <AnchorPane layoutX="370.0" layoutY="290.0" prefHeight="60.0" prefWidth="250.0"
-                  style="-fx-background-color: rgba(0,0,0,0.6); -fx-background-radius: 10;">
-         <Label layoutX="10.0" layoutY="8.0" text="ENTRENADOR" textFill="white">
-            <font><Font name="Press Start 2P" size="9.0"/></font>
-         </Label>
-         <Label fx:id="lblPokedollars" layoutX="10.0" layoutY="30.0"
-                text="💰 500 PD" textFill="#FFD700">
-            <font><Font name="Press Start 2P" size="8.0"/></font>
-         </Label>
-      </AnchorPane>
+      <!-- Caja de acciones inferior -->
+      <AnchorPane layoutX="0.0" layoutY="280.0" prefHeight="120.0" prefWidth="640.0"
+                  style="-fx-background-color: rgba(0,0,0,0.75);">
 
-      <!-- Caja de acciones -->
-      <AnchorPane layoutX="0.0" layoutY="320.0" prefHeight="80.0" prefWidth="350.0"
-                  style="-fx-background-color: rgba(0,0,0,0.7); -fx-background-radius: 10;">
+         <!-- Mensaje de estado -->
+         <Label fx:id="lblMensaje" layoutX="15.0" layoutY="8.0" prefWidth="610.0"
+                text="¡Pulsa Randomizar para encontrar un Pokémon!"
+                textFill="white" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
 
-         <!-- Botón Pokéball -->
-         <Button fx:id="btnPokeball" layoutX="20.0" layoutY="15.0"
-                 mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0"
-                 text="⚪ Lanzar Pokéball" onAction="#handleLanzarPokeball"
+         <!-- Botón Randomizar -->
+         <Button fx:id="btnRandomizar" layoutX="15.0" layoutY="35.0"
+                 mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0"
+                 text="🔀 Randomizar" onAction="#handleRandomizar"
+                 style="-fx-background-color: #1565C0; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-font-size: 10px;"/>
+
+         <!-- Botón Capturar -->
+         <Button fx:id="btnCapturar" layoutX="165.0" layoutY="35.0"
+                 mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0"
+                 text="⚪ Capturar" onAction="#handleCapturar" disable="true"
                  style="-fx-background-color: #e94560; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-font-size: 10px;"/>
 
-         <!-- Botón Huir -->
-         <Button fx:id="btnHuir" layoutX="180.0" layoutY="15.0"
-                 mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0"
-                 text="🏃 Huir" onAction="#handleHuir"
-                 style="-fx-background-color: #444444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-font-size: 10px;"/>
-      </AnchorPane>
+         <!-- Campo mote (oculto hasta capturar) -->
+         <Label layoutX="320.0" layoutY="40.0" text="Mote:" textFill="white"
+                style="-fx-font-size: 10px; -fx-font-weight: bold;"/>
+         <TextField fx:id="txtMote" layoutX="365.0" layoutY="35.0"
+                    prefWidth="150.0" prefHeight="30.0" promptText="Escribe un mote..."
+                    visible="false"/>
+         <Button fx:id="btnConfirmarMote" layoutX="525.0" layoutY="35.0"
+                 mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0"
+                 text="✔ Confirmar" onAction="#handleConfirmarMote" visible="false"
+                 style="-fx-background-color: #2e7d32; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-font-size: 9px;"/>
 
-      <!-- Mensaje de estado -->
-      <Label fx:id="lblMensaje" layoutX="0.0" layoutY="290.0" prefWidth="350.0"
-             text="¡Un TORCHIC salvaje apareció!" textFill="white"
-             style="-fx-background-color: rgba(0,0,0,0.6); -fx-padding: 5; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+         <!-- Botón Volver -->
+         <Button layoutX="15.0" layoutY="82.0"
+                 mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0"
+                 text="← Volver" onAction="#handleVolver"
+                 style="-fx-background-color: #444; -fx-text-fill: white; -fx-font-size: 9px; -fx-background-radius: 8;"/>
+
+         <!-- Pokéballs disponibles -->
+         <Label fx:id="lblPokeballs" layoutX="450.0" layoutY="88.0"
+                text="⚪ Pokéballs: 5" textFill="#FFD700"
+                style="-fx-font-size: 10px; -fx-font-weight: bold;"/>
+      </AnchorPane>
 
    </children>
 </AnchorPane>

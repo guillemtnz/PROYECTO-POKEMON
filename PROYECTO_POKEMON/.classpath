@@ -6,6 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="Media"/>
 	<classpathentry kind="lib" path="C:/javafx-sdk-21.0.10/lib/javafx.base.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
