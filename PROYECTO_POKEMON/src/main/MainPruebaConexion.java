@@ -17,9 +17,7 @@ PokemonDAO dao = new PokemonDAO();
             System.out.println("¡Un " + salvaje.getNombre() + " salvaje apareció!");
             System.out.println("Nivel: " + salvaje.getNivel());
             System.out.println("Sexo: " + salvaje.getSexo());
-            System.out.println("Stats -> Vit: " + salvaje.getVitalidad() + " | Atk: " + salvaje.getAtaque());
             
-            // Aquí iría tu lógica de la Pokeball (2/3 de probabilidad)
             double suerte = Math.random();
             System.out.println("\nLanzando Pokéball...");
             
