@@ -1,9 +1,24 @@
 package model;
 
 public enum Tipo {
-	ACERO, AGUA, BICHO, DRAGON, ELECTRICO, FANTASMA, FUEGO, HADA,
-	HIELO, LUCHA, NORMAL, PLANTA, PSIQUICO, ROCA, SINIESTRO, 
-	TIERRA, VENENO, VOLADOR;
+	ACERO,
+	AGUA,
+	BICHO,
+	DRAGON,
+	ELECTRICO,
+	FANTASMA,
+	FUEGO,
+	HADA,
+	HIELO,
+	LUCHA,
+	NORMAL,
+	PLANTA,
+	PSIQUICO,
+	ROCA,
+	SINIESTRO, 
+	TIERRA,
+	VENENO,
+	VOLADOR;
 	
 	//Tabla de efectividades ATACANTE X DEFENSOR (en el orden que se ha enumerado) 
 	//Static porque es la misma para TODOS los pokemon y Final porque no se modifica
@@ -30,6 +45,7 @@ public enum Tipo {
 	      {0.5,1,  1.5,1,  0.5,1,  1,  1,  1,  1.5,1,  1.5,1,  0.5,1,  1,  1,  1}  // VOLADOR			
 	};
 	
+
 	public double calcularEfectividad(Tipo defensor) {
 	    return EFECTIVIDAD[this.ordinal()][defensor.ordinal()];
 	}
