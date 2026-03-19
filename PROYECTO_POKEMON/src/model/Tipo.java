@@ -45,6 +45,7 @@ public enum Tipo {
 	      {0.5,1,  1.5,1,  0.5,1,  1,  1,  1,  1.5,1,  1.5,1,  0.5,1,  1,  1,  1}  // VOLADOR			
 	};
 	
+	
 
 	public double calcularEfectividad(Tipo defensor) {
 	    return EFECTIVIDAD[this.ordinal()][defensor.ordinal()];

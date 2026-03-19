@@ -26,6 +26,7 @@ public class MovimientoDAO {
 
 	        if (rs.next()) { // Usamos IF porque solo esperamos uno
 	            m = new Movimiento(  //NO ME DEJA INSTANCIAR, IMAGINO QUE POR EL CONSTRUCTOR
+	            		
 	                rs.getInt("id_movimiento"),
 	                rs.getString("nombre"),
 	                rs.getInt("potencia"),

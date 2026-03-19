@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.*;
+
+
 import model.Pokemon;
 import model.Pokemon.Sexo; 
 
@@ -32,27 +34,48 @@ public class PokemonDAO {
     /* guarda un pokemon capturado en la base de datos  */
     
     public boolean guardarPokemonCapturado(Pokemon pokemon, int idEntrenador) {
-        String sql = "INSERT INTO pokemon "
-                   + "(NUM_POKEDEX, ID_ENTRENADOR, MOTE, NIVEL, FERTILIDAD, SEXO, UBICACION) "
-                   + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
+        String sqlMaxId = "SELECT MAX(ID_POKEMON) FROM pokemon";
+        
+        
+        String sqlInsert = "INSERT INTO pokemon "
+                   + "(ID_POKEMON, NUM_POKEDEX, ID_ENTRENADOR, MOTE, NIVEL, FERTILIDAD, SEXO, UBICACION) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection cn = Conexion.conectar();
-             PreparedStatement pst = cn.prepareStatement(sql)) {
+        try (Connection cn = Conexion.conectar()) {
+            
+            
+            int nuevoId = 1; // Por si la tabla está vacía, empezamos en 1
+            try (PreparedStatement pstMax = cn.prepareStatement(sqlMaxId);
+                 ResultSet rs = pstMax.executeQuery()) {
+                if (rs.next()) {
+                    // Tomamos el máximo y le sumamos 1
+                    nuevoId = rs.getInt(1) + 1; 
+                }
+            }
 
-            pst.setInt(1, pokemon.getNumPokedex());
-            pst.setInt(2, idEntrenador);
-            pst.setString(3, pokemon.getMote());
-            pst.setInt(4, pokemon.getNivel());
-            pst.setInt(5, 5);                              // fertilidad 5 por defecto
-            pst.setString(6, pokemon.getSexo().toString()); // macho o hembra
-            pst.setString(7, "CAJA");                      // las capturas van a la caja directamente
 
-            int filasInsertadas = pst.executeUpdate();
-            return filasInsertadas > 0;
+            try (PreparedStatement pst = cn.prepareStatement(sqlInsert)) {
+                pst.setInt(1, nuevoId); 
+                pst.setInt(2, pokemon.getNumPokedex());
+                pst.setInt(3, idEntrenador);
+                pst.setString(4, pokemon.getMote());
+                pst.setInt(5, pokemon.getNivel());
+                pst.setInt(6, 5);
+                pst.setString(7, pokemon.getSexo().toString());
+                pst.setString(8, "CAJA");
+
+                int filasInsertadas = pst.executeUpdate();
+                
+                if (filasInsertadas > 0) {
+                    pokemon.setIdPokemon(nuevoId); 
+                    return true;
+                }
+            }
 
         } catch (SQLException e) {
-            System.out.println("Error al guardar el Pokémon capturado: " + e.getMessage());
-            return false;
+            System.out.println("Error al guardar: " + e.getMessage());
         }
+        return false;
     }
 }

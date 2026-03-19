@@ -356,6 +356,7 @@ public class Pokemon {
 	}
 	
 	//el método sustituye también uno de los movimientos si el pokemon ya conoce los 4
+	
 	public boolean aprenderMovimiento(Movimiento nuevoMovimiento) {
 		for (int i = 0; i < movimientos.length; i++) {
 	        if (movimientos[i] == null) {
