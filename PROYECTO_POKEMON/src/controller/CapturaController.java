@@ -111,7 +111,18 @@ public class CapturaController {
         }
 
         pokemonActual.setMote(mote);
-        lblMensaje.setText(pokemonActual.getNombre().toUpperCase() + " añadido a tu caja con el mote: " + mote);
+
+        // guarda el pokemon capturado en la base de datos
+        // pongo id 1 como default que seria ash porque no hay como una gestion de sesion
+        int idEntrenadorActual = 1;
+        boolean guardado = pokemonDAO.guardarPokemonCapturado(pokemonActual, idEntrenadorActual);
+
+        if (guardado) {
+            lblMensaje.setText(pokemonActual.getNombre().toUpperCase() + " añadido a tu caja con el mote: " + mote);
+        } else {
+            lblMensaje.setText(pokemonActual.getNombre().toUpperCase() + " capturado, pero hubo un error al guardarlo en la BD");
+        }
+
         txtMote.setVisible(false);
         btnConfirmarMote.setVisible(false);
         pokemonActual = null;
