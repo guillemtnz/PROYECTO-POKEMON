@@ -41,8 +41,8 @@ public class PokemonDAO {
         
         
         String sqlInsert = "INSERT INTO POKEMON "
-                   + "(ID_POKEMON, NUM_POKEDEX, ID_ENTRENADOR, MOTE, NIVEL, FERTILIDAD, SEXO, UBICACION) "
-                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                   + "(ID_POKEMON, NUM_POKEDEX, ID_ENTRENADOR, MOTE, NIVEL, FERTILIDAD, SEXO, UBICACION, VITALIDAD, ATAQUE, DEFENSA, AT_ESP, DEF_ESP, VELOCIDAD) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection cn = Conexion.conectar()) {
             
@@ -63,9 +63,14 @@ public class PokemonDAO {
                 pst.setInt(3, idLogueado);
                 pst.setString(4, pokemon.getMote());
                 pst.setInt(5, pokemon.getNivel());
-                pst.setInt(6, 5);
+                pst.setInt(6, 5); //fertilidad 5 por defecto
                 pst.setString(7, pokemon.getSexo().toString());
-                pst.setString(8, "CAJA");
+                pst.setString(8, "CAJA");  //los pokemon capturados van a la caja
+                
+                for (int i = 9; i <= 14; i++) {
+                    int stat = (int) (Math.random() * 5) + 1;
+                    pst.setInt(i, stat);
+                }
 
                 int filasInsertadas = pst.executeUpdate();
                 
