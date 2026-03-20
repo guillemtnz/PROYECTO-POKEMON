@@ -9,22 +9,39 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController" style="-fx-background-color: black;">  <children>
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController" style="-fx-background-color: black;">
+  <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-<ImageView fitHeight="400.0" fitWidth="640.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="false">               <image>
+            <ImageView fitHeight="400.0" fitWidth="640.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="false">
+               <image>
                   <Image url="@../../Media/Background/fondoLogin.png" />
                </image>
             </ImageView>
-            <Button layoutX="220.0" layoutY="224.0" mnemonicParsing="false" onAction="#handleLogin" text="Log in"
-      		style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
 
-			<Button layoutX="340.0" layoutY="224.0" mnemonicParsing="false" text="Limpiar"
-       		 style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+            <!-- Campos -->
+            <Label layoutX="150.0" layoutY="127.0" text="Nombre de Usuario" textFill="WHITE"
+                   style="-fx-background-color: rgba(0,0,0,0.5); -fx-padding: 5; -fx-background-radius: 5;"/>
             <TextField fx:id="txtUsuario" alignment="CENTER" layoutX="270.0" layoutY="123.0" />
+
+            <Label layoutX="150.0" layoutY="169.0" text="Contraseña" textFill="WHITE"
+                   style="-fx-background-color: rgba(0,0,0,0.5); -fx-padding: 5; -fx-background-radius: 5;"/>
             <PasswordField fx:id="txtPassword" layoutX="270.0" layoutY="165.0" />
-            <Label layoutX="150.0" layoutY="127.0" text="Nombre de Usuario" textFill="WHITE" style="-fx-background-color: rgba(0,0,0,0.5); -fx-padding: 5; -fx-background-radius: 5;"/>
-			<Label layoutX="150.0" layoutY="169.0" text="Contraseña" textFill="WHITE" style="-fx-background-color: rgba(0,0,0,0.5); -fx-padding: 5; -fx-background-radius: 5;"/>
+
+            <!-- Mensaje de error/info -->
+            <Label fx:id="lblMensaje" layoutX="150.0" layoutY="205.0" prefWidth="340.0"
+                   textFill="white" style="-fx-font-size: 10px; -fx-font-weight: bold;"/>
+
+            <!-- Botones Login y Limpiar -->
+            <Button layoutX="220.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleLogin" text="Log in"
+                    style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+            <Button layoutX="340.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleLimpiar" text="Limpiar"
+                    style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+
+            <!-- Botón Registro -->
+            <Button layoutX="255.0" layoutY="275.0" mnemonicParsing="false" onAction="#handleRegistro" text="Registrate"
+      				style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+      				
       </children>
     </AnchorPane>
   </children>
