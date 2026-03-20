@@ -14,7 +14,7 @@ import javafx.event.ActionEvent;
 import model.Entrenador;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+
 
 public class LoginController {
 
@@ -38,6 +38,9 @@ public class LoginController {
         Entrenador entrenador = entrenadorDAO.login(nombre, password);
 
         if (entrenador != null) {
+        	
+        	Entrenador.entrenadorLogueado = entrenador;
+        	
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("/view/PantallaCarga.fxml"));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

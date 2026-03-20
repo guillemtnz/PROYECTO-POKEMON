@@ -5,6 +5,10 @@ import java.util.Random;
 
 public class Entrenador {
 	
+	public static Entrenador entrenadorLogueado;
+	
+	private int idEntrenador;
+	
 	private String nombre;
 	private int pokedollars;
 	
@@ -25,8 +29,16 @@ public class Entrenador {
 	
 	}
 	//getter setters
+	public int getIdEntrenador() {
+		return idEntrenador;
+	}
+	
 	public String getNombre() {
 		return nombre;
+	}
+	
+	public void setIdEntrenador(int idEntrenador) {
+		this.idEntrenador = idEntrenador;
 	}
 
 	public void setNombre(String nombre) {

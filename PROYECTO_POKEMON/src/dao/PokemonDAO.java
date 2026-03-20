@@ -2,7 +2,7 @@ package dao;
 
 import java.sql.*;
 
-
+import model.Entrenador;
 import model.Pokemon;
 import model.Pokemon.Sexo; 
 
@@ -35,10 +35,12 @@ public class PokemonDAO {
     
     public boolean guardarPokemonCapturado(Pokemon pokemon, int idEntrenador) {
         
-        String sqlMaxId = "SELECT MAX(ID_POKEMON) FROM pokemon";
+    	int idLogueado = Entrenador.entrenadorLogueado.getIdEntrenador();
+    	
+        String sqlMaxId = "SELECT MAX(ID_POKEMON) FROM POKEMON"; //obtengo el máximo id_pokemon para generar el siguiente id
         
         
-        String sqlInsert = "INSERT INTO pokemon "
+        String sqlInsert = "INSERT INTO POKEMON "
                    + "(ID_POKEMON, NUM_POKEDEX, ID_ENTRENADOR, MOTE, NIVEL, FERTILIDAD, SEXO, UBICACION) "
                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -58,7 +60,7 @@ public class PokemonDAO {
             try (PreparedStatement pst = cn.prepareStatement(sqlInsert)) {
                 pst.setInt(1, nuevoId); 
                 pst.setInt(2, pokemon.getNumPokedex());
-                pst.setInt(3, idEntrenador);
+                pst.setInt(3, idLogueado);
                 pst.setString(4, pokemon.getMote());
                 pst.setInt(5, pokemon.getNivel());
                 pst.setInt(6, 5);

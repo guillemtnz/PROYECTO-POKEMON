@@ -25,6 +25,8 @@ public class EntrenadorDAO {
                     new java.util.ArrayList<>(),
                     new java.util.ArrayList<>()
                 );
+                
+                e.setIdEntrenador(rs.getInt("ID_ENTRENADOR"));
                 return e;
             }
         } catch (SQLException e) {
@@ -34,13 +36,24 @@ public class EntrenadorDAO {
     }
 
     public boolean registrar(String nombre, String password) {
-        String sql = "INSERT INTO ENTRENADOR (NOM_ENTRENADOR, PASSWORD, POKEDOLLARS, TIPO_ENTRENADOR) VALUES (?, ?, ?, 1)";
+    	String sqlMaxId = "SELECT MAX(ID_ENTRENADOR) FROM ENTRENADOR"; //obtengo el máximo id_pokemon para generar el siguiente id
+    	
+        String sql = "INSERT INTO ENTRENADOR (ID_ENTRENADOR, NOM_ENTRENADOR, PASSWORD, POKEDOLLARS, TIPO_ENTRENADOR) VALUES (?, ?, ?, ?, 1)";
         try (Connection cn = Conexion.conectar();
-             PreparedStatement pst = cn.prepareStatement(sql)) {
+            PreparedStatement pst = cn.prepareStatement(sql)) {
 
-            pst.setString(1, nombre);
-            pst.setString(2, password);
-            pst.setInt(3, (int)(Math.random() * 201) + 800); // entre 800 y 1000 por ejemplo, nose cuanto poner
+        	int nuevoId = 1; // Por si la tabla está vacía, empezamos en 1
+            try (PreparedStatement pstMax = cn.prepareStatement(sqlMaxId);
+                 ResultSet rs = pstMax.executeQuery()) {
+                if (rs.next()) {
+                    // Tomamos el máximo y le sumamos 1
+                    nuevoId = rs.getInt(1) + 1; 
+                }
+            }
+        	pst.setInt(1, nuevoId);
+            pst.setString(2, nombre);
+            pst.setString(3, password);
+            pst.setInt(4, (int)(Math.random() * 201) + 800); // entre 800 y 1000 por ejemplo, nose cuanto poner
             int filas = pst.executeUpdate();
             return filas > 0;
 
