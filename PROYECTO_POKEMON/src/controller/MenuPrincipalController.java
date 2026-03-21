@@ -19,6 +19,12 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+	
+	 /*
+	 * Controlador del menú principal.
+	 * Gestiona la navegación entre las distintas vistas del juego,
+	 * Está vinculado a la vista MenuPrincipal.fxml
+	 */
 
 public class MenuPrincipalController {
 	
@@ -42,27 +48,32 @@ public class MenuPrincipalController {
     @FXML private Button btnCrianza;
     @FXML private Button btnCasino;
     @FXML private Button btnCerrarSesion;
-
+    
+    // Navega a la vista de captura de Pokemon
     @FXML
     public void handleCapturar(ActionEvent event) {
         navegarA("/view/Captura.fxml", event);
     }
-
+    
+    // Navega a la vista del equipo del entrenador
     @FXML
     public void handleEquipo(ActionEvent event) {
         navegarA("/view/Equipo.fxml", event);
     }
-
+    
+    // Aviso (aun falta por hacer :p )
     @FXML
     public void handleCrianza(ActionEvent event) {
         mostrarAviso("Crianza - Próximamente");
     }
-
+    
+    // Aviso (aun falta por hacer :p )
     @FXML
     public void handleCasino(ActionEvent event) {
         mostrarAviso("Casino - Próximamente");
     }
-
+    
+    // Cierra la sesión del entrenador y vuelve a la pantalla de login
     @FXML
     public void handleCerrarSesion(ActionEvent event) {
         try {

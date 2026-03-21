@@ -18,6 +18,14 @@ import javafx.event.ActionEvent;
 import model.Pokemon;
 import java.io.File;
 
+ /*
+ * Controlador de la pantalla de captura de Pokémon.
+ * Gestiona la obtención de un Pokémon aleatorio desde la base de datos,
+ * la mecánica de captura con Pokéballs, la validación del mote
+ * y el guardado del Pokémon capturado en la base de datos.
+ * Está vinculado a la vista Captura.fxml
+ */
+
 public class CapturaController {
 	
 	private boolean musica = false;
@@ -41,19 +49,28 @@ public class CapturaController {
     @FXML private Button btnRandomizar;
     @FXML private TextField txtMote;
     @FXML private Button btnConfirmarMote;
-
+    
+    // Pokémon que aparece actualmente en pantalla
     private Pokemon pokemonActual = null;
+    
+    // Número de pokeballs disponibles para el jugador
     private int pokeballs = 5;
-    private boolean capturado = false;
+    
+    // Indica si el Pokémon actual ha sido capturado
+    private boolean capturado;
+    
+    // DAO para acceder a los datos de Pokemon en la BD
     private PokemonDAO pokemonDAO = new PokemonDAO();
-
+    
+    // Método initialize() que se ejecuta automáticamente al cargar la vista
     @FXML
     public void initialize() {
     	musica();
         lblMensaje.setText("Pulsa Randomizar para encontrar un Pokemon");
         btnCapturar.setDisable(true);
     }
-
+    
+    // Método que se ejecuta al pulsar el botón "Randomizar"
     @FXML
     public void handleRandomizar(ActionEvent event) {
         pokemonActual = pokemonDAO.generarPokemonAleatorio();
@@ -84,7 +101,8 @@ public class CapturaController {
         txtMote.setVisible(false);
         btnConfirmarMote.setVisible(false);
     }
-
+    
+    // Método que se ejecuta al pulsar el botón "Capturar".
     @FXML
     public void handleCapturar(ActionEvent event) {
         if (pokemonActual == null) {
@@ -111,7 +129,8 @@ public class CapturaController {
             lblMensaje.setText(pokemonActual.getNombre().toUpperCase() + " escapo! Intentalo de nuevo.");
         }
     }
-
+    
+    // Método que se ejecuta al pulsar el botón "Confirmar mote".
     @FXML
     public void handleConfirmarMote(ActionEvent event) {
         String mote = txtMote.getText().trim();
@@ -121,7 +140,7 @@ public class CapturaController {
             return;
         }
 
-        String[] palabrasProhibidas = {"tonto", "idiota", "maldito", "estupido"};
+        String[] palabrasProhibidas = {"tonto", "idiota", "bobolon", "estupido"};
         for (String palabra : palabrasProhibidas) {
             if (mote.toLowerCase().matches(".*" + palabra + ".*")) {
                 lblMensaje.setText("Ese mote contiene palabras no permitidas.");
@@ -147,7 +166,8 @@ public class CapturaController {
         pokemonActual = null;
         btnRandomizar.setDisable(false);
     }
-
+    
+    // Método que navega de vuelta al menú principal.
     @FXML
     public void handleVolver(ActionEvent event) {
         navegarA("/view/MenuPrincipal.fxml", event);

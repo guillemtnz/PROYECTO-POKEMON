@@ -16,11 +16,23 @@ import javafx.scene.image.ImageView;
 import javafx.animation.RotateTransition;
 
 public class PantallaCargaController {
+	
+	 /*
+	 * Controlador de la pantalla de carga.
+	 * Se encarga de gestionar la animación de la barra de progreso
+	 * y la Pokéball giratoria antes de navegar al menú principal.
+	 * Está vinculado a la vista PantallaCarga.fxml
+	 */
 
     @FXML private ProgressBar progressBar;
     @FXML private Button btnJugar;
     @FXML private ImageView pokeball;
-
+    
+    /*
+    * Método que se ejecuta al pulsar el botón "JUGAR".
+    * Oculta el botón y muestra la barra de carga junto a la Pokéball
+    * Cuando la barra llega al 100%, navega automáticamente al menú principal.
+    */
     @FXML
     public void handleJugar(ActionEvent event) {
         // Ocultar botón y mostrar barra
