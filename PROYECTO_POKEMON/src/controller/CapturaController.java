@@ -22,6 +22,7 @@ public class CapturaController {
 	
 	private boolean musica = false;
 	private MediaPlayer mediaPlayer;
+	private MediaPlayer gritoPlayer;
 	
 	@FXML private ImageView imgMusica;
 	
@@ -188,8 +189,8 @@ public class CapturaController {
     		String rutaGrito = "./Media/Audio/" + numPokedex + ".mp3";
         	Media grito = new Media(new File(rutaGrito).toURI().toString());
         	
-        	mediaPlayer = new MediaPlayer(grito);
-        	mediaPlayer.play();
+        	gritoPlayer = new MediaPlayer(grito);
+        	gritoPlayer.play();
     }
     
     
