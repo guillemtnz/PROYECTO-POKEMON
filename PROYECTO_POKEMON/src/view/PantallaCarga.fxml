@@ -44,7 +44,7 @@
                    prefWidth="400.0" prefHeight="20.0" progress="0.0"
                    visible="false"
                    style="-fx-accent: #e94560;"/>
-      <!-- Pokéball giratoria -->
+      <!-- Pokéball giratoria (oculta tambien) -->
 <ImageView fx:id="pokeball" layoutX="520.0" layoutY="345.0" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
    <image>
       <Image url="@../../Media/Img/pokeball.png" />

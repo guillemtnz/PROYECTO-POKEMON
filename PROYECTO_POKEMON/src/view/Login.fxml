@@ -24,7 +24,7 @@
             <TextField fx:id="txtUsuario" alignment="CENTER" layoutX="270.0" layoutY="123.0" />
 
             <Label layoutX="150.0" layoutY="169.0" style="-fx-background-color: rgba(0,0,0,0.5); -fx-padding: 5; -fx-background-radius: 5;" text="Contraseña" textFill="WHITE" />
-            <PasswordField fx:id="txtPassword" layoutX="270.0" layoutY="165.0" />
+            <PasswordField fx:id="txtPassword" alignment="CENTER" layoutX="270.0" layoutY="165.0" />
 
             <!-- Mensaje de error/info -->
             <Label fx:id="lblMensaje" layoutX="150.0" layoutY="205.0" prefWidth="340.0" style="-fx-font-size: 10px; -fx-font-weight: bold;" textFill="white" />
