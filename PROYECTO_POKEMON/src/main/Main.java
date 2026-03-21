@@ -13,7 +13,7 @@ public class Main extends Application {
         try {
             // 1. Cargar el archivo FXML desde la carpeta view
             // El "/" inicial busca desde la raíz del proyecto (carpeta src)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MenuPrincipal.fxml"));
             Parent root = loader.load();
 //ciao 
             // 2. Crear la escena con el contenido del FXML

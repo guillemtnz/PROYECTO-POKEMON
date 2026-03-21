@@ -10,12 +10,27 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import model.Pokemon;
 import java.io.File;
 
 public class CapturaController {
+	
+	private boolean musica = false;
+	private MediaPlayer mediaPlayer;
+	
+	@FXML private ImageView imgMusica;
+	
+	@FXML
+    void activarDesactivarSonido(MouseEvent event) {
+		musica();
+    }
+	
+
 
     @FXML private Label lblNombreSalvaje;
     @FXML private Label lblMensaje;
@@ -33,6 +48,7 @@ public class CapturaController {
 
     @FXML
     public void initialize() {
+    	musica();
         lblMensaje.setText("Pulsa Randomizar para encontrar un Pokemon");
         btnCapturar.setDisable(true);
     }
@@ -45,6 +61,8 @@ public class CapturaController {
             lblMensaje.setText("Error al conectar con la base de datos.");
             return;
         }
+        
+        reproducirGrito(pokemonActual.getNumPokedex());
 
         lblNombreSalvaje.setText(pokemonActual.getNombre().toUpperCase() + "  Nv.1");
 
@@ -144,4 +162,35 @@ public class CapturaController {
             e.printStackTrace();
         }
     }
+    
+    public void musica() {
+    	
+    	if(!this.musica) {
+    		String musica = "./Media/Music/pokemon_salvaje.mp3";
+        	Media sound = new Media(new File(musica).toURI().toString());
+        	
+        	mediaPlayer = new MediaPlayer(sound);
+        	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        	mediaPlayer.play();
+        	imgMusica.setImage(new Image(new File("./Media/Img/unmuted.png").toURI().toString()));
+        	
+        	this.musica =true;
+    	}else {
+    		mediaPlayer.stop();
+    		this.musica =false;
+    		imgMusica.setImage(new Image(new File("./Media/Img/muted.png").toURI().toString()));
+    	}
+    	
+    }
+    
+    public void reproducirGrito(int numPokedex) {
+    	
+    		String rutaGrito = "./Media/Audio/" + numPokedex + ".mp3";
+        	Media grito = new Media(new File(rutaGrito).toURI().toString());
+        	
+        	mediaPlayer = new MediaPlayer(grito);
+        	mediaPlayer.play();
+    }
+    
+    
 }

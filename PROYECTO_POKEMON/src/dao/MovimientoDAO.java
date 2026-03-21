@@ -12,6 +12,7 @@ import model.Movimiento;
 
 public class MovimientoDAO {
 	
+	/*
 	public Movimiento buscarMovimiento(String tipoPokemon, int nivelPokemon) {
 	    Movimiento m = null;
 	    
@@ -39,4 +40,5 @@ public class MovimientoDAO {
 	    return m;
 
 	}
+	*/
 }

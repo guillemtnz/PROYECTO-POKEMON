@@ -4,16 +4,11 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="640.0"
-            xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.MenuPrincipalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuPrincipalController">
    <children>
       <!-- Imagen de fondo -->
-      <ImageView fitHeight="400.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="false">
+      <ImageView fitHeight="400.0" fitWidth="640.0" layoutY="4.0" pickOnBounds="true" preserveRatio="false">
          <image>
             <Image url="@../../Media/Background/ciudadMenu.jpg" />
          </image>
@@ -21,60 +16,45 @@
 
       <!-- FILA 1 -->
       <!-- Capturar -->
-      <Button layoutX="65.0" layoutY="75.0" prefHeight="110.0" prefWidth="110.0"
-              onAction="#handleCapturar"
-              style="-fx-background-color: rgba(255,255,255,0.4); -fx-border-color: white; -fx-border-width: 3; -fx-border-radius: 55; -fx-background-radius: 55;"/>
-      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="90.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" mouseTransparent="true">
-         <image><Image url="@../../Media/Img/icono_capturar.png"/></image>
+      <Button layoutX="65.0" layoutY="75.0" onAction="#handleCapturar" prefHeight="110.0" prefWidth="110.0" style="-fx-background-color: rgba(255,255,255,0.4); -fx-border-color: white; -fx-border-width: 3; -fx-border-radius: 55; -fx-background-radius: 55;" />
+      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="90.0" layoutY="100.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <image><Image url="@../../Media/Img/icono_capturar.png" /></image>
       </ImageView>
-      <Button layoutX="55.0" layoutY="192.0" mnemonicParsing="false" text="CAPTURAR"
-              prefWidth="130.0" onAction="#handleCapturar"
-              style="-fx-background-color: rgba(0,0,0,0.5); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 11px; -fx-background-radius: 5; -fx-alignment: center;"/>
+      <Button layoutX="55.0" layoutY="192.0" mnemonicParsing="false" onAction="#handleCapturar" prefWidth="130.0" style="-fx-background-color: rgba(0,0,0,0.5); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 11px; -fx-background-radius: 5; -fx-alignment: center;" text="CAPTURAR" />
 
       <!-- Mi Equipo -->
-      <Button layoutX="265.0" layoutY="75.0" prefHeight="110.0" prefWidth="110.0"
-              onAction="#handleEquipo"
-              style="-fx-background-color: rgba(255,255,255,0.4); -fx-border-color: white; -fx-border-width: 3; -fx-border-radius: 55; -fx-background-radius: 55;"/>
-      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="292.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" mouseTransparent="true">
-         <image><Image url="@../../Media/Img/icono_equipo.png"/></image>
+      <Button layoutX="265.0" layoutY="75.0" onAction="#handleEquipo" prefHeight="110.0" prefWidth="110.0" style="-fx-background-color: rgba(255,255,255,0.4); -fx-border-color: white; -fx-border-width: 3; -fx-border-radius: 55; -fx-background-radius: 55;" />
+      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="292.0" layoutY="100.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <image><Image url="@../../Media/Img/icono_equipo.png" /></image>
       </ImageView>
-      <Button layoutX="255.0" layoutY="192.0" mnemonicParsing="false" text="EQUIPO"
-              prefWidth="130.0" onAction="#handleEquipo"
-              style="-fx-background-color: rgba(0,0,0,0.5); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 11px; -fx-background-radius: 5; -fx-alignment: center;"/>
+      <Button layoutX="255.0" layoutY="192.0" mnemonicParsing="false" onAction="#handleEquipo" prefWidth="130.0" style="-fx-background-color: rgba(0,0,0,0.5); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 11px; -fx-background-radius: 5; -fx-alignment: center;" text="EQUIPO" />
 
       <!-- Crianza -->
-      <Button layoutX="465.0" layoutY="75.0" prefHeight="110.0" prefWidth="110.0"
-              onAction="#handleCrianza"
-              style="-fx-background-color: rgba(255,255,255,0.4); -fx-border-color: white; -fx-border-width: 3; -fx-border-radius: 55; -fx-background-radius: 55;"/>
-      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="498.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" mouseTransparent="true">
-         <image><Image url="@../../Media/Img/icono_crianza.png"/></image>
+      <Button layoutX="465.0" layoutY="75.0" onAction="#handleCrianza" prefHeight="110.0" prefWidth="110.0" style="-fx-background-color: rgba(255,255,255,0.4); -fx-border-color: white; -fx-border-width: 3; -fx-border-radius: 55; -fx-background-radius: 55;" />
+      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="498.0" layoutY="100.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <image><Image url="@../../Media/Img/icono_crianza.png" /></image>
       </ImageView>
-      <Button layoutX="455.0" layoutY="192.0" mnemonicParsing="false" text="CRIANZA"
-              prefWidth="130.0" onAction="#handleCrianza"
-              style="-fx-background-color: rgba(0,0,0,0.5); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 11px; -fx-background-radius: 5; -fx-alignment: center;"/>
+      <Button layoutX="455.0" layoutY="192.0" mnemonicParsing="false" onAction="#handleCrianza" prefWidth="130.0" style="-fx-background-color: rgba(0,0,0,0.5); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 11px; -fx-background-radius: 5; -fx-alignment: center;" text="CRIANZA" />
 
       <!-- FILA 2 -->
       <!-- Casino -->
-      <Button layoutX="145.0" layoutY="235.0" prefHeight="110.0" prefWidth="110.0"
-              onAction="#handleCasino"
-              style="-fx-background-color: rgba(255,255,255,0.4); -fx-border-color: white; -fx-border-width: 3; -fx-border-radius: 55; -fx-background-radius: 55;"/>
-      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="170.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" mouseTransparent="true">
-         <image><Image url="@../../Media/Img/icono_casino.png"/></image>
+      <Button layoutX="145.0" layoutY="235.0" onAction="#handleCasino" prefHeight="110.0" prefWidth="110.0" style="-fx-background-color: rgba(255,255,255,0.4); -fx-border-color: white; -fx-border-width: 3; -fx-border-radius: 55; -fx-background-radius: 55;" />
+      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="170.0" layoutY="260.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <image><Image url="@../../Media/Img/icono_casino.png" /></image>
       </ImageView>
-      <Button layoutX="135.0" layoutY="352.0" mnemonicParsing="false" text="CASINO"
-              prefWidth="130.0" onAction="#handleCasino"
-              style="-fx-background-color: rgba(0,0,0,0.5); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 11px; -fx-background-radius: 5; -fx-alignment: center;"/>
+      <Button layoutX="135.0" layoutY="352.0" mnemonicParsing="false" onAction="#handleCasino" prefWidth="130.0" style="-fx-background-color: rgba(0,0,0,0.5); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 11px; -fx-background-radius: 5; -fx-alignment: center;" text="CASINO" />
 
       <!-- Salir -->
-      <Button layoutX="385.0" layoutY="235.0" prefHeight="110.0" prefWidth="110.0"
-              onAction="#handleCerrarSesion"
-              style="-fx-background-color: rgba(255,255,255,0.4); -fx-border-color: white; -fx-border-width: 3; -fx-border-radius: 55; -fx-background-radius: 55;"/>
-      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="415.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" mouseTransparent="true">
-         <image><Image url="@../../Media/Img/icono_cerrarsesion.png"/></image>
+      <Button layoutX="385.0" layoutY="235.0" onAction="#handleCerrarSesion" prefHeight="110.0" prefWidth="110.0" style="-fx-background-color: rgba(255,255,255,0.4); -fx-border-color: white; -fx-border-width: 3; -fx-border-radius: 55; -fx-background-radius: 55;" />
+      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="415.0" layoutY="260.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <image><Image url="@../../Media/Img/icono_cerrarsesion.png" /></image>
       </ImageView>
-      <Button layoutX="375.0" layoutY="352.0" mnemonicParsing="false" text="SALIR"
-              prefWidth="130.0" onAction="#handleCerrarSesion"
-              style="-fx-background-color: rgba(0,0,0,0.5); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 11px; -fx-background-radius: 5; -fx-alignment: center;"/>
+      <Button layoutX="375.0" layoutY="352.0" mnemonicParsing="false" onAction="#handleCerrarSesion" prefWidth="130.0" style="-fx-background-color: rgba(0,0,0,0.5); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 11px; -fx-background-radius: 5; -fx-alignment: center;" text="SALIR" />
+      <ImageView fx:id="imgMusica" fitHeight="71.0" fitWidth="60.0" layoutX="575.0" layoutY="334.0" onMouseClicked="#activarDesactivarSonido" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Media/Img/unmuted.png" />
+         </image>
+      </ImageView>
 
    </children>
 </AnchorPane>

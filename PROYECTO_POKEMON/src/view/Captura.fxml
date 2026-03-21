@@ -49,6 +49,11 @@
          <!-- Pokéballs disponibles -->
          <Label fx:id="lblPokeballs" layoutX="450.0" layoutY="88.0" style="-fx-font-size: 10px; -fx-font-weight: bold;" text="Pokéballs: 5" textFill="#FFD700" />
       </AnchorPane>
+      <ImageView fx:id="imgMusica" fitHeight="63.0" fitWidth="47.0" layoutX="593.0" onMouseClicked="#activarDesactivarSonido" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Media/Img/unmuted.png" />
+         </image>
+      </ImageView>
 
    </children>
 </AnchorPane>

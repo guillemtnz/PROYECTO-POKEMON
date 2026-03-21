@@ -5,12 +5,37 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.File;
+
+
+
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class MenuPrincipalController {
+	
+	private boolean musica = false;
+	private MediaPlayer mediaPlayer;
+	
+	@FXML private ImageView imgMusica;
+
+	@FXML
+	public void initialize() {
+		musica();
+	}
+	
+	@FXML
+    void activarDesactivarSonido(MouseEvent event) {
+		musica();
+    }
 
     @FXML private Button btnCapturar;
     @FXML private Button btnEquipo;
@@ -64,8 +89,29 @@ public class MenuPrincipalController {
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
+            mediaPlayer.stop();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public void musica() {
+    	
+    	if(!this.musica) {
+    		String musica = "./Media/Music/littleroot_town.mp3";
+        	Media sound = new Media(new File(musica).toURI().toString());
+        	
+        	mediaPlayer = new MediaPlayer(sound);
+        	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        	mediaPlayer.play();
+        	imgMusica.setImage(new Image(new File("./Media/Img/unmuted.png").toURI().toString()));
+        	
+        	this.musica =true;
+    	}else {
+    		mediaPlayer.stop();
+    		this.musica =false;
+    		imgMusica.setImage(new Image(new File("./Media/Img/muted.png").toURI().toString()));
+    	}
+    	
     }
 }
