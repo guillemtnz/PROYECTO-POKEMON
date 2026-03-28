@@ -81,6 +81,7 @@ public class MenuPrincipalController {
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
+            mediaPlayer.stop();
         } catch (Exception e) {
             e.printStackTrace();
         }
