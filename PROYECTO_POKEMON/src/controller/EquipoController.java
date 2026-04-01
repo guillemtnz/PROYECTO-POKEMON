@@ -25,7 +25,7 @@ public class EquipoController {
     @FXML public void handleSlot5(ActionEvent event) { }
     @FXML public void handleSlot6(ActionEvent event) { }
     
-    // Método para volver al menú
+    // Método para volver al menú principal
     @FXML
     public void handleVolver(ActionEvent event) {
         try {

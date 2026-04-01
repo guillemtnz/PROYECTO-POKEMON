@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="640.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.CombateController">
+   <children>
+
+      <!-- Imagen de fondo -->
+      <ImageView fitHeight="400.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="false">
+         <image><Image url="@../../Media/Background/fondoCombate.png"/></image>
+      </ImageView>
+
+      <!-- POKEMON RIVAL (arriba derecha) -->
+      <ImageView fx:id="imgRival" fitHeight="100.0" fitWidth="100.0"
+                 layoutX="420.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true"/>
+
+      <!-- Info rival -->
+      <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="70.0" prefWidth="220.0"
+                  style="-fx-background-color: rgba(255,255,255,0.85); -fx-background-radius: 8;">
+         <Label fx:id="lblNombreRival" layoutX="10.0" layoutY="8.0" text="RIVAL"
+                style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+         <!-- Barra vitalidad rival -->
+         <Label layoutX="10.0" layoutY="28.0" text="VIT:" style="-fx-font-size: 10px;"/>
+         <AnchorPane layoutX="35.0" layoutY="30.0" prefHeight="10.0" prefWidth="160.0"
+                     style="-fx-background-color: #ccc; -fx-background-radius: 5;">
+            <AnchorPane fx:id="barraVidaRival" prefHeight="10.0" prefWidth="160.0"
+                        style="-fx-background-color: #44dd44; -fx-background-radius: 5;"/>
+         </AnchorPane>
+         <!-- Barra estamina rival -->
+         <Label layoutX="10.0" layoutY="46.0" text="ST:" style="-fx-font-size: 10px;"/>
+         <AnchorPane layoutX="35.0" layoutY="48.0" prefHeight="10.0" prefWidth="160.0"
+                     style="-fx-background-color: #ccc; -fx-background-radius: 5;">
+            <AnchorPane fx:id="barraEstaminaRival" prefHeight="10.0" prefWidth="160.0"
+                        style="-fx-background-color: #4488ff; -fx-background-radius: 5;"/>
+         </AnchorPane>
+         <!-- Botón grito rival -->
+         <Button layoutX="170.0" layoutY="5.0" mnemonicParsing="false" text="♪"
+                 onAction="#handleGritoRival"
+                 style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-size: 10px; -fx-background-radius: 5;"/>
+      </AnchorPane>
+
+      <!-- POKEMON PROPIO (abajo izquierda) -->
+      <ImageView fx:id="imgPropio" fitHeight="120.0" fitWidth="120.0"
+                 layoutX="60.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true"/>
+
+      <!-- Info propio -->
+      <AnchorPane layoutX="350.0" layoutY="200.0" prefHeight="70.0" prefWidth="270.0"
+                  style="-fx-background-color: rgba(255,255,255,0.85); -fx-background-radius: 8;">
+         <Label fx:id="lblNombrePropio" layoutX="10.0" layoutY="8.0" text="MI POKEMON"
+                style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+         <!-- Barra vitalidad propio -->
+         <Label layoutX="10.0" layoutY="28.0" text="VIT:" style="-fx-font-size: 10px;"/>
+         <AnchorPane layoutX="35.0" layoutY="30.0" prefHeight="10.0" prefWidth="200.0"
+                     style="-fx-background-color: #ccc; -fx-background-radius: 5;">
+            <AnchorPane fx:id="barraVidaPropia" prefHeight="10.0" prefWidth="200.0"
+                        style="-fx-background-color: #44dd44; -fx-background-radius: 5;"/>
+         </AnchorPane>
+         <!-- Barra estamina propio -->
+         <Label layoutX="10.0" layoutY="46.0" text="ST:" style="-fx-font-size: 10px;"/>
+         <AnchorPane layoutX="35.0" layoutY="48.0" prefHeight="10.0" prefWidth="200.0"
+                     style="-fx-background-color: #ccc; -fx-background-radius: 5;">
+            <AnchorPane fx:id="barraEstaminaPropia" prefHeight="10.0" prefWidth="200.0"
+                        style="-fx-background-color: #4488ff; -fx-background-radius: 5;"/>
+         </AnchorPane>
+         <!-- Botón grito propio -->
+         <Button layoutX="240.0" layoutY="5.0" mnemonicParsing="false" text="♪"
+                 onAction="#handleGritoPropio"
+                 style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-size: 10px; -fx-background-radius: 5;"/>
+         </AnchorPane>
+      
+         <Label fx:id="lblMensajeHuir" layoutX="350.0" layoutY="270.0" prefWidth="270.0"
+      	 text="" textFill="black" visible="false"
+       	 style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-padding: 3;"
+         wrapText="true"/>
+
+      <!-- LOG DE COMBATE -->
+      <TextArea fx:id="txtLog" layoutX="0.0" layoutY="290.0" prefHeight="110.0" prefWidth="260.0"
+                editable="false" wrapText="true"
+                style="-fx-background-color: rgba(0,0,0,0.75); -fx-text-fill: white; -fx-font-size: 10px;"/>
+                
+      <!-- PANEL DE ACCIONES -->
+	  <AnchorPane layoutX="260.0" layoutY="290.0" prefHeight="110.0" prefWidth="380.0"
+            style="-fx-background-color: rgba(0,0,0,0.75);">
+
+   	  <!-- Botón Luchar (despliega ataques) -->
+      <Button fx:id="btnLuchar" layoutX="10.0" layoutY="10.0" prefWidth="170.0" prefHeight="40.0"
+           text="LUCHAR" onAction="#handleLuchar"
+           style="-fx-background-color: #e94560; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 11px;"/>
+
+      <!-- Botón Descansar -->
+      <Button fx:id="btnDescansar" layoutX="200.0" layoutY="10.0" prefWidth="170.0" prefHeight="40.0"
+           text="DESCANSAR" onAction="#handleDescansar"
+           style="-fx-background-color: #1565C0; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 11px;"/>
+
+  	  <!-- Botón Pokemon -->
+      <Button fx:id="btnCambiar" layoutX="10.0" layoutY="60.0" prefWidth="170.0" prefHeight="40.0"
+           text="POKEMON" onAction="#handleCambiar"
+           style="-fx-background-color: #2e7d32; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 11px;"/>
+
+  	  <!-- Botón Huir -->
+      <Button fx:id="btnHuir" layoutX="200.0" layoutY="60.0" prefWidth="170.0" prefHeight="40.0"
+           text="HUIR" onAction="#handleHuir"
+           style="-fx-background-color: #444444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 11px;"/>
+	  </AnchorPane>
+
+	<!-- PANEL ATAQUES (oculto hasta clickarlo) -->
+	<AnchorPane fx:id="panelAtaques" layoutX="260.0" layoutY="290.0" prefHeight="110.0" prefWidth="380.0"
+            visible="false"
+            style="-fx-background-color: rgba(0,0,0,0.75);">
+
+   <Button fx:id="btnAtaque1" layoutX="10.0" layoutY="10.0" prefWidth="170.0" prefHeight="40.0"
+           text="Ataque 1" onAction="#handleAtaque1"
+           style="-fx-background-color: #e94560; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 10px;"/>
+   <Button fx:id="btnAtaque2" layoutX="200.0" layoutY="10.0" prefWidth="170.0" prefHeight="40.0"
+           text="Ataque 2" onAction="#handleAtaque2"
+           style="-fx-background-color: #e94560; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 10px;"/>
+   <Button fx:id="btnAtaque3" layoutX="10.0" layoutY="60.0" prefWidth="170.0" prefHeight="40.0"
+           text="Ataque 3" onAction="#handleAtaque3"
+           style="-fx-background-color: #e94560; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 10px;"/>
+   <Button fx:id="btnAtaque4" layoutX="200.0" layoutY="60.0" prefWidth="170.0" prefHeight="40.0"
+           text="Ataque 4" onAction="#handleAtaque4"
+           style="-fx-background-color: #e94560; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 10px;"/>
+
+   <!-- Botón volver al menú principal de acciones -->
+   <Button layoutX="320.0" layoutY="80.0" prefWidth="50.0" prefHeight="25.0"
+           text="Volver" onAction="#handleVolverAcciones"
+           style="-fx-background-color: #444; -fx-text-fill: white; -fx-font-size: 8px; -fx-background-radius: 5;"/>
+</AnchorPane>
+
+
+   </children>
+</AnchorPane>

@@ -13,7 +13,7 @@
 
       <!-- Imagen de fondo -->
       <ImageView fitHeight="400.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="false">
-         <image><Image url="@../../Media/Background/fondoCaptura.png" /></image>
+         <image><Image url="@../../Media/Background/fondoCaptura.jpg" /></image>
       </ImageView>
 
       <!-- Nombre del Pokemon salvaje -->
