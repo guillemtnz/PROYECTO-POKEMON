@@ -361,7 +361,7 @@ public class Pokemon {
 		for (int i = 0; i < movimientos.length; i++) {
 	        if (movimientos[i] == null) {
 	            movimientos[i] = nuevoMovimiento;
-	            System.out.println("¡" + nombre + " ha aprendido " + nuevoMovimiento.getNombre() + "!");
+	            System.out.println("¡" + nombre + " ha aprendido " + nuevoMovimiento.getNombreMovimiento() + "!");
 	            return true; 
 	        }
 	    }

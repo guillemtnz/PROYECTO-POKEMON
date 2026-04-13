@@ -1,131 +1,156 @@
 package model;
 
-//HAY QUE MODIFICAR TANTO LA TABLA MOVIMIENTO COMO SU IMPLEMENTACIÓN EN EL PROGRAMA
-
 
 public abstract class Movimiento {
 	
-	public enum TipoMovimiento {
-		ATAQUE, ESTADO, MEJORA
-	}
+	public enum MecanicaEspecial {
+        SUICIDIO, RECOIL, DRENAJE, MULTIGOLPE, CLIMA, MISMO_DESTINO
+    }
+
+	protected int idMovimiento;
+	protected String nombreMovimiento;
+	protected Tipo tipoMovimiento; //definida en la clase Tipo
+	protected int nivel;
+	protected int prioridad;
+	protected int precision;
+	protected int pp;
+	protected String desc; //breve descripción del movimiento
 	
-	public enum TipoPokemon {
-		ACERO, AGUA, BICHO, DRAGON, ELECTRICO, FANTASMA, FUEGO, HADA,
-		HIELO, LUCHA, NORMAL, PLANTA, PSIQUICO, ROCA, SINIESTRO, 
-		TIERRA, VENENO, VOLADOR
-	}
+	protected MecanicaEspecial mecanicaEspecial;
+    protected int valorMecanica;
 	
-	public enum Estado {
-		PARALIZADO, QUEMADO, ENVENENADO, GRAVEMENTE_ENVENENADO, DORMIDO, SOMNOLIENTO,
-		CONGELADO, HELADO
-	}
-	
-	public enum Mejora {
-		ATAQUE, ATAQUE_ESPECIAL, DEFENSA, DEFENSA_ESPECIAL
+	//CONSTRUCTOR POR DEFECTO
+	public Movimiento() {
+		super();
+		this.idMovimiento = 0;
+		this.nombreMovimiento = "";
+		this.tipoMovimiento = null;
+		this.prioridad = 0;
+		this.precision = 100;
+		this.pp = 40;
+		this.nivel = 0;
+		this.desc = "";
+		this.mecanicaEspecial = null;
+		this.valorMecanica = 0;
 	}
 
-
-	protected String nombre;
-	protected TipoMovimiento tipoMovimiento;
-	protected int costePP;
-	
-	public Movimiento(String nombre, TipoMovimiento tipoMovimiento) {
-		this.nombre = nombre;
+	//CONSTRUCTOR CON TODOS LOS ATRIBUTOS
+	public Movimiento(int idMovimiento, String nombreMovimiento, Tipo tipoMovimiento, int nivel, 
+						int prioridad, int precision, int pp, String desc, MecanicaEspecial mecanicaEspecial, int valorMecanica) {
+		super();
+		this.idMovimiento = idMovimiento;
+		this.nombreMovimiento = nombreMovimiento;
 		this.tipoMovimiento = tipoMovimiento;
-		this.costePP = 1; //Todos los movimientos, ya sean de ataque mejora o estado cuestan 1 PP
+		this.nivel = nivel;
+		this.prioridad = prioridad;
+		this.precision = precision;
+		this.pp = pp;
+		this.desc = desc;
+		this.mecanicaEspecial = mecanicaEspecial;
+		this.valorMecanica = valorMecanica;
+	}
+	
+	//CONSTRUCTOR COPIA  (no creo que se use nunca)
+	public Movimiento(Movimiento m) {
+		super();
+		this.idMovimiento = m.idMovimiento;
+		this.nombreMovimiento = m.nombreMovimiento;
+		this.tipoMovimiento = m.tipoMovimiento;
+		this.nivel = m.nivel;
+		this.prioridad = m.prioridad;
+		this.precision = m.precision;
+		this.pp = m.pp;
+		this.desc = m.desc;
+		this.mecanicaEspecial = m.mecanicaEspecial;
+		this.valorMecanica = m.valorMecanica;
+	}
+	
+	//GETTERS Y SETTERS
+
+	public int getIdMovimiento() {
+		return idMovimiento;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public void setIdMovimiento(int idMovimiento) {
+		this.idMovimiento = idMovimiento;
 	}
 
-	public TipoMovimiento getTipoMovimiento() {
+	public String getNombreMovimiento() {
+		return nombreMovimiento;
+	}
+
+	public void setNombreMovimiento(String nombreMovimiento) {
+		this.nombreMovimiento = nombreMovimiento;
+	}
+
+	public Tipo getTipoMovimiento() {
 		return tipoMovimiento;
 	}
 
-	public int getCostePP() {
-		return costePP;
+	public void setTipoMovimiento(Tipo tipoMovimiento) {
+		this.tipoMovimiento = tipoMovimiento;
+	}
+
+
+	public int getPrioridad() {
+		return prioridad;
+	}
+
+	public void setPrioridad(int prioridad) {
+		this.prioridad = prioridad;
+	}
+
+
+	public int getPrecision() {
+		return precision;
+	}
+
+	public void setPrecision(int precision) {
+		this.precision = precision;
+	}
+
+	public int getPp() {
+		return pp;
+	}
+
+	public void setPp(int pp) {
+		this.pp = pp;
+	}
+
+	public int getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
+
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 	
+	
+	public MecanicaEspecial getMecanicaEspecial() {
+		return mecanicaEspecial;
+	}
+
+	public void setMecanicaEspecial(MecanicaEspecial mecanicaEspecial) {
+		this.mecanicaEspecial = mecanicaEspecial;
+	}
+
+	public int getValorMecanica() {
+		return valorMecanica;
+	}
+
+	public void setValorMecanica(int valorMecanica) {
+		this.valorMecanica = valorMecanica;
+	}
+
 	public abstract void ejecutarMovimiento();
 
-	
-	//Clase interna Ataque
-	public class MovimientoAtaque extends Movimiento {
-		
-		private int potencia;
-		private TipoPokemon tipo;
-		
-		public MovimientoAtaque(String nombre, int potencia, TipoPokemon tipo) {
-			super(nombre, TipoMovimiento.ATAQUE);
-			this.potencia = potencia;
-			this.tipo = tipo;
-		}
-		
-		public int getPotencia() {
-			return potencia;
-		}
-
-		public TipoPokemon getTipo() {
-			return tipo;
-		}
-
-		@Override
-		public void ejecutarMovimiento() {
-			// TODO Auto-generated method stub
-		}
-	}
-	
-	//Clase interna Estado
-	public class MovimientoEstado extends Movimiento {
-		
-		private Estado estado;
-		private int turnos;
-		
-		public MovimientoEstado(String nombre, Estado estado, int turnos) {
-			super(nombre, TipoMovimiento.ESTADO);
-			this.estado = estado;
-			this.turnos = turnos;
-		}
-
-		public Estado getEstado() {
-			return estado;
-		}
-
-		public int getTurnos() {
-			return turnos;
-		}
-
-		@Override
-		public void ejecutarMovimiento() {
-			// TODO Auto-generated method stub	
-		}
-	}
-	
-	//Clase interna Mejora
-	public class MovimientoMejora extends Movimiento {
-		
-		private Mejora mejora;
-		private int turnos;
-		
-		public MovimientoMejora(String nombre, Mejora mejora, int turnos) {
-			super(nombre, TipoMovimiento.MEJORA);
-			this.mejora = mejora;
-			this.turnos = turnos;
-		}
-		
-		public Mejora getMejora() {
-			return mejora;
-		}
-
-		public int getTurnos() {
-			return turnos;
-		}
-
-		@Override
-		public void ejecutarMovimiento() {
-			// TODO Auto-generated method stub
-		}
-		
-	}
 }
