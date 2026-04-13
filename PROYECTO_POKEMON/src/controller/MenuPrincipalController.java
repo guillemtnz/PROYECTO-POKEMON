@@ -73,11 +73,12 @@ public class MenuPrincipalController {
         mostrarAviso("Crianza - Próximamente");
     }
     
-    // Aviso (aun falta por hacer :p )
+    // Navega a la vista del casino
     @FXML
     public void handleCasino(ActionEvent event) {
-        mostrarAviso("Casino - Próximamente");
+        navegarA("/view/Casino.fxml", event);
     }
+    
     
     // Cierra la sesión del entrenador y vuelve a la pantalla de login
     @FXML
@@ -130,6 +131,5 @@ public class MenuPrincipalController {
     		this.musica =false;
     		imgMusica.setImage(new Image(new File("./Media/Img/muted.png").toURI().toString()));
     	}
-    	
     }
 }

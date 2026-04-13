@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="640.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.CasinoController">
+   <children>
+
+      <!-- Imagen de fondo -->
+      <ImageView fitHeight="400.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="false">
+         <image><Image url="@../../Media/Background/fondoCasino.png"/></image>
+      </ImageView>
+
+      <!-- Titulo -->
+      <Label layoutX="170.0" layoutY="20.0" text="CASINO" textFill="#FFD700"
+             style="-fx-effect: dropshadow(gaussian, black, 6, 0.9, 0, 0);">
+         <font><Font name="Press Start 2P" size="30.0"/></font>
+      </Label>
+
+      <Label layoutX="170.0" layoutY="70.0" text="Elige un juego" textFill="white"
+             style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 3, 0.8, 0, 0);"/>
+
+      <!-- Botón Cara o Cruz -->
+      <AnchorPane layoutX="80.0" layoutY="110.0" prefHeight="150.0" prefWidth="140.0"
+                  style="-fx-background-color: rgba(0,0,0,0.65); -fx-background-radius: 12;">
+         <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="30.0" layoutY="10.0"
+                    pickOnBounds="true" preserveRatio="true">
+            <image><Image url="@../../Media/Img/icono_moneda.png"/></image>
+         </ImageView>
+         <Button layoutX="10.0" layoutY="100.0" prefWidth="120.0" prefHeight="35.0"
+                 text="Cara o Cruz" onAction="#handleCaraCruz"
+                 style="-fx-background-color: #e94560; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-font-size: 10px;"/>
+      </AnchorPane>
+
+      <!-- Botón Ruleta -->
+      <AnchorPane layoutX="250.0" layoutY="110.0" prefHeight="150.0" prefWidth="140.0"
+                  style="-fx-background-color: rgba(0,0,0,0.65); -fx-background-radius: 12;">
+         <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="30.0" layoutY="10.0"
+                    pickOnBounds="true" preserveRatio="true">
+            <image><Image url="@../../Media/Img/icono_ruleta.png"/></image>
+         </ImageView>
+         <Button layoutX="10.0" layoutY="100.0" prefWidth="120.0" prefHeight="35.0"
+                 text="Ruleta" onAction="#handleRuleta"
+                 style="-fx-background-color: #1565C0; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-font-size: 10px;"/>
+      </AnchorPane>
+
+      <!-- Botón Adivinar Número -->
+      <AnchorPane layoutX="420.0" layoutY="110.0" prefHeight="150.0" prefWidth="140.0"
+                  style="-fx-background-color: rgba(0,0,0,0.65); -fx-background-radius: 12;">
+         <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="30.0" layoutY="10.0"
+                    pickOnBounds="true" preserveRatio="true">
+            <image><Image url="@../../Media/Img/icono_numero.png"/></image>
+         </ImageView>
+         <Button layoutX="10.0" layoutY="100.0" prefWidth="120.0" prefHeight="35.0"
+                 text="Adivinar Nro" onAction="#handleAdivinarNumero"
+                 style="-fx-background-color: #2e7d32; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-font-size: 10px;"/>
+      </AnchorPane>
+
+      <!-- Pokedollars disponibles -->
+      <Label fx:id="lblPokedollars" layoutX="200.0" layoutY="290.0"
+             text="Pokedollars: 0" textFill="#FFD700"
+             style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 3, 0.8, 0, 0);"/>
+
+      <!-- Botón volver -->
+      <Button layoutX="20.0" layoutY="360.0" mnemonicParsing="false"
+              prefHeight="30.0" prefWidth="100.0" text="Volver" onAction="#handleVolver"
+              style="-fx-background-color: #444; -fx-text-fill: white; -fx-font-size: 9px; -fx-background-radius: 8;"/>
+
+   </children>
+</AnchorPane>
