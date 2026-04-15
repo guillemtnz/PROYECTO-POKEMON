@@ -77,4 +77,17 @@ public class EntrenadorDAO {
             return false;
         }
     }
+    
+    public boolean actualizarPokedollars(int idEntrenador, int pokedollars) {
+        String sql = "UPDATE ENTRENADOR SET POKEDOLLARS = ? WHERE ID_ENTRENADOR = ?";
+        try (Connection cn = Conexion.conectar();
+             PreparedStatement pst = cn.prepareStatement(sql)) {
+            pst.setInt(1, pokedollars);
+            pst.setInt(2, idEntrenador);
+            return pst.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar Pokedólares: " + e.getMessage());
+            return false;
+        }
+    }
 }

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="640.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.RuletaController">
+   <children>
+
+      <!-- Imagen de fondo -->
+      <ImageView fitHeight="400.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="false">
+         <image><Image url="@../../Media/Background/fondoCasino.png"/></image>
+      </ImageView>
+
+      <!-- Titulo -->
+      <Label layoutX="190.0" layoutY="20.0" text="RULETA" textFill="#FFD700"
+             style="-fx-effect: dropshadow(gaussian, black, 6, 0.9, 0, 0);">
+         <font><Font name="Press Start 2P" size="26.0"/></font>
+      </Label>
+
+      <!-- Panel resultado -->
+      <AnchorPane fx:id="panelResultado" layoutX="220.0" layoutY="65.0" prefHeight="80.0" prefWidth="200.0"
+                  style="-fx-background-color: rgba(0,0,0,0.75); -fx-background-radius: 10;">
+         <Label layoutX="10.0" layoutY="8.0" text="Resultado:" textFill="white"
+                style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+         <Label fx:id="lblNumeroSalido" layoutX="10.0" layoutY="30.0"
+                text="?" textFill="white"
+                style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+         <Label fx:id="lblColorSalido" layoutX="60.0" layoutY="35.0"
+                text="?" textFill="white"
+                style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+      </AnchorPane>
+
+      <!-- Panel principal -->
+      <AnchorPane layoutX="60.0" layoutY="160.0" prefHeight="200.0" prefWidth="520.0"
+                  style="-fx-background-color: rgba(0,0,0,0.75); -fx-background-radius: 12;">
+
+         <!-- Pokedollars -->
+         <Label fx:id="lblPokedollars" layoutX="15.0" layoutY="10.0"
+                text="Pokedollars: 0" textFill="#FFD700"
+                style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+
+         <!-- Tipo de apuesta -->
+         <Label layoutX="15.0" layoutY="40.0" text="Apostar por:" textFill="white"
+                style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+
+         <Button fx:id="btnTipoNumero" layoutX="120.0" layoutY="35.0" prefWidth="90.0" prefHeight="28.0"
+                 text="Numero" onAction="#handleTipoNumero"
+                 style="-fx-background-color: #444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 10px;"/>
+         <Button fx:id="btnTipoColor" layoutX="220.0" layoutY="35.0" prefWidth="90.0" prefHeight="28.0"
+                 text="Color" onAction="#handleTipoColor"
+                 style="-fx-background-color: #444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 10px;"/>
+         <Button fx:id="btnTipoAmbos" layoutX="320.0" layoutY="35.0" prefWidth="120.0" prefHeight="28.0"
+                 text="Numero y Color" onAction="#handleTipoAmbos"
+                 style="-fx-background-color: #444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 10px;"/>
+
+         <!-- Numero a apostar -->
+         <Label fx:id="lblEtiquetaNumero" layoutX="15.0" layoutY="80.0" text="Numero (1-37):" textFill="white"
+                visible="false" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+         <TextField fx:id="txtNumero" layoutX="130.0" layoutY="76.0" prefWidth="80.0" prefHeight="28.0"
+                    promptText="1-37" visible="false"/>
+
+         <!-- Color a apostar -->
+         <Label fx:id="lblEtiquetaColor" layoutX="15.0" layoutY="115.0" text="Color:" textFill="white"
+                visible="false" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+         <Button fx:id="btnRojo" layoutX="65.0" layoutY="110.0" prefWidth="80.0" prefHeight="28.0"
+                 text="ROJO" onAction="#handleElegirRojo" visible="false"
+                 style="-fx-background-color: #444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;"/>
+         <Button fx:id="btnNegro" layoutX="155.0" layoutY="110.0" prefWidth="80.0" prefHeight="28.0"
+                 text="NEGRO" onAction="#handleElegirNegro" visible="false"
+                 style="-fx-background-color: #444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;"/>
+
+         <!-- Apuesta -->
+         <Label layoutX="15.0" layoutY="152.0" text="Apuesta:" textFill="white"
+                style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+         <TextField fx:id="txtApuesta" layoutX="90.0" layoutY="148.0"
+                    prefWidth="100.0" prefHeight="28.0" promptText="Ej: 200"/>
+
+         <!-- Botón girar -->
+         <Button fx:id="btnGirar" layoutX="210.0" layoutY="148.0" prefWidth="130.0" prefHeight="28.0"
+                 text="Girar ruleta" onAction="#handleGirar"
+                 style="-fx-background-color: #e94560; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 10px;"/>
+
+         <!-- Mensaje resultado -->
+         <Label fx:id="lblResultado" layoutX="15.0" layoutY="180.0" prefWidth="490.0"
+                text="" textFill="white" wrapText="true"
+                style="-fx-font-size: 10px; -fx-font-weight: bold;"/>
+
+      </AnchorPane>
+
+      <!-- Botón volver -->
+      <Button layoutX="20.0" layoutY="360.0" mnemonicParsing="false"
+              prefHeight="30.0" prefWidth="100.0" text="Volver" onAction="#handleVolver"
+              style="-fx-background-color: #444; -fx-text-fill: white; -fx-font-size: 9px; -fx-background-radius: 8;"/>
+
+   </children>
+</AnchorPane>
