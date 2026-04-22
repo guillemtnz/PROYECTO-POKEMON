@@ -67,10 +67,10 @@ public class MenuPrincipalController {
         navegarA("/view/Combate.fxml", event);
     }
     
-    // Aviso (aun falta por hacer :p )
+    // Muestra vista crianza
     @FXML
     public void handleCrianza(ActionEvent event) {
-        mostrarAviso("Crianza - Próximamente");
+        navegarA("/view/Crianza.fxml", event);
     }
     
     // Navega a la vista del casino
