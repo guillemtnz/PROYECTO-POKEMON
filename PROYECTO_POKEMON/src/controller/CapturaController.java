@@ -212,6 +212,4 @@ public class CapturaController {
         	gritoPlayer = new MediaPlayer(grito);
         	gritoPlayer.play();
     }
-    
-    
 }
