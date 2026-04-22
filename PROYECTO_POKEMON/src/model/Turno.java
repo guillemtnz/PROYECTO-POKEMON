@@ -2,6 +2,10 @@ package model;
 
 public class Turno {
 	
+	public enum TipoAccion {
+	    ATACAR, CAMBIAR_POKEMON, USAR_OBJETO, HUIR
+	}
+	
 	private int numTurno;
 	private String accionEntrenador;
 	private String accionRival;

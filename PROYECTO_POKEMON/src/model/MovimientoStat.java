@@ -1,69 +1,42 @@
 package model;
 
-import model.MovimientoAtaque.Objetivo;
-
 public class MovimientoStat extends Movimiento {
 	
-		
-	private Stat stat; // stat a cambiar
-	private int cantidad;
-	private int probabilidadStat; 
-	private Objetivo objetivo;
-		
-	
-	public MovimientoStat(
-			// de Movimiento
-			int idMovimiento, String nombreMovimiento, Tipo tipoMovimiento, int nivel, 
-			int prioridad, int precision, int pp, String desc, 
-			MecanicaEspecial mecanicaEspecial, int valorMecanica, 
-			
-			// hijo
-			Stat stat, int cantidad, int probabilidadStat, Objetivo objetivo) {
-		
-		super(idMovimiento, nombreMovimiento, tipoMovimiento, nivel, prioridad, precision, pp, desc, mecanicaEspecial, valorMecanica);
-		this.stat = stat;
-		this.cantidad = cantidad;
-		this.probabilidadStat = probabilidadStat;
-		this.objetivo = objetivo;
-	}
-		
-	//  GETTERS Y SETTERS 
+	private Stat statModificado; // stat a cambiar 
+	private int cantidadModificacion; // Ej: 2 para subir dos niveles, -1 para bajar uno
 	
 
-	public Stat getStat() {
-		return stat;
+	
+	// CONSTRUCTOR CON TODOS LOS ATRIBUTOS
+	public MovimientoStat(int idMovimiento, String nombreMovimiento, Tipo tipoMovimiento, int nivel, 
+			Integer precision, int pp, int prioridad, Blanco blanco, String efectoEspecial, 
+			Stat statModificado, int cantidadModificacion) {
+		super(idMovimiento, nombreMovimiento, tipoMovimiento, nivel, precision, pp, prioridad, blanco, efectoEspecial);
+
+		this.statModificado = statModificado;
+		this.cantidadModificacion = cantidadModificacion;
+	}
+		
+	// --- GETTERS Y SETTERS --- 
+
+	public Stat getStatModificado() {
+		return statModificado;
 	}
 
-	public void setStat(Stat stat) {
-		this.stat = stat;
+	public void setStatModificado(Stat statModificado) {
+		this.statModificado = statModificado;
 	}
 
-	public int getCantidad() {
-		return cantidad;
+	public int getCantidadModificacion() {
+		return cantidadModificacion;
 	}
 
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
+	public void setCantidadModificacion(int cantidadModificacion) {
+		this.cantidadModificacion = cantidadModificacion;
 	}
 
-	public int getProbabilidadStat() {
-		return probabilidadStat;
-	}
-
-	public void setProbabilidadStat(int probabilidadStat) {
-		this.probabilidadStat = probabilidadStat;
-	}
-
-	public Objetivo getObjetivo() {
-		return objetivo;
-	}
-
-	public void setObjetivo(Objetivo objetivo) {
-		this.objetivo = objetivo;
-	}
 
 	@Override
 	public void ejecutarMovimiento() {
-		
 	}
 }

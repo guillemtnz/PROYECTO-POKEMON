@@ -2,36 +2,44 @@ package model;
 
 public class MovimientoEstado extends Movimiento {
 		
-		private Estado estado;
-		private int numTurnos;
+
+	private Estado efecto; 
+	private int probabilidadEfecto;
+	
+	
+	public MovimientoEstado(int idMovimiento, String nombreMovimiento, Tipo tipoMovimiento, int nivel, 
+			int precision, int pp, int prioridad, Blanco blanco, String efectoEspecial, 
+			Estado efecto, int probabilidadEfecto) {
 		
-		public MovimientoEstado(int idMovimiento, String nombreMovimiento, Tipo tipoMovimiento, int nivel, 
-									int prioridad, int precision, int pp, String desc, Estado estado, int numTurnos, MecanicaEspecial mecanicaEspecial, int valorMecanica) {
-			super(idMovimiento, nombreMovimiento, tipoMovimiento, nivel, prioridad, precision, pp, desc, mecanicaEspecial, valorMecanica);
-			this.estado = estado;
-			this.numTurnos = numTurnos;
-		}
+		super(idMovimiento, nombreMovimiento, tipoMovimiento, nivel, precision, pp, prioridad, blanco, efectoEspecial);
+		
+		this.efecto = efecto;
+		this.probabilidadEfecto = probabilidadEfecto;
+		
+	}
 
-		public Estado getEstado() {
-			return estado;
-		}
+	// GETTERS Y SETTERS
 
-		public void setEstado(Estado estado) {
-			this.estado = estado;
-		}
+	public Estado getEfecto() {
+		return efecto;
+	}
 
-		public int getNumTurnos() {
-			return numTurnos;
-		}
+	public void setEfecto(Estado efecto) {
+		this.efecto = efecto;
+	}
+
+	public int getProbabilidadEfecto() {
+		return probabilidadEfecto;
+	}
+
+	public void setProbabilidadEfecto(int probabilidadEfecto) {
+		this.probabilidadEfecto = probabilidadEfecto;
+	}
 
 
-		public void setNumTurnos(int numTurnos) {
-			this.numTurnos = numTurnos;
-		}
 
-		public void ejecutarMovimiento() {
-			// TODO Auto-generated method stub	
-		}
-	
-	
+	@Override
+	public void ejecutarMovimiento() {
+		
+	}
 }

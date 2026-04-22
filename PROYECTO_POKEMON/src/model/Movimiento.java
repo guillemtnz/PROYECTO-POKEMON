@@ -1,75 +1,69 @@
 package model;
 
 
+
 public abstract class Movimiento {
 	
+	public static final int ACIERTA_SIEMPRE = 999;
+
 	public enum Stat {
-		ATAQUE, ATAQUE_ESPECIAL, DEFENSA, DEFENSA_ESPECIAL, VELOCIDAD
+		ATAQUE, ATAQUE_ESPECIAL, DEFENSA, DEFENSA_ESPECIAL, VELOCIDAD, PRECISION, EVASION
 	}
 	
-	public enum MecanicaEspecial {
-        SUICIDIO, RECOIL, DRENAJE, MULTIGOLPE, CLIMA, MISMO_DESTINO
+
+	public enum Blanco {
+        RIVAL, USUARIO
     }
 
 	protected int idMovimiento;
 	protected String nombreMovimiento;
-	protected Tipo tipoMovimiento; //definida en la clase Tipo
+	protected Tipo tipoMovimiento; // Definida en Tipo
 	protected int nivel;
-	protected int prioridad;
-	protected int precision;
+	protected int precision; 
 	protected int pp;
-	protected String desc; //breve descripción del movimiento
+	protected int prioridad;
+	protected Blanco blanco;
+	protected String efectoEspecial; 
 	
-	protected MecanicaEspecial mecanicaEspecial;
-    protected int valorMecanica;
-	
-	//CONSTRUCTOR POR DEFECTO
+	// CONSTRUCTOR POR DEFECTO
 	public Movimiento() {
-		super();
 		this.idMovimiento = 0;
 		this.nombreMovimiento = "";
 		this.tipoMovimiento = null;
-		this.prioridad = 0;
+		this.nivel = 1;
 		this.precision = 100;
 		this.pp = 40;
-		this.nivel = 0;
-		this.desc = "";
-		this.mecanicaEspecial = null;
-		this.valorMecanica = 0;
+		this.prioridad = 0;
+		this.blanco = Blanco.RIVAL;
+		this.efectoEspecial = null;
 	}
 
-	//CONSTRUCTOR CON TODOS LOS ATRIBUTOS
+	// CONSTRUCTOR CON TODOS LOS ATRIBUTOS
 	public Movimiento(int idMovimiento, String nombreMovimiento, Tipo tipoMovimiento, int nivel, 
-						int prioridad, int precision, int pp, String desc, MecanicaEspecial mecanicaEspecial, int valorMecanica) {
-		super();
+			int precision, int pp, int prioridad, Blanco blanco, String efectoEspecial) {
 		this.idMovimiento = idMovimiento;
 		this.nombreMovimiento = nombreMovimiento;
 		this.tipoMovimiento = tipoMovimiento;
 		this.nivel = nivel;
-		this.prioridad = prioridad;
 		this.precision = precision;
 		this.pp = pp;
-		this.desc = desc;
-		this.mecanicaEspecial = mecanicaEspecial;
-		this.valorMecanica = valorMecanica;
+		this.prioridad = prioridad;
+		this.blanco = blanco;
+		this.efectoEspecial = efectoEspecial;
 	}
 	
-	//CONSTRUCTOR COPIA  (no creo que se use nunca)
+	// CONSTRUCTOR COPIA
 	public Movimiento(Movimiento m) {
-		super();
 		this.idMovimiento = m.idMovimiento;
 		this.nombreMovimiento = m.nombreMovimiento;
 		this.tipoMovimiento = m.tipoMovimiento;
 		this.nivel = m.nivel;
-		this.prioridad = m.prioridad;
 		this.precision = m.precision;
 		this.pp = m.pp;
-		this.desc = m.desc;
-		this.mecanicaEspecial = m.mecanicaEspecial;
-		this.valorMecanica = m.valorMecanica;
+		this.prioridad = m.prioridad;
+		this.blanco = m.blanco;
+		this.efectoEspecial = m.efectoEspecial;
 	}
-	
-	//GETTERS Y SETTERS
 
 	public int getIdMovimiento() {
 		return idMovimiento;
@@ -95,15 +89,13 @@ public abstract class Movimiento {
 		this.tipoMovimiento = tipoMovimiento;
 	}
 
-
-	public int getPrioridad() {
-		return prioridad;
+	public int getNivel() {
+		return nivel;
 	}
 
-	public void setPrioridad(int prioridad) {
-		this.prioridad = prioridad;
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
 	}
-
 
 	public int getPrecision() {
 		return precision;
@@ -121,40 +113,31 @@ public abstract class Movimiento {
 		this.pp = pp;
 	}
 
-	public int getNivel() {
-		return nivel;
+	public int getPrioridad() {
+		return prioridad;
 	}
 
-	public void setNivel(int nivel) {
-		this.nivel = nivel;
+	public void setPrioridad(int prioridad) {
+		this.prioridad = prioridad;
 	}
 
-
-	public String getDesc() {
-		return desc;
+	public Blanco getBlanco() {
+		return blanco;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setBlanco(Blanco blanco) {
+		this.blanco = blanco;
+	}
+
+	public String getEfectoEspecial() {
+		return efectoEspecial;
+	}
+
+	public void setEfectoEspecial(String efectoEspecial) {
+		this.efectoEspecial = efectoEspecial;
 	}
 	
 	
-	public MecanicaEspecial getMecanicaEspecial() {
-		return mecanicaEspecial;
-	}
-
-	public void setMecanicaEspecial(MecanicaEspecial mecanicaEspecial) {
-		this.mecanicaEspecial = mecanicaEspecial;
-	}
-
-	public int getValorMecanica() {
-		return valorMecanica;
-	}
-
-	public void setValorMecanica(int valorMecanica) {
-		this.valorMecanica = valorMecanica;
-	}
-
 	public abstract void ejecutarMovimiento();
 
 }
