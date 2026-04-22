@@ -1,5 +1,6 @@
 package controller;
 
+import dao.EntrenadorDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import model.Entrenador;
 
 public class RuletaController {
 
@@ -26,35 +28,29 @@ public class RuletaController {
     @FXML private Label lblEtiquetaNumero;
     @FXML private Label lblEtiquetaColor;
 
-    // Tipo de apuesta: "NUMERO", "COLOR", "AMBOS"
-    private String tipoApuesta = null;
-
-    // Color elegido por el jugador
+    private String tipoApuesta  = null;
     private String colorElegido = null;
 
-    // TODO: obtener del entrenador logueado cuando este implementada la sesion
-    private int pokedollars = 1000;
+    private final EntrenadorDAO entrenadorDAO = new EntrenadorDAO();
 
-    private String estiloBotonNormal = "-fx-background-color: #444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 10px;";
+    private String estiloBotonNormal       = "-fx-background-color: #444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 10px;";
     private String estiloBotonSeleccionado = "-fx-background-color: #e94560; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 10px;";
 
     @FXML
     public void initialize() {
-        lblPokedollars.setText("Pokedollars: " + pokedollars);
+        refrescarPokedollars();
         lblResultado.setText("Elige tipo de apuesta y cantidad");
     }
 
     @FXML
     public void handleTipoNumero(ActionEvent event) {
-        tipoApuesta = "NUMERO";
+        tipoApuesta  = "NUMERO";
         colorElegido = null;
-        // Mostramos solo el campo de numero
         lblEtiquetaNumero.setVisible(true);
         txtNumero.setVisible(true);
         lblEtiquetaColor.setVisible(false);
         btnRojo.setVisible(false);
         btnNegro.setVisible(false);
-        // Resaltamos boton seleccionado
         btnTipoNumero.setStyle(estiloBotonSeleccionado);
         btnTipoColor.setStyle(estiloBotonNormal);
         btnTipoAmbos.setStyle(estiloBotonNormal);
@@ -64,15 +60,13 @@ public class RuletaController {
 
     @FXML
     public void handleTipoColor(ActionEvent event) {
-        tipoApuesta = "COLOR";
+        tipoApuesta  = "COLOR";
         colorElegido = null;
-        // Mostramos solo los botones de color
         lblEtiquetaNumero.setVisible(false);
         txtNumero.setVisible(false);
         lblEtiquetaColor.setVisible(true);
         btnRojo.setVisible(true);
         btnNegro.setVisible(true);
-        // Resaltamos boton seleccionado
         btnTipoColor.setStyle(estiloBotonSeleccionado);
         btnTipoNumero.setStyle(estiloBotonNormal);
         btnTipoAmbos.setStyle(estiloBotonNormal);
@@ -82,15 +76,13 @@ public class RuletaController {
 
     @FXML
     public void handleTipoAmbos(ActionEvent event) {
-        tipoApuesta = "AMBOS";
+        tipoApuesta  = "AMBOS";
         colorElegido = null;
-        // Mostramos tanto numero como color
         lblEtiquetaNumero.setVisible(true);
         txtNumero.setVisible(true);
         lblEtiquetaColor.setVisible(true);
         btnRojo.setVisible(true);
         btnNegro.setVisible(true);
-        // Resaltamos boton seleccionado
         btnTipoAmbos.setStyle(estiloBotonSeleccionado);
         btnTipoNumero.setStyle(estiloBotonNormal);
         btnTipoColor.setStyle(estiloBotonNormal);
@@ -114,14 +106,12 @@ public class RuletaController {
 
     @FXML
     public void handleGirar(ActionEvent event) {
-        // Validamos que haya elegido tipo de apuesta
         if (tipoApuesta == null) {
             lblResultado.setText("Primero elige el tipo de apuesta!");
             lblResultado.setStyle("-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #ffaa00;");
             return;
         }
 
-        // Validamos apuesta
         int apuesta;
         try {
             apuesta = Integer.parseInt(txtApuesta.getText().trim());
@@ -131,19 +121,20 @@ public class RuletaController {
             return;
         }
 
+        Entrenador ent = Entrenador.entrenadorLogueado;
+
         if (apuesta <= 0) {
             lblResultado.setText("La apuesta debe ser mayor que 0.");
             lblResultado.setStyle("-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #ffaa00;");
             return;
         }
 
-        if (apuesta > pokedollars) {
+        if (apuesta > ent.getPokedollars()) {
             lblResultado.setText("No tienes suficientes Pokedollars!");
             lblResultado.setStyle("-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #ff4444;");
             return;
         }
 
-        // Validamos numero si hace falta
         int numeroElegido = -1;
         if (tipoApuesta.equals("NUMERO") || tipoApuesta.equals("AMBOS")) {
             try {
@@ -160,56 +151,51 @@ public class RuletaController {
             }
         }
 
-        // Validamos color si hace falta
         if ((tipoApuesta.equals("COLOR") || tipoApuesta.equals("AMBOS")) && colorElegido == null) {
             lblResultado.setText("Elige un color antes de girar.");
             lblResultado.setStyle("-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #ffaa00;");
             return;
         }
 
-        // Generamos resultado aleatorio
-        int numeroSalido = (int)(Math.random() * 37) + 1;
-        String colorSalido = Math.random() < 0.5 ? "ROJO" : "NEGRO";
+        // Generar resultado
+        int    numeroSalido = (int)(Math.random() * 37) + 1;
+        String colorSalido  = Math.random() < 0.5 ? "ROJO" : "NEGRO";
 
-        // Mostramos resultado
         lblNumeroSalido.setText(String.valueOf(numeroSalido));
         lblColorSalido.setText(colorSalido);
-        if (colorSalido.equals("ROJO")) {
-            lblColorSalido.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #cc0000;");
-        } else {
-            lblColorSalido.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;");
-        }
+        lblColorSalido.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: "
+                + (colorSalido.equals("ROJO") ? "#cc0000" : "white") + ";");
 
-        // Calculamos si gana o pierde
+        // Evaluar resultado
         boolean aciertoNumero = (tipoApuesta.equals("NUMERO") || tipoApuesta.equals("AMBOS")) && numeroSalido == numeroElegido;
-        boolean aciertoColor = (tipoApuesta.equals("COLOR") || tipoApuesta.equals("AMBOS")) && colorSalido.equals(colorElegido);
+        boolean aciertoColor  = (tipoApuesta.equals("COLOR")  || tipoApuesta.equals("AMBOS")) && colorSalido.equals(colorElegido);
 
         if (aciertoNumero && aciertoColor) {
-            // Acierta numero y color: gana x10 + x2
             int ganancia = apuesta * 12;
-            pokedollars += ganancia;
-            lblResultado.setText("Salio " + numeroSalido + " " + colorSalido + ". Acertaste numero y color! Ganaste " + ganancia + " Pokedollars! Total: " + pokedollars);
+            ent.setPokedollars(ent.getPokedollars() + ganancia);
+            lblResultado.setText("Salio " + numeroSalido + " " + colorSalido + ". Acertaste numero y color! Ganaste " + ganancia + " Pokedollars!");
             lblResultado.setStyle("-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #44dd44;");
         } else if (aciertoNumero) {
             int ganancia = apuesta * 10;
-            pokedollars += ganancia;
-            lblResultado.setText("Salio " + numeroSalido + " " + colorSalido + ". Acertaste el numero! Ganaste " + ganancia + " Pokedollars! Total: " + pokedollars);
+            ent.setPokedollars(ent.getPokedollars() + ganancia);
+            lblResultado.setText("Salio " + numeroSalido + " " + colorSalido + ". Acertaste el numero! Ganaste " + ganancia + " Pokedollars!");
             lblResultado.setStyle("-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #44dd44;");
         } else if (aciertoColor) {
             int ganancia = apuesta * 2;
-            pokedollars += ganancia;
-            lblResultado.setText("Salio " + numeroSalido + " " + colorSalido + ". Acertaste el color! Ganaste " + ganancia + " Pokedollars! Total: " + pokedollars);
+            ent.setPokedollars(ent.getPokedollars() + ganancia);
+            lblResultado.setText("Salio " + numeroSalido + " " + colorSalido + ". Acertaste el color! Ganaste " + ganancia + " Pokedollars!");
             lblResultado.setStyle("-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #44dd44;");
         } else {
-            pokedollars -= apuesta;
-            lblResultado.setText("Salio " + numeroSalido + " " + colorSalido + ". No acertaste. Perdiste " + apuesta + " Pokedollars. Total: " + pokedollars);
+            ent.setPokedollars(ent.getPokedollars() - apuesta);
+            lblResultado.setText("Salio " + numeroSalido + " " + colorSalido + ". No acertaste. Perdiste " + apuesta + " Pokedollars.");
             lblResultado.setStyle("-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #ff4444;");
         }
 
-        lblPokedollars.setText("Pokedollars: " + pokedollars);
+        entrenadorDAO.actualizarPokedollars(ent.getIdEntrenador(), ent.getPokedollars());
+        refrescarPokedollars();
 
-        // Reseteamos selecciones para la siguiente ronda
-        tipoApuesta = null;
+        // Resetear selecciones
+        tipoApuesta  = null;
         colorElegido = null;
         btnTipoNumero.setStyle(estiloBotonNormal);
         btnTipoColor.setStyle(estiloBotonNormal);
@@ -230,8 +216,11 @@ public class RuletaController {
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    private void refrescarPokedollars() {
+        if (Entrenador.entrenadorLogueado != null)
+            lblPokedollars.setText("Pokedollars: " + Entrenador.entrenadorLogueado.getPokedollars());
     }
 }

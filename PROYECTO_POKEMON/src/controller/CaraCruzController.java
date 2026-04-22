@@ -1,5 +1,6 @@
 package controller;
 
+import dao.EntrenadorDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,35 +12,32 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import model.Entrenador;
+
 import java.io.File;
 
 public class CaraCruzController {
 
-    @FXML private Label lblPokedollars;
-    @FXML private Label lblResultado;
-    @FXML private ImageView imgMoneda;
+    @FXML private Label     lblPokedollars;
+    @FXML private Label     lblResultado;
     @FXML private TextField txtApuesta;
-    @FXML private Button btnCara;
-    @FXML private Button btnCruz;
+    @FXML private Button    btnCara;
+    @FXML private Button    btnCruz;
+    @FXML private ImageView imgMoneda;
 
-    // Opcion elegida por el jugador: "CARA" o "CRUZ"
     private String eleccion = null;
-
-    // Pokedollars del jugador
-    // TODO: obtener del entrenador logueado cuando este implementada la sesion
-    private int pokedollars = 1000;
+    private final EntrenadorDAO entrenadorDAO = new EntrenadorDAO();
 
     @FXML
     public void initialize() {
-        lblPokedollars.setText("Pokedollars: " + pokedollars);
+        refrescarPokedollars();
         lblResultado.setText("Elige cara o cruz y escribe tu apuesta");
     }
 
     @FXML
     public void handleElegirCara(ActionEvent event) {
         eleccion = "CARA";
-        // Resaltamos el boton seleccionado
-        btnCara.setStyle("-fx-background-color: red ; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;");
+        btnCara.setStyle("-fx-background-color: red; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;");
         btnCruz.setStyle("-fx-background-color: #444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;");
         lblResultado.setText("Has elegido CARA");
     }
@@ -47,7 +45,6 @@ public class CaraCruzController {
     @FXML
     public void handleElegirCruz(ActionEvent event) {
         eleccion = "CRUZ";
-        // Resaltamos el boton seleccionado
         btnCruz.setStyle("-fx-background-color: red; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;");
         btnCara.setStyle("-fx-background-color: #444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;");
         lblResultado.setText("Has elegido CRUZ");
@@ -55,14 +52,12 @@ public class CaraCruzController {
 
     @FXML
     public void handleLanzar(ActionEvent event) {
-        // Validamos que haya elegido cara o cruz
         if (eleccion == null) {
             lblResultado.setText("Primero elige CARA o CRUZ!");
             lblResultado.setStyle("-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #ffaa00;");
             return;
         }
 
-        // Validamos que haya escrito una apuesta valida
         int apuesta;
         try {
             apuesta = Integer.parseInt(txtApuesta.getText().trim());
@@ -72,44 +67,44 @@ public class CaraCruzController {
             return;
         }
 
-        // Validamos que tenga suficientes pokedollars
+        Entrenador ent = Entrenador.entrenadorLogueado;
+
         if (apuesta <= 0) {
             lblResultado.setText("La apuesta debe ser mayor que 0.");
             lblResultado.setStyle("-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #ffaa00;");
             return;
         }
 
-        if (apuesta > pokedollars) {
+        if (apuesta > ent.getPokedollars()) {
             lblResultado.setText("No tienes suficientes Pokedollars!");
             lblResultado.setStyle("-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #ff4444;");
             return;
         }
 
-        // Lanzamos la moneda (50% de probabilidad)
+        // Lanzar moneda
         String resultado = Math.random() < 0.5 ? "CARA" : "CRUZ";
 
-        // Actualizamos la imagen de la moneda
-        String rutaImg = "./Media/Img/moneda_" + resultado.toLowerCase() + ".png";
-        File archivoImg = new File(rutaImg);
+        // Actualizar imagen de la moneda
+        File archivoImg = new File("./Media/Img/moneda_" + resultado.toLowerCase() + ".png");
         if (archivoImg.exists()) {
             imgMoneda.setImage(new Image(archivoImg.toURI().toString()));
         }
 
-        // Comprobamos si gana o pierde
+        // Resolver apuesta
         if (resultado.equals(eleccion)) {
-            pokedollars += apuesta;
-            lblResultado.setText("Ha salido " + resultado + "! Ganaste " + apuesta + " Pokedollars! Total: " + pokedollars);
+            ent.setPokedollars(ent.getPokedollars() + apuesta);
+            lblResultado.setText("Ha salido " + resultado + "! Ganaste " + apuesta + " Pokedollars!");
             lblResultado.setStyle("-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #44dd44;");
         } else {
-            pokedollars -= apuesta;
-            lblResultado.setText("Ha salido " + resultado + "! Perdiste " + apuesta + " Pokedollars. Total: " + pokedollars);
+            ent.setPokedollars(ent.getPokedollars() - apuesta);
+            lblResultado.setText("Ha salido " + resultado + "! Perdiste " + apuesta + " Pokedollars.");
             lblResultado.setStyle("-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #ff4444;");
         }
 
-        // Actualizamos el contador de pokedollars
-        lblPokedollars.setText("Pokedollars: " + pokedollars);
+        entrenadorDAO.actualizarPokedollars(ent.getIdEntrenador(), ent.getPokedollars());
+        refrescarPokedollars();
 
-        // Reseteamos la eleccion para la siguiente ronda
+        // Resetear elección
         eleccion = null;
         btnCara.setStyle("-fx-background-color: #444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;");
         btnCruz.setStyle("-fx-background-color: #444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;");
@@ -122,8 +117,11 @@ public class CaraCruzController {
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    private void refrescarPokedollars() {
+        if (Entrenador.entrenadorLogueado != null)
+            lblPokedollars.setText("Pokedollars: " + Entrenador.entrenadorLogueado.getPokedollars());
     }
 }

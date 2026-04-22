@@ -17,7 +17,7 @@
       </ImageView>
 
       <!-- Titulo -->
-      <Label layoutX="251.0" layoutY="38.0" style="-fx-effect: dropshadow(gaussian, black, 6, 0.9, 0, 0);" text="CARA O CRUZ" textFill="#FFD700">
+      <Label layoutX="234.0" layoutY="31.0" style="-fx-effect: dropshadow(gaussian, black, 6, 0.9, 0, 0); -fx-font-weight: bold; -fx-font-size: 26px;" text="CARA O CRUZ" textFill="#FFD700">
          <font><Font name="Press Start 2P" size="22.0" /></font>
       </Label>
 
@@ -50,9 +50,12 @@
          <Label fx:id="lblResultado" layoutX="15.0" layoutY="115.0" prefWidth="410.0" style="-fx-font-size: 11px; -fx-font-weight: bold;" text="" textFill="white" wrapText="true" />
 
       </AnchorPane>
-
-      <!-- Botón volver -->
-      <Button layoutX="20.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleVolver" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #444; -fx-text-fill: white; -fx-font-size: 9px; -fx-background-radius: 8;" text="Volver" />
+      <AnchorPane layoutY="357.0" prefHeight="42.0" prefWidth="640.0" style="-fx-background-color: rgba(0,0,0,0.80);">
+         <children>
+            <Label fx:id="lblMensaje" layoutX="25.0" layoutY="12.0" prefWidth="420.0" style="-fx-font-size: 12px;" text="¡Juega con responsabilidad! +18" textFill="white" wrapText="true" />
+            <Button layoutX="512.0" layoutY="8.0" onAction="#handleVolver" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #444; -fx-text-fill: white; -fx-font-size: 9px; -fx-background-radius: 8;" text="Volver" />
+         </children>
+      </AnchorPane>
 
    </children>
 </AnchorPane>
