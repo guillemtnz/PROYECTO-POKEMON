@@ -167,7 +167,114 @@ public class Entrenador {
     }
     
     //CRIANZA
-    
+    /**  
+     * @param padre Pokémon MACHO (debe tener fertilidad > 0)
+     * @param madre Pokémon HEMBRA (debe tener fertilidad > 0)
+     * @return Pokémon hijo o null si no se puede criar
+     */
+    public Pokemon criarPokemon(Pokemon padre, Pokemon madre) {
+
+        // Condiciones
+        if (padre == null || madre == null) return null;
+        if (padre.getSexo() != Pokemon.Sexo.MACHO)  return null;
+        if (madre.getSexo() != Pokemon.Sexo.HEMBRA) return null;
+        if (padre.getFertilidad() <= 0 || madre.getFertilidad() <= 0) return null;
+
+        Random rnd = new Random();
+
+        //  Mote mezclado 
+        String motePadre = (padre.getMote() != null && !padre.getMote().isEmpty())
+                ? padre.getMote() : padre.getNombre();
+        String moteMadre = (madre.getMote() != null && !madre.getMote().isEmpty())
+                ? madre.getMote() : madre.getNombre();
+
+        int mitadP = motePadre.length() / 2;
+        int mitadM = moteMadre.length() / 2;
+        String segP = motePadre.substring(0, mitadP);
+        String segM = moteMadre.substring(0, mitadM);
+
+        // Orden aleatorio de las mitades
+        String moteHijo = rnd.nextBoolean() ? segP + segM : segM + segP;
+        if (moteHijo.isEmpty()) moteHijo = "Hijo"; // fallback
+
+        // ── Movimientos mezclados (2 padre + 2 madre) ──
+        Movimiento[] movHijo = new Movimiento[4];
+        Movimiento[] movPadre = padre.getMovimientos();
+        Movimiento[] movMadre = madre.getMovimientos();
+
+        // indices no nulos de cada padre
+        java.util.List<Integer> idxP = new java.util.ArrayList<>();
+        java.util.List<Integer> idxM = new java.util.ArrayList<>();
+        if (movPadre != null) for (int i = 0; i < movPadre.length; i++) if (movPadre[i] != null) idxP.add(i);
+        if (movMadre != null) for (int i = 0; i < movMadre.length; i++) if (movMadre[i] != null) idxM.add(i);
+
+        java.util.Collections.shuffle(idxP, rnd);
+        java.util.Collections.shuffle(idxM, rnd);
+
+        int slot = 0;
+        for (int i = 0; i < 2 && i < idxP.size() && slot < 4; i++) movHijo[slot++] = movPadre[idxP.get(i)];
+        for (int i = 0; i < 2 && i < idxM.size() && slot < 4; i++) movHijo[slot++] = movMadre[idxM.get(i)];
+
+        // ── Tipos mezclados ──
+        // Recogemos todos los tipos de ambos progenitores (sin nulos ni duplicados)
+        java.util.Set<Tipo> tiposDisponibles = new java.util.LinkedHashSet<>();
+        if (padre.getTipo1() != null) tiposDisponibles.add(padre.getTipo1());
+        if (padre.getTipo2() != null) tiposDisponibles.add(padre.getTipo2());
+        if (madre.getTipo1() != null) tiposDisponibles.add(madre.getTipo1());
+        if (madre.getTipo2() != null) tiposDisponibles.add(madre.getTipo2());
+
+        java.util.List<Tipo> listaTipos = new java.util.ArrayList<>(tiposDisponibles);
+        java.util.Collections.shuffle(listaTipos, rnd);
+
+        Tipo tipo1Hijo = listaTipos.isEmpty()  ? null : listaTipos.get(0);
+        Tipo tipo2Hijo = listaTipos.size() < 2 ? null : listaTipos.get(1);
+
+        // Favorecer tipos compartidos: si padre y madre comparten tipo1, el hijo lo hereda seguro
+        if (padre.getTipo1() != null && padre.getTipo1().equals(madre.getTipo1())) {
+            tipo1Hijo = padre.getTipo1();
+        }
+
+        // ── Mejores estadisticas ──
+        int vitHijo   = Math.max(padre.getVitalidad(),        madre.getVitalidad());
+        int atkHijo   = Math.max(padre.getAtaque(),           madre.getAtaque());
+        int defHijo   = Math.max(padre.getDefensa(),          madre.getDefensa());
+        int atkEHijo  = Math.max(padre.getAtaqueEspecial(),   madre.getAtaqueEspecial());
+        int defEHijo  = Math.max(padre.getDefensaEspecial(),  madre.getDefensaEspecial());
+        int velHijo   = Math.max(padre.getVelocidad(),        madre.getVelocidad());
+
+        // ── Sexo aleatorio del hijo ──
+        Pokemon.Sexo sexoHijo = rnd.nextBoolean() ? Pokemon.Sexo.MACHO : Pokemon.Sexo.HEMBRA;
+
+        // ── Construir hijo ──
+        // El hijo hereda nombre/numPokedex de la madre 
+        Pokemon hijo = new Pokemon(
+                0,                          // idPokemon (lo asigna ala BD)
+                madre.getNumPokedex(),      // numPokedex (especie de la madre)
+                this.idEntrenador,          // pertenece al entrenador actual
+                madre.getNombre(),          // nombre de especie
+                moteHijo,                   // mote mezclado
+                vitHijo,                    // vitalidad
+                atkHijo,                    // ataque
+                defHijo,                    // defensa
+                atkEHijo,                   // ataqueEspecial
+                defEHijo,                   // defensaEspecial
+                velHijo,                    // velocidad
+                1,                          // nivel 1
+                0,                          // experiencia 0
+                movHijo,                    // movimientos mezclados
+                5,                          // fertilidad inicial
+                sexoHijo,                   // sexo aleatorio
+                tipo1Hijo,                  // tipo1 mezclado
+                tipo2Hijo,                  // tipo2 mezclado
+                null                        // sin estado
+        );
+
+        // ── Reduce fertilidad de los padres ──
+        padre.setFertilidad(padre.getFertilidad() - 1);
+        madre.setFertilidad(madre.getFertilidad() - 1);
+
+        return hijo;
+    }
    
 }
 
