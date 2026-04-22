@@ -1,7 +1,5 @@
 package model;
 
-import model.MovimientoStat.Stat;
-
 public class MovimientoAtaque extends Movimiento {
 	
 	public enum Objetivo{
@@ -21,9 +19,11 @@ public class MovimientoAtaque extends Movimiento {
 		
 		
 		
-		public MovimientoAtaque(int potencia, Estado estado, int probabilidadEstado, Objetivo objetivoEstado, Stat stat,
-				int cantidadStat, int probabilidadStat, Objetivo objetivoStat) {
-			super();  //aqui tengo que meter atributos
+		public MovimientoAtaque(int idMovimiento, String nombreMovimiento, Tipo tipoMovimiento, int nivel, 
+				int prioridad, int precision, int pp, String desc, MecanicaEspecial mecanicaEspecial, 
+				int valorMecanica, int potencia, Estado estado, int probabilidadEstado, Objetivo objetivoEstado,
+				Stat stat, int cantidadStat, int probabilidadStat, Objetivo objetivoStat) {
+			super(idMovimiento, nombreMovimiento, tipoMovimiento, nivel, prioridad, precision, pp, desc, mecanicaEspecial, valorMecanica);  //aqui tengo que meter atributos
 			this.potencia = potencia;
 			this.estado = estado;
 			this.probabilidadEstado = probabilidadEstado;

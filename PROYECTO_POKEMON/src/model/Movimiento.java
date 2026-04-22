@@ -3,6 +3,10 @@ package model;
 
 public abstract class Movimiento {
 	
+	public enum Stat {
+		ATAQUE, ATAQUE_ESPECIAL, DEFENSA, DEFENSA_ESPECIAL, VELOCIDAD
+	}
+	
 	public enum MecanicaEspecial {
         SUICIDIO, RECOIL, DRENAJE, MULTIGOLPE, CLIMA, MISMO_DESTINO
     }
