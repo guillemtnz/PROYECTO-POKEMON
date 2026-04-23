@@ -85,4 +85,34 @@ public class PokemonDAO {
         }
         return false;
     }
+    /* obtiene los pokemon de un entrenador desde la base de datos */
+    public java.util.ArrayList<Pokemon> getPokemonDeEntrenador(int idEntrenador) {
+        java.util.ArrayList<Pokemon> lista = new java.util.ArrayList<>();
+        String sql = "SELECT * FROM POKEMON WHERE ID_ENTRENADOR = ?";
+        
+        try (Connection cn = Conexion.conectar();
+             PreparedStatement pst = cn.prepareStatement(sql)) {
+            pst.setInt(1, idEntrenador);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Pokemon p = new Pokemon();
+                p.setIdPokemon(rs.getInt("ID_POKEMON"));
+                p.setNumPokedex(rs.getInt("NUM_POKEDEX"));
+                p.setNombre(rs.getString("MOTE")); // usamos el mote como nombre visible
+                p.setMote(rs.getString("MOTE"));
+                p.setNivel(rs.getInt("NIVEL"));
+                p.setSexo(Pokemon.Sexo.valueOf(rs.getString("SEXO")));
+                p.setVitalidad(rs.getInt("VITALIDAD"));
+                p.setAtaque(rs.getInt("ATAQUE"));
+                p.setDefensa(rs.getInt("DEFENSA"));
+                p.setAtaqueEspecial(rs.getInt("AT_ESP"));
+                p.setDefensaEspecial(rs.getInt("DEF_ESP"));
+                p.setVelocidad(rs.getInt("VELOCIDAD"));
+                lista.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al cargar pokemon del entrenador: " + e.getMessage());
+        }
+        return lista;
+    }
 }
