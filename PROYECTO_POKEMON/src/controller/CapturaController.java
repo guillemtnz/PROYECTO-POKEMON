@@ -15,6 +15,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import model.Entrenador;
 import model.Pokemon;
 import java.io.File;
 
