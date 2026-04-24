@@ -156,9 +156,12 @@ public class CapturaController {
         boolean guardado = pokemonDAO.guardarPokemonCapturado(pokemonActual, idEntrenadorActual);
 
         if (guardado) {
+            
+            Entrenador.entrenadorLogueado.getEquipoSecundario().add(pokemonActual);
+
             lblMensaje.setText(pokemonActual.getNombre().toUpperCase() + " añadido a tu caja con el mote: " + mote);
         } else {
-            lblMensaje.setText(pokemonActual.getNombre().toUpperCase() + " capturado, pero hubo un error al guardarlo en la BD");
+            lblMensaje.setText("Error al guardarlo en la BD");
         }
 
         txtMote.setVisible(false);

@@ -46,6 +46,7 @@ public class Pokemon {
 	private Estado estado;
 	
 	//UBICACION
+	private String ubicacion;
 	
 	//OBJETO
 	
@@ -237,6 +238,14 @@ public class Pokemon {
 
 	public void setIdEntrenador(int idEntrenador) {
 		this.idEntrenador = idEntrenador;
+	}
+
+	public String getUbicacion() {
+		return ubicacion;
+	}
+
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
 	}
 
 

@@ -27,6 +27,18 @@ public class EntrenadorDAO {
                 );
                 
                 e.setIdEntrenador(rs.getInt("ID_ENTRENADOR"));
+
+                // cargar los pokemon del entrenador al hacer login
+                PokemonDAO pokemonDAO = new PokemonDAO();
+                java.util.ArrayList<model.Pokemon> todos = pokemonDAO.getPokemonDeEntrenador(e.getIdEntrenador());
+                for (model.Pokemon p : todos) {
+                    if ("EQUIPO".equals(p.getUbicacion())) {
+                        e.getEquipoPrincipal().add(p);
+                    } else {
+                        e.getEquipoSecundario().add(p); // CAJA
+                    }
+                }
+
                 return e;
             }
         } catch (SQLException e) {

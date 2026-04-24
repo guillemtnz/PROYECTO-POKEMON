@@ -108,6 +108,7 @@ public class PokemonDAO {
                 p.setAtaqueEspecial(rs.getInt("AT_ESP"));
                 p.setDefensaEspecial(rs.getInt("DEF_ESP"));
                 p.setVelocidad(rs.getInt("VELOCIDAD"));
+                p.setUbicacion(rs.getString("UBICACION"));
                 lista.add(p);
             }
         } catch (SQLException e) {
