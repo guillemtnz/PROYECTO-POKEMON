@@ -161,11 +161,11 @@ public class RuletaController {
         int    numeroSalido = (int)(Math.random() * 37) + 1;
         String colorSalido  = Math.random() < 0.5 ? "ROJO" : "NEGRO";
 
-        lblNumeroSalido.setText(String.valueOf(numeroSalido));
-        lblColorSalido.setText(colorSalido);
-        lblColorSalido.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: "
+        lblNumeroSalido.setText(numeroSalido + "  " + colorSalido);
+        lblNumeroSalido.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: "
                 + (colorSalido.equals("ROJO") ? "#cc0000" : "white") + ";");
-
+        lblColorSalido.setText("");
+        
         // Evaluar resultado
         boolean aciertoNumero = (tipoApuesta.equals("NUMERO") || tipoApuesta.equals("AMBOS")) && numeroSalido == numeroElegido;
         boolean aciertoColor  = (tipoApuesta.equals("COLOR")  || tipoApuesta.equals("AMBOS")) && colorSalido.equals(colorElegido);

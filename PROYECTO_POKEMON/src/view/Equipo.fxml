@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -7,32 +6,99 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EquipoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="640.0"
+            xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.EquipoController">
    <children>
-      <!-- Imagen de fondo -->
+
       <ImageView fitHeight="400.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="false">
-         <image>
-            <Image url="@../../Media/Background/fondoEquipo.png" />
-         </image>
+         <image><Image url="@../../Media/Background/fondoEquipo.png"/></image>
       </ImageView>
 
-      <!-- Fila 1 de Pokémon -->
-      <Button fx:id="btnPoke1" layoutX="60.0" layoutY="80.0" onAction="#handleSlot1" prefHeight="80.0" prefWidth="120.0" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-border-color: #FFD700; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 10px;" text="[ Vacío ]" />
+      <!-- Fila 1 -->
+      <AnchorPane fx:id="slot1" layoutX="60.0" layoutY="60.0" prefHeight="110.0" prefWidth="120.0"
+                  onMouseClicked="#handleSlot1"
+                  style="-fx-background-color: rgba(0,0,50,0.75); -fx-border-color: #FFD700;
+                         -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand;">
+         <ImageView fx:id="imgPoke1" fitHeight="70.0" fitWidth="70.0"
+                    layoutX="25.0" layoutY="5.0" preserveRatio="true" pickOnBounds="true"/>
+         <Label fx:id="lblPoke1" layoutX="0.0" layoutY="82.0" prefWidth="120.0"
+                text="[ Vacío ]" textFill="white"
+                style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-alignment: center;"/>
+      </AnchorPane>
 
-      <Button fx:id="btnPoke2" layoutX="260.0" layoutY="80.0" onAction="#handleSlot2" prefHeight="80.0" prefWidth="120.0" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-border-color: #FFD700; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 10px;" text="[ Vacío ]" />
+      <AnchorPane fx:id="slot2" layoutX="260.0" layoutY="60.0" prefHeight="110.0" prefWidth="120.0"
+                  onMouseClicked="#handleSlot2"
+                  style="-fx-background-color: rgba(0,0,50,0.75); -fx-border-color: #FFD700;
+                         -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand;">
+         <ImageView fx:id="imgPoke2" fitHeight="70.0" fitWidth="70.0"
+                    layoutX="25.0" layoutY="5.0" preserveRatio="true" pickOnBounds="true"/>
+         <Label fx:id="lblPoke2" layoutX="0.0" layoutY="82.0" prefWidth="120.0"
+                text="[ Vacío ]" textFill="white"
+                style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-alignment: center;"/>
+      </AnchorPane>
 
-      <Button fx:id="btnPoke3" layoutX="460.0" layoutY="80.0" onAction="#handleSlot3" prefHeight="80.0" prefWidth="120.0" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-border-color: #FFD700; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 10px;" text="[ Vacío ]" />
+      <AnchorPane fx:id="slot3" layoutX="460.0" layoutY="60.0" prefHeight="110.0" prefWidth="120.0"
+                  onMouseClicked="#handleSlot3"
+                  style="-fx-background-color: rgba(0,0,50,0.75); -fx-border-color: #FFD700;
+                         -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand;">
+         <ImageView fx:id="imgPoke3" fitHeight="70.0" fitWidth="70.0"
+                    layoutX="25.0" layoutY="5.0" preserveRatio="true" pickOnBounds="true"/>
+         <Label fx:id="lblPoke3" layoutX="0.0" layoutY="82.0" prefWidth="120.0"
+                text="[ Vacío ]" textFill="white"
+                style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-alignment: center;"/>
+      </AnchorPane>
 
-      <!-- Fila 2 de Pokémon -->
-      <Button fx:id="btnPoke4" layoutX="60.0" layoutY="220.0" onAction="#handleSlot4" prefHeight="80.0" prefWidth="120.0" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-border-color: #FFD700; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 10px;" text="[ Vacío ]" />
+      <!-- Fila 2 -->
+      <AnchorPane fx:id="slot4" layoutX="60.0" layoutY="210.0" prefHeight="110.0" prefWidth="120.0"
+                  onMouseClicked="#handleSlot4"
+                  style="-fx-background-color: rgba(0,0,50,0.75); -fx-border-color: #FFD700;
+                         -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand;">
+         <ImageView fx:id="imgPoke4" fitHeight="70.0" fitWidth="70.0"
+                    layoutX="25.0" layoutY="5.0" preserveRatio="true" pickOnBounds="true"/>
+         <Label fx:id="lblPoke4" layoutX="0.0" layoutY="82.0" prefWidth="120.0"
+                text="[ Vacío ]" textFill="white"
+                style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-alignment: center;"/>
+      </AnchorPane>
 
-      <Button fx:id="btnPoke5" layoutX="260.0" layoutY="220.0" onAction="#handleSlot5" prefHeight="80.0" prefWidth="120.0" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-border-color: #FFD700; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 10px;" text="[ Vacío ]" />
+      <AnchorPane fx:id="slot5" layoutX="260.0" layoutY="210.0" prefHeight="110.0" prefWidth="120.0"
+                  onMouseClicked="#handleSlot5"
+                  style="-fx-background-color: rgba(0,0,50,0.75); -fx-border-color: #FFD700;
+                         -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand;">
+         <ImageView fx:id="imgPoke5" fitHeight="70.0" fitWidth="70.0"
+                    layoutX="25.0" layoutY="5.0" preserveRatio="true" pickOnBounds="true"/>
+         <Label fx:id="lblPoke5" layoutX="0.0" layoutY="82.0" prefWidth="120.0"
+                text="[ Vacío ]" textFill="white"
+                style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-alignment: center;"/>
+      </AnchorPane>
 
-      <Button fx:id="btnPoke6" layoutX="460.0" layoutY="220.0" onAction="#handleSlot6" prefHeight="80.0" prefWidth="120.0" style="-fx-background-color: rgba(255,255,255,0.15); -fx-text-fill: white; -fx-border-color: #FFD700; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 10px;" text="[ Vacío ]" />
+      <AnchorPane fx:id="slot6" layoutX="460.0" layoutY="210.0" prefHeight="110.0" prefWidth="120.0"
+                  onMouseClicked="#handleSlot6"
+                  style="-fx-background-color: rgba(0,0,50,0.75); -fx-border-color: #FFD700;
+                         -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand;">
+         <ImageView fx:id="imgPoke6" fitHeight="70.0" fitWidth="70.0"
+                    layoutX="25.0" layoutY="5.0" preserveRatio="true" pickOnBounds="true"/>
+         <Label fx:id="lblPoke6" layoutX="0.0" layoutY="82.0" prefWidth="120.0"
+                text="[ Vacío ]" textFill="white"
+                style="-fx-font-size: 9px; -fx-font-weight: bold; -fx-alignment: center;"/>
+      </AnchorPane>
 
-      <!-- Botón volver -->
-      <Button fx:id="btnVolver" layoutX="260.0" layoutY="345.0" mnemonicParsing="false" onAction="#handleVolver" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="VOLVER">
-         <font><Font name="Press Start 2P" size="7.0" /></font>
+      <!-- Botones -->
+      <Button layoutX="160.0" layoutY="345.0" onAction="#handleVolver"
+              prefHeight="35.0" prefWidth="120.0"
+              style="-fx-background-color: #1a237e; -fx-text-fill: white;
+                     -fx-font-weight: bold; -fx-background-radius: 8;" text="VOLVER">
+         <font><Font name="Press Start 2P" size="7.0"/></font>
       </Button>
+
+      <Button layoutX="360.0" layoutY="345.0" onAction="#handleMover"
+              prefHeight="35.0" prefWidth="120.0"
+              style="-fx-background-color: #4a148c; -fx-text-fill: white;
+                     -fx-font-weight: bold; -fx-background-radius: 8;" text="MOVER">
+         <font><Font name="Press Start 2P" size="7.0"/></font>
+      </Button>
+
    </children>
 </AnchorPane>

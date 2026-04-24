@@ -8,7 +8,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuPrincipalController">
    <children>
       <!-- Imagen de fondo -->
-      <ImageView fitHeight="400.0" fitWidth="640.0" layoutY="4.0" pickOnBounds="true" preserveRatio="false">
+      <ImageView fitHeight="400.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="false">
          <image>
             <Image url="@../../Media/Background/ciudadMenu.jpg" />
          </image>

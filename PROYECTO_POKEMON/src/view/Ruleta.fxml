@@ -23,9 +23,9 @@
 
       <!-- Panel resultado -->
       <AnchorPane fx:id="panelResultado" layoutX="220.0" layoutY="262.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: rgba(0,0,0,0.75); -fx-background-radius: 10;">
-         <Label layoutX="68.0" layoutY="6.0" style="-fx-font-size: 11px; -fx-font-weight: bold;" text="RESULTADO" textFill="white" />
-         <Label fx:id="lblColorSalido" layoutX="14.0" layoutY="34.0" style="-fx-font-size: 22px; -fx-font-weight: bold;" text="COLOR" textFill="white" />
-         <Label fx:id="lblNumeroSalido" layoutX="91.0" layoutY="34.0" style="-fx-font-size: 22px; -fx-font-weight: bold;" text="NUMERO" textFill="white" />
+         <Label alignment="CENTER" layoutY="6.0" prefWidth="200.0" style="-fx-font-size: 11px; -fx-font-weight: bold;" text="RESULTADO" textAlignment="CENTER" textFill="white" />
+         <Label fx:id="lblColorSalido" text="" textFill="white" />
+         <Label fx:id="lblNumeroSalido" alignment="CENTER" layoutX="0.0" layoutY="30.0" prefWidth="200.0" style="-fx-font-size: 22px; -fx-font-weight: bold;" textAlignment="CENTER" />
       </AnchorPane>
 
       <!-- Panel principal -->
@@ -58,10 +58,10 @@
          <Button fx:id="btnGirar" layoutX="210.0" layoutY="148.0" onAction="#handleGirar" prefHeight="28.0" prefWidth="130.0" style="-fx-background-color: #e94560; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 10px;" text="Girar ruleta" />
 
          <!-- Mensaje resultado -->
-         <Label fx:id="lblResultado" layoutX="15.0" layoutY="180.0" prefWidth="490.0" style="-fx-font-size: 10px; -fx-font-weight: bold;" text="" textFill="white" wrapText="true" />
+         <Label fx:id="lblResultado" layoutX="5.0" layoutY="180.0" prefWidth="490.0" style="-fx-font-size: 10px; -fx-font-weight: bold;" text="" textFill="white" wrapText="true" />
 
       </AnchorPane>
-      <AnchorPane layoutY="354.0" prefHeight="42.0" prefWidth="640.0" style="-fx-background-color: rgba(0,0,0,0.80);">
+      <AnchorPane layoutY="357.0" prefHeight="42.0" prefWidth="640.0" style="-fx-background-color: rgba(0,0,0,0.80);">
          <children>
             <Label fx:id="lblMensaje" layoutX="32.0" layoutY="11.0" prefWidth="420.0" style="-fx-font-size: 12px;" text="¡Juega con responsabilidad! +18" textFill="white" wrapText="true" />
             <Button layoutX="512.0" layoutY="8.0" onAction="#handleVolver" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #444; -fx-text-fill: white; -fx-font-size: 9px; -fx-background-radius: 8;" text="Volver" />

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MoverPokemonController">
+   <children>
+
+      <ImageView fitHeight="500.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="false">
+         <image><Image url="@../../Media/Background/fondoEquipo.png" /></image>
+      </ImageView>
+
+      <!-- Equipo fila 1 -->
+      <AnchorPane fx:id="slotE1" layoutX="108.0" layoutY="39.0" onMouseClicked="#handleSlotEquipo1" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: rgba(0,0,50,0.75); -fx-border-color: #FFD700;                          -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand;">
+         <ImageView fx:id="imgE1" fitHeight="60.0" fitWidth="60.0" layoutX="15.0" layoutY="3.0" preserveRatio="true" />
+         <Label fx:id="lblE1" layoutX="0.0" layoutY="65.0" prefWidth="90.0" style="-fx-font-size: 8px; -fx-font-weight: bold; -fx-alignment: center;" text="[ Vacío ]" textFill="white" />
+      </AnchorPane>
+
+      <AnchorPane fx:id="slotE2" layoutX="268.0" layoutY="39.0" onMouseClicked="#handleSlotEquipo2" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: rgba(0,0,50,0.75); -fx-border-color: #FFD700;                          -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand;">
+         <ImageView fx:id="imgE2" fitHeight="60.0" fitWidth="60.0" layoutX="15.0" layoutY="3.0" preserveRatio="true" />
+         <Label fx:id="lblE2" layoutX="0.0" layoutY="65.0" prefWidth="90.0" style="-fx-font-size: 8px; -fx-font-weight: bold; -fx-alignment: center;" text="[ Vacío ]" textFill="white" />
+      </AnchorPane>
+
+      <AnchorPane fx:id="slotE3" layoutX="433.0" layoutY="39.0" onMouseClicked="#handleSlotEquipo3" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: rgba(0,0,50,0.75); -fx-border-color: #FFD700;                          -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand;">
+         <ImageView fx:id="imgE3" fitHeight="60.0" fitWidth="60.0" layoutX="15.0" layoutY="3.0" preserveRatio="true" />
+         <Label fx:id="lblE3" layoutX="0.0" layoutY="65.0" prefWidth="90.0" style="-fx-font-size: 8px; -fx-font-weight: bold; -fx-alignment: center;" text="[ Vacío ]" textFill="white" />
+      </AnchorPane>
+
+      <!-- Equipo fila 2 -->
+      <AnchorPane fx:id="slotE4" layoutX="108.0" layoutY="140.0" onMouseClicked="#handleSlotEquipo4" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: rgba(0,0,50,0.75); -fx-border-color: #FFD700;                          -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand;">
+         <ImageView fx:id="imgE4" fitHeight="60.0" fitWidth="60.0" layoutX="15.0" layoutY="3.0" preserveRatio="true" />
+         <Label fx:id="lblE4" layoutX="0.0" layoutY="65.0" prefWidth="90.0" style="-fx-font-size: 8px; -fx-font-weight: bold; -fx-alignment: center;" text="[ Vacío ]" textFill="white" />
+      </AnchorPane>
+
+      <AnchorPane fx:id="slotE5" layoutX="268.0" layoutY="140.0" onMouseClicked="#handleSlotEquipo5" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: rgba(0,0,50,0.75); -fx-border-color: #FFD700;                          -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand;">
+         <ImageView fx:id="imgE5" fitHeight="60.0" fitWidth="60.0" layoutX="15.0" layoutY="3.0" preserveRatio="true" />
+         <Label fx:id="lblE5" layoutX="0.0" layoutY="65.0" prefWidth="90.0" style="-fx-font-size: 8px; -fx-font-weight: bold; -fx-alignment: center;" text="[ Vacío ]" textFill="white" />
+      </AnchorPane>
+
+      <AnchorPane fx:id="slotE6" layoutX="433.0" layoutY="140.0" onMouseClicked="#handleSlotEquipo6" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: rgba(0,0,50,0.75); -fx-border-color: #FFD700;                          -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand;">
+         <ImageView fx:id="imgE6" fitHeight="60.0" fitWidth="60.0" layoutX="15.0" layoutY="3.0" preserveRatio="true" />
+         <Label fx:id="lblE6" layoutX="0.0" layoutY="65.0" prefWidth="90.0" style="-fx-font-size: 8px; -fx-font-weight: bold; -fx-alignment: center;" text="[ Vacío ]" textFill="white" />
+      </AnchorPane>
+
+      <!-- ScrollPane con FlowPane para la caja — caben todos los pokemon -->
+      <ScrollPane fx:id="scrollCaja" fitToWidth="true" layoutX="10.0" layoutY="265.0" prefHeight="180.0" prefWidth="620.0" style="-fx-background: transparent; -fx-background-color: transparent;">
+         <content>
+            <FlowPane fx:id="flowCaja" hgap="8.0" prefWrapLength="600.0" style="-fx-background-color: transparent; -fx-padding: 8;" vgap="8.0" />
+         </content>
+      </ScrollPane>
+
+      <!-- Botón volver -->
+      <Button layoutX="260.0" layoutY="455.0" onAction="#handleVolver" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #1a237e; -fx-text-fill: white;                      -fx-font-weight: bold; -fx-background-radius: 8;" text="VOLVER">
+         <font><Font name="Press Start 2P" size="7.0" /></font>
+      </Button>
+
+   </children>
+</AnchorPane>

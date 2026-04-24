@@ -13,7 +13,7 @@
          <image><Image url="@../../Media/Background/fondoCasino.png" /></image>
       </ImageView>
       <Label layoutX="168.0" layoutY="29.0" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 6, 0.9, 0, 0);" text="ADIVINAR EL NÚMERO" textFill="#FFD700" />
-      <Label layoutX="30.0" layoutY="68.0" style="-fx-font-size: 11px; -fx-font-weight: bold;" text="Pokedólares:" textFill="white" />
+      <Label layoutX="30.0" layoutY="68.0" style="-fx-font-size: 11px; -fx-font-weight: bold;" text="Pokedollars:" textFill="white" />
       <Label fx:id="lblPokedollars" layoutX="140.0" layoutY="68.0" style="-fx-font-size: 11px; -fx-font-weight: bold;" text="--" textFill="#FFD700" />
       <AnchorPane layoutX="30.0" layoutY="107.0" prefHeight="185.0" prefWidth="260.0" style="-fx-background-color: rgba(0,0,0,0.65); -fx-background-radius: 10;">
          <Label layoutX="12.0" layoutY="12.0" style="-fx-font-size: 11px; -fx-font-weight: bold;" text="Adivina el número (1-20)" textFill="white" />
@@ -39,7 +39,7 @@
          <Label layoutX="12.0" layoutY="158.0" style="-fx-font-size: 9px;" text="Sin acierto no pierdes nada, oda a la ludopatía" textFill="WHITE" />
       </AnchorPane>
       <Label fx:id="lblResultado" layoutX="30.0" layoutY="310.0" prefWidth="580.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="" textFill="white" wrapText="true" />
-      <AnchorPane layoutX="0.0" layoutY="358.0" prefHeight="42.0" prefWidth="640.0" style="-fx-background-color: rgba(0,0,0,0.80);">
+      <AnchorPane layoutY="357.0" prefHeight="42.0" prefWidth="640.0" style="-fx-background-color: rgba(0,0,0,0.80);">
          <Label fx:id="lblMensaje" layoutX="32.0" layoutY="11.0" prefWidth="420.0" style="-fx-font-size: 12px;" text="¡Juega con responsabilidad! +18" textFill="white" wrapText="true" />
          <Button layoutX="512.0" layoutY="8.0" onAction="#handleVolver" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #444; -fx-text-fill: white; -fx-font-size: 9px; -fx-background-radius: 8;" text="Volver" />
       </AnchorPane>
