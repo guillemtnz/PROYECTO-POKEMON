@@ -20,6 +20,8 @@ import model.Pokemon;
 
 import java.io.File;
 import java.util.ArrayList;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 /*
  * Controlador de la pantalla de Crianza
@@ -59,7 +61,7 @@ public class CrianzaController {
 
     /** Pokémon hijo generado, pendiente de ser revelado */
     private Pokemon hijoGenerado;
-
+    private MediaPlayer mediaPlayer;
     
     //  Inicialización
     
@@ -67,6 +69,7 @@ public class CrianzaController {
     @FXML
     public void initialize() {
         cargarPokemonEnCombos();
+        iniciarMusica();
     }
 
     /**
@@ -265,6 +268,7 @@ public class CrianzaController {
     @FXML
     public void handleVolver(ActionEvent event) {
         try {
+        	pararMusica();
             Parent root = FXMLLoader.load(getClass().getResource("/view/MenuPrincipal.fxml"));
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -293,5 +297,22 @@ public class CrianzaController {
                 setText(mote + " (" + p.getNombre() + ") Nv." + p.getNivel());
             }
         }
+    }
+    
+    private void iniciarMusica() {
+        try {
+            File archivo = new File("./Media/Music/Crianza.mp3");
+            if (!archivo.exists()) return;
+            Media media = new Media(archivo.toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            System.out.println("Error al cargar música: " + e.getMessage());
+        }
+    }
+
+    private void pararMusica() {
+        if (mediaPlayer != null) mediaPlayer.stop();
     }
 }

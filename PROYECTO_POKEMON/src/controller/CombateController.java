@@ -6,6 +6,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.event.ActionEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
 
 public class CombateController {
 
@@ -28,12 +31,14 @@ public class CombateController {
     @FXML private javafx.scene.control.Label lblMensajeHuir;
     
     private int turno = 1;
-
+    private MediaPlayer mediaPlayer;
+    
     @FXML
     public void initialize() {
         txtLog.setText("Turno 1: El combate ha comenzado!\n");
         lblNombrePropio.setText("MI POKEMON");
         lblNombreRival.setText("RIVAL");
+        iniciarMusica();
     }
 
     @FXML
@@ -100,5 +105,18 @@ public class CombateController {
     private void registrarTurno(String accion) {
         txtLog.appendText("Turno " + turno + ": Entrenador usa " + accion + "\n");
         turno++;
+    }
+    
+    private void iniciarMusica() {
+        try {
+            File archivo = new File("./Media/Music/Combate.mp3");
+            if (!archivo.exists()) return;
+            Media media = new Media(archivo.toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            System.out.println("Error al cargar música: " + e.getMessage());
+        }
     }
 }

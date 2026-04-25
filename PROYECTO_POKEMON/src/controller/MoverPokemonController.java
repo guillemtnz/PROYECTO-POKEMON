@@ -19,6 +19,8 @@ import model.Pokemon;
 
 import java.io.File;
 import java.util.ArrayList;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class MoverPokemonController {
 
@@ -34,7 +36,7 @@ public class MoverPokemonController {
     private ArrayList<Pokemon> equipo = new ArrayList<>();
     private ArrayList<Pokemon> caja   = new ArrayList<>();
     private Pokemon pokemonEquipoSeleccionado = null;
-
+    private MediaPlayer mediaPlayer;
     private PokemonDAO pokemonDAO = new PokemonDAO();
 
     @FXML
@@ -42,9 +44,10 @@ public class MoverPokemonController {
         cargarEquipo();
         cargarCaja();
         setCajaActiva(false);
+        iniciarMusica();
     }
 
-    // ── CARGAR EQUIPO ─────────────────────────────────────────────────────────
+    // CARGAR EQUIPO
 
     private void cargarEquipo() {
         equipo = pokemonDAO.obtenerEquipo(Entrenador.entrenadorLogueado.getIdEntrenador());
@@ -64,7 +67,7 @@ public class MoverPokemonController {
         }
     }
 
-    // ── CARGAR CAJA DINÁMICA ──────────────────────────────────────────────────
+    // CARGAR CAJA DINÁMICA
 
     private void cargarCaja() {
         caja = pokemonDAO.obtenerCaja(Entrenador.entrenadorLogueado.getIdEntrenador());
@@ -113,7 +116,7 @@ public class MoverPokemonController {
         return slot;
     }
 
-    // ── HANDLERS EQUIPO ───────────────────────────────────────────────────────
+    // HANDLERS EQUIPO 
 
     @FXML public void handleSlotEquipo1(MouseEvent e) { seleccionarEquipo(0); }
     @FXML public void handleSlotEquipo2(MouseEvent e) { seleccionarEquipo(1); }
@@ -133,7 +136,7 @@ public class MoverPokemonController {
         setCajaActiva(true);
     }
 
-    // ── HANDLER CAJA DINÁMICO ─────────────────────────────────────────────────
+    // HANDLER CAJA DINÁMICO
 
     private void seleccionarCaja(int indice, AnchorPane slotClickado) {
         if (pokemonEquipoSeleccionado == null) {
@@ -152,11 +155,12 @@ public class MoverPokemonController {
         cargarCaja();
     }
 
-    // ── VOLVER ────────────────────────────────────────────────────────────────
+    // VOLVER
 
     @FXML
     public void handleVolver(ActionEvent event) {
         try {
+        	pararMusica();
             Parent root = FXMLLoader.load(getClass().getResource("/view/Equipo.fxml"));
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -164,7 +168,7 @@ public class MoverPokemonController {
         } catch (Exception e) { e.printStackTrace(); }
     }
 
-    // ── UTILIDADES ────────────────────────────────────────────────────────────
+    // UTILIDADES
 
     private void setCajaActiva(boolean activa) {
         scrollCaja.setOpacity(activa ? 1.0 : 0.4);
@@ -184,5 +188,22 @@ public class MoverPokemonController {
     private String estiloCaja(boolean sel) {
         return "-fx-background-color: rgba(0,50,0,0.75); -fx-border-color: " + (sel ? "#00FF00" : "#aaaaaa") + ";"
                 + "-fx-border-width: " + (sel ? "3" : "2") + "; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand;";
+    }
+    
+    private void iniciarMusica() {
+        try {
+            File archivo = new File("./Media/Music/Equipo.mp3");
+            if (!archivo.exists()) return;
+            Media media = new Media(archivo.toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            System.out.println("Error al cargar música: " + e.getMessage());
+        }
+    }
+
+    private void pararMusica() {
+        if (mediaPlayer != null) mediaPlayer.stop();
     }
 }

@@ -17,6 +17,8 @@ import model.Pokemon;
 
 import java.io.File;
 import java.util.ArrayList;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class EquipoController {
 
@@ -26,10 +28,12 @@ public class EquipoController {
 
     private ArrayList<Pokemon> equipo = new ArrayList<>();
     private PokemonDAO pokemonDAO = new PokemonDAO();
-
+    private MediaPlayer mediaPlayer;
+    
     @FXML
     public void initialize() {
         cargarEquipo();
+        iniciarMusica();
     }
 
     private void cargarEquipo() {
@@ -61,6 +65,7 @@ public class EquipoController {
     @FXML
     public void handleMover(ActionEvent event) {
         try {
+        	pararMusica();
             Parent root = FXMLLoader.load(getClass().getResource("/view/MoverPokemon.fxml"));
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -71,10 +76,28 @@ public class EquipoController {
     @FXML
     public void handleVolver(ActionEvent event) {
         try {
+        	pararMusica();
             Parent root = FXMLLoader.load(getClass().getResource("/view/MenuPrincipal.fxml"));
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) { e.printStackTrace(); }
+    }
+    
+    private void iniciarMusica() {
+        try {
+            File archivo = new File("./Media/Music/Equipo.mp3");
+            if (!archivo.exists()) return;
+            Media media = new Media(archivo.toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            System.out.println("Error al cargar música: " + e.getMessage());
+        }
+    }
+
+    private void pararMusica() {
+        if (mediaPlayer != null) mediaPlayer.stop();
     }
 }
