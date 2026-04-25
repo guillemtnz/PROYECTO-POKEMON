@@ -37,10 +37,10 @@
                         style="-fx-background-color: #44dd44; -fx-background-radius: 5;"/>
          </AnchorPane>
          <!-- Barra estamina rival -->
-         <Label layoutX="10.0" layoutY="46.0" text="ST:" style="-fx-font-size: 10px;"/>
+         <Label layoutX="10.0" layoutY="46.0" text="EXP:" style="-fx-font-size: 10px;"/>
          <AnchorPane layoutX="35.0" layoutY="48.0" prefHeight="10.0" prefWidth="160.0"
                      style="-fx-background-color: #ccc; -fx-background-radius: 5;">
-            <AnchorPane fx:id="barraEstaminaRival" prefHeight="10.0" prefWidth="160.0"
+            <AnchorPane fx:id="barraExpRival" prefHeight="10.0" prefWidth="160.0"
                         style="-fx-background-color: #4488ff; -fx-background-radius: 5;"/>
          </AnchorPane>
          <!-- Botón grito rival -->
@@ -66,10 +66,10 @@
                         style="-fx-background-color: #44dd44; -fx-background-radius: 5;"/>
          </AnchorPane>
          <!-- Barra estamina propio -->
-         <Label layoutX="10.0" layoutY="46.0" text="ST:" style="-fx-font-size: 10px;"/>
+         <Label layoutX="10.0" layoutY="46.0" text="EXP:" style="-fx-font-size: 10px;"/>
          <AnchorPane layoutX="35.0" layoutY="48.0" prefHeight="10.0" prefWidth="200.0"
                      style="-fx-background-color: #ccc; -fx-background-radius: 5;">
-            <AnchorPane fx:id="barraEstaminaPropia" prefHeight="10.0" prefWidth="200.0"
+            <AnchorPane fx:id="barraExpPropia" prefHeight="10.0" prefWidth="200.0"
                         style="-fx-background-color: #4488ff; -fx-background-radius: 5;"/>
          </AnchorPane>
          <!-- Botón grito propio -->
@@ -98,8 +98,8 @@
            style="-fx-background-color: #e94560; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 11px;"/>
 
       <!-- Botón Descansar -->
-      <Button fx:id="btnDescansar" layoutX="200.0" layoutY="10.0" prefWidth="170.0" prefHeight="40.0"
-           text="DESCANSAR" onAction="#handleDescansar"
+      <Button fx:id="btnObjeto" layoutX="200.0" layoutY="10.0" prefWidth="170.0" prefHeight="40.0"
+           text="OBJETOS" onAction="#handleObjeto"
            style="-fx-background-color: #1565C0; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-font-size: 11px;"/>
 
   	  <!-- Botón Pokemon -->

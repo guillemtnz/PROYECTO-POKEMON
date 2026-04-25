@@ -102,4 +102,39 @@ public class EntrenadorDAO {
             return false;
         }
     }
+    
+    public Entrenador obtenerPorId(int idEntrenador) {
+        String sql = "SELECT * FROM ENTRENADOR WHERE ID_ENTRENADOR = ?";
+        try (Connection cn = Conexion.conectar();
+             PreparedStatement pst = cn.prepareStatement(sql)) {
+
+            pst.setInt(1, idEntrenador);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                Entrenador e = new Entrenador(
+                    rs.getString("NOM_ENTRENADOR"),
+                    rs.getInt("POKEDOLLARS"),
+                    new java.util.ArrayList<>(),
+                    new java.util.ArrayList<>(),
+                    new java.util.ArrayList<>()
+                );
+                e.setIdEntrenador(rs.getInt("ID_ENTRENADOR"));
+
+                PokemonDAO pokemonDAO = new PokemonDAO();
+                java.util.ArrayList<model.Pokemon> todos = pokemonDAO.getPokemonDeEntrenador(e.getIdEntrenador());
+                for (model.Pokemon p : todos) {
+                    if ("EQUIPO".equals(p.getUbicacion())) {
+                        e.getEquipoPrincipal().add(p);
+                    } else {
+                        e.getEquipoSecundario().add(p);
+                    }
+                }
+                return e;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en obtenerPorId: " + e.getMessage());
+        }
+        return null;
+    }
 }

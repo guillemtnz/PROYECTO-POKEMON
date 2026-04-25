@@ -1,0 +1,116 @@
+Turno 1:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 2:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 3:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 4:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 5:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 6:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 7:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 8:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 9:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 10:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 11:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 12:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 13:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 14:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 15:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 16:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 17:
+Entrenador: Fuego Fatuo
+Rival: Placaje
+
+Turno 18:
+Entrenador: Látigo
+Rival: Placaje
+
+Turno 19:
+Entrenador: Rapidez
+Rival: Placaje
+
+Turno 20:
+Entrenador: Usó Objeto
+Rival: Placaje
+
+Turno 21:
+Entrenador: Látigo
+Rival: Ascuas
+
+Turno 22:
+Entrenador: Látigo
+Rival: Ascuas
+
+Turno 23:
+Entrenador: Látigo
+Rival: Placaje
+
+Turno 24:
+Entrenador: Látigo
+Rival: Placaje
+
+Turno 25:
+Entrenador: Látigo
+Rival: Placaje
+
+Turno 26:
+Entrenador: Rapidez
+Rival: Ascuas
+
+Turno 27:
+Entrenador: Placaje
+Rival: Ascuas
+
+Turno 28:
+Entrenador: Placaje
+Rival: Confusión
+
+Turno 29:
+Entrenador: Placaje
+Rival: Confusión
+

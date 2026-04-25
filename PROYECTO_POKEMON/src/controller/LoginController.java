@@ -47,6 +47,9 @@ public class LoginController {
         	// Guardo el entrenador logueado para usarlo en otras vistas
         	Entrenador.entrenadorLogueado = entrenador;
         	
+        	dao.PokemonDAO pDao = new dao.PokemonDAO();
+            Entrenador.entrenadorLogueado.setEquipoPrincipal(pDao.obtenerEquipo(entrenador.getIdEntrenador()));
+        	
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("/view/PantallaCarga.fxml"));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -162,8 +162,8 @@ public class Entrenador {
     
     //CAPTURAR
     
-    public boolean capturar(Pokemon pokemonSalvaje) {
-    	return true;
+    public void capturar(Pokemon pokemonSalvaje) {
+    	this.equipoSecundario.add(pokemonSalvaje);
     }
     
     //CRIANZA
@@ -254,6 +254,7 @@ public class Entrenador {
                 madre.getNombre(),          // nombre de especie
                 moteHijo,                   // mote mezclado
                 vitHijo,                    // vitalidad
+                vitHijo,                    // vitalidad actual (misma que la que tiene)
                 atkHijo,                    // ataque
                 defHijo,                    // defensa
                 atkEHijo,                   // ataqueEspecial
@@ -266,7 +267,9 @@ public class Entrenador {
                 sexoHijo,                   // sexo aleatorio
                 tipo1Hijo,                  // tipo1 mezclado
                 tipo2Hijo,                  // tipo2 mezclado
-                null                        // sin estado
+                null,                       // sin estado
+                "CAJA",
+                null
         );
 
         // ── Reduce fertilidad de los padres ──

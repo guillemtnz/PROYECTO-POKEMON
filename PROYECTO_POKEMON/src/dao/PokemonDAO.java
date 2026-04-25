@@ -3,6 +3,7 @@ package dao;
 import java.sql.*;
 import java.util.ArrayList;
 import model.Entrenador;
+import model.Movimiento;
 import model.Pokemon;
 import model.Pokemon.Sexo;
 
@@ -128,12 +129,84 @@ public class PokemonDAO {
                 p.setAtaqueEspecial(rs.getInt("AT_ESP"));
                 p.setDefensaEspecial(rs.getInt("DEF_ESP"));
                 p.setVelocidad(rs.getInt("VELOCIDAD"));
+                
+                p.setMovimientos(cargarMovimientos(p.getIdPokemon()));
+                
                 equipo.add(p);
             }
         } catch (SQLException e) {
             System.out.println("Error al obtener equipo: " + e.getMessage());
         }
         return equipo;
+    }
+    
+
+    private Movimiento[] cargarMovimientos(int idPokemon) {
+        Movimiento[] movs = new Movimiento[4];
+        // Hacemos un JOIN entre pkmnmovimiento y movimiento
+        String sql = "SELECT m.*, pm.PP AS PP_ACTUAL FROM pkmnmovimiento pm "
+                   + "JOIN movimiento m ON pm.ID_MOVIMIENTO = m.ID_MOVIMIENTO "
+                   + "WHERE pm.ID_POKEMON = ? AND pm.ACTIVO = 1 LIMIT 4";
+        
+        try (Connection cn = Conexion.conectar();
+             PreparedStatement pst = cn.prepareStatement(sql)) {
+            
+            pst.setInt(1, idPokemon);
+            ResultSet rs = pst.executeQuery();
+            
+            int i = 0;
+            while (rs.next() && i < 4) {
+                int idMov = rs.getInt("ID_MOVIMIENTO");
+                String nombre = rs.getString("NOMBRE");
+                model.Tipo tipo = model.Tipo.valueOf(rs.getString("TIPO"));
+                int nivel = rs.getInt("NIVEL");
+                int precision = rs.getInt("PRECISION_MOV");
+                int ppActual = rs.getInt("PP_ACTUAL"); 
+                int prioridad = rs.getInt("PRIORIDAD");
+                Movimiento.Blanco blanco = Movimiento.Blanco.valueOf(rs.getString("BLANCO"));
+                String efectoEsp = rs.getString("EFECTO_ESPECIAL");
+                
+                String categoriaStr = rs.getString("CATEGORIA");
+                
+                // 1. Si es FÍSICO o ESPECIAL (MovimientoAtaque)
+                if (categoriaStr.equals("FÍSICO") || categoriaStr.equals("ESPECIAL")) {
+                    model.MovimientoAtaque.Categoria cat = categoriaStr.equals("FÍSICO") ? 
+                            model.MovimientoAtaque.Categoria.FISICO : model.MovimientoAtaque.Categoria.ESPECIAL;
+                    int potencia = rs.getInt("POTENCIA");
+                    
+                    model.Estado estado = null;
+                    if (rs.getString("EFECTO") != null) {
+                        estado = model.Estado.valueOf(rs.getString("EFECTO"));
+                    }
+                    int prob = rs.getInt("PROBABILIDAD_EFECTO");
+                    
+                    movs[i] = new model.MovimientoAtaque(idMov, nombre, tipo, nivel, precision, ppActual, prioridad, blanco, efectoEsp, cat, potencia, estado, prob, null, 0);
+                } 
+                // 2. Si es de ESTADO (Dormir, Paralizar...) (MovimientoEstado)
+                else if (categoriaStr.equals("ESTADO")) {
+                    model.Estado efecto = model.Estado.valueOf(rs.getString("EFECTO"));
+                    int prob = rs.getInt("PROBABILIDAD_EFECTO");
+                    movs[i] = new model.MovimientoEstado(idMov, nombre, tipo, nivel, precision, ppActual, prioridad, blanco, efectoEsp, efecto, prob);
+                }
+                // 3. Si es de STATS (Danza Espada, Látigo...) (MovimientoStat)
+                else if (categoriaStr.equals("STAT")) {
+                    String dbStat = rs.getString("STAT_MODIFICADO");
+                    Movimiento.Stat stat = null;
+                    if (dbStat != null) {
+                        // Adaptamos los nombres de la BD al enum de Java
+                        if (dbStat.equals("ATAQUE_ESP")) stat = Movimiento.Stat.ATAQUE_ESPECIAL;
+                        else if (dbStat.equals("DEFENSA_ESP")) stat = Movimiento.Stat.DEFENSA_ESPECIAL;
+                        else stat = Movimiento.Stat.valueOf(dbStat);
+                    }
+                    int cantidad = rs.getInt("CANTIDAD_MODIFICACION");
+                    movs[i] = new model.MovimientoStat(idMov, nombre, tipo, nivel, precision, ppActual, prioridad, blanco, efectoEsp, stat, cantidad);
+                }
+                i++;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al cargar movimientos: " + e.getMessage());
+        }
+        return movs;
     }
 
     public ArrayList<Pokemon> obtenerCaja(int idEntrenador) {
@@ -179,4 +252,6 @@ public class PokemonDAO {
             return false;
         }
     }
+    
+    
 }
