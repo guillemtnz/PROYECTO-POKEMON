@@ -116,13 +116,16 @@ public class Log {
 
     // Escribe todas las lineas en el fichero
     private void guardar() {
-        File fichero = new File("logs" + File.separator + nombre);
-        try {
-            FileWriter fw = new FileWriter(fichero, false);
-            for (String linea : lineas) {
-                fw.write(linea + "\n");
-            }
-            fw.close();
+        File carpeta = new File("logs");
+        if (!carpeta.exists()) carpeta.mkdir();
+
+        File fichero = new File(carpeta, nombre);
+        // Usamos 'true' para ACTIVAR el modo APPEND (añadir al final)
+        try (FileWriter fw = new FileWriter(fichero, true)) { 
+            // Solo escribimos la ÚLTIMA línea añadida a la lista
+            String ultimaLinea = lineas.get(lineas.size() - 1);
+            fw.write(ultimaLinea + "\n");
+            fw.flush(); // Fuerza la escritura inmediata al disco
         } catch (IOException e) {
             System.out.println("Error al guardar el log: " + e.getMessage());
         }
@@ -143,6 +146,15 @@ public class Log {
             resultado += linea + "\n";
         }
         return resultado;
+    }
+    
+ // REGISTRA UN TURNO DE ATAQUE U OBJETO
+    public void registrarTurnoGeneral(Pokemon pokemon, Pokemon pokemonRival, String accion) {
+        int numTurno = turnos.size() + 1;
+        // Usamos el nombre de la acción (ej: "Ataque", "Cura") como evento
+        turnos.add(new Turno(numTurno, accion, "-")); 
+        lineas.add(generarLinea(accion, pokemon, pokemonRival, numTurno));
+        guardar();
     }
 
     public String getNombre() {

@@ -64,7 +64,7 @@ public class MenuPrincipalController {
     // Navega a la vista del combate
     @FXML
     public void handleCombate(ActionEvent event) {
-        navegarA("/view/Combate.fxml", event);
+        navegarA("/view/SeleccionCombate.fxml", event);
     }
     
     // Muestra vista crianza

@@ -149,11 +149,30 @@ public class Pokemon {
 	public int getModDefensaEspecial() { return this.modDefensaEspecial; }
 	public int getModVelocidad() { return this.modVelocidad; }
 
-	public int getAtaqueEnCombate() { return calcularStat(this.ataque, this.modAtaque); }
-	public int getDefensaEnCombate() { return calcularStat(this.defensa, this.modDefensa); }
-	public int getAtaqueEspecialEnCombate() { return calcularStat(this.ataqueEspecial, this.modAtaqueEspecial); }
-	public int getDefensaEspecialEnCombate() { return calcularStat(this.defensaEspecial, this.modDefensaEspecial); }
-	public int getVelocidadEnCombate() { return calcularStat(this.velocidad, this.modVelocidad); }
+	public int getAtaqueEnCombate() { 
+        int baseConObjeto = this.ataque + (objeto != null ? objeto.getAtaque() : 0);
+        return calcularStat(Math.max(1, baseConObjeto), this.modAtaque); 
+    }
+
+    public int getDefensaEnCombate() { 
+        int baseConObjeto = this.defensa + (objeto != null ? objeto.getDefensa() : 0);
+        return calcularStat(Math.max(1, baseConObjeto), this.modDefensa); 
+    }
+
+    public int getAtaqueEspecialEnCombate() { 
+        int baseConObjeto = this.ataqueEspecial + (objeto != null ? objeto.getAtaEsp() : 0);
+        return calcularStat(Math.max(1, baseConObjeto), this.modAtaqueEspecial); 
+    }
+
+    public int getDefensaEspecialEnCombate() { 
+        int baseConObjeto = this.defensaEspecial + (objeto != null ? objeto.getDefensa() : 0);
+        return calcularStat(Math.max(1, baseConObjeto), this.modDefensaEspecial); 
+    }
+
+    public int getVelocidadEnCombate() { 
+        int baseConObjeto = this.velocidad + (objeto != null ? objeto.getVelocidad() : 0);
+        return calcularStat(Math.max(1, baseConObjeto), this.modVelocidad); 
+    }
 
 	private int calcularStat(int base, int modificador) {
 		if (modificador == 0) return base;
@@ -224,4 +243,6 @@ public class Pokemon {
 	public String getMoteOCualquierNombre() {
 		return (this.mote != null && !this.mote.isEmpty()) ? this.mote : this.nombre;
 	}
+	
+	
 }

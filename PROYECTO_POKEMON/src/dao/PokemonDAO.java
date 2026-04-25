@@ -253,5 +253,49 @@ public class PokemonDAO {
         }
     }
     
+    public void guardarProgreso(Pokemon p) {
+        String sql = "UPDATE pokemon SET NIVEL = ?, EXPERIENCIA = ?, VITALIDAD = ?, ATAQUE = ?, DEFENSA = ?, AT_ESP = ?, DEF_ESP = ?, VELOCIDAD = ? WHERE ID_POKEMON = ?";
+        try (Connection conn = Conexion.conectar();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, p.getNivel());
+            pstmt.setInt(2, p.getExperiencia());
+            pstmt.setInt(3, p.getVitalidad());
+            pstmt.setInt(4, p.getAtaque());
+            pstmt.setInt(5, p.getDefensa());
+            pstmt.setInt(6, p.getAtaqueEspecial());
+            pstmt.setInt(7, p.getDefensaEspecial());
+            pstmt.setInt(8, p.getVelocidad());
+            pstmt.setInt(9, p.getIdPokemon());
+            
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error al guardar progreso: " + e.getMessage());
+        }
+    }
+    
+ // LOCALIZACIÓN: dao.PokemonDAO.java
+    public void actualizarObjetoEquipado(Pokemon p) {
+        String sql = "UPDATE pokemon SET ID_OBJETO = ? WHERE ID_POKEMON = ?";
+        
+        try (java.sql.Connection conn = Conexion.conectar();
+             java.sql.PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            
+            if (p.getObjeto() != null) {
+                
+                pstmt.setInt(1, p.getObjeto().getIdObjeto()); 
+            } else {
+                pstmt.setNull(1, java.sql.Types.INTEGER);
+            }
+            
+            pstmt.setInt(2, p.getIdPokemon());
+            pstmt.executeUpdate();
+            
+        } catch (java.sql.SQLException e) {
+            System.err.println("Error al actualizar el objeto del Pokémon en la BD: " + e.getMessage());
+        }
+    }
+    
     
 }

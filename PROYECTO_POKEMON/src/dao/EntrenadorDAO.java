@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import model.Entrenador;
+import model.Objeto;
 
 public class EntrenadorDAO {
 
@@ -136,5 +139,32 @@ public class EntrenadorDAO {
             System.out.println("Error en obtenerPorId: " + e.getMessage());
         }
         return null;
+    }
+    
+    public ArrayList<Objeto> obtenerMochila(int idEntrenador) {
+        ArrayList<Objeto> mochila = new ArrayList<>();
+        String sql = "SELECT o.*, m.CANTIDAD FROM objeto o " +
+                     "JOIN mochila m ON o.ID_OBJETO = m.ID_OBJETO " +
+                     "WHERE m.ID_ENTRENADOR = ?";
+        try (Connection conn = Conexion.conectar();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, idEntrenador);
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                Objeto obj = new Objeto();
+                obj.setIdObjeto(rs.getInt("ID_OBJETO"));
+                obj.setNombre(rs.getString("NOM_OBJETO"));
+                obj.setAtaque(rs.getInt("ATAQUE"));
+                obj.setDefensa(rs.getInt("DEFENSA"));
+                obj.setVelocidad(rs.getInt("VELOCIDAD"));
+                obj.setCantidad(rs.getInt("CANTIDAD"));
+                mochila.add(obj);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al cargar mochila: " + e.getMessage());
+        }
+        return mochila;
     }
 }

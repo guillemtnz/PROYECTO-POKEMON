@@ -1,0 +1,64 @@
+Turno 1:
+Entrenador: Rapidez
+Rival: Danza Espada
+
+Turno 3:
+Entrenador: Rapidez
+Rival: Golpe Cuerpo
+
+Turno 5:
+Entrenador: Rapidez
+Rival: Danza Espada
+
+Turno 7:
+Entrenador: Rapidez
+Rival: Danza Espada
+
+Turno 9:
+Entrenador: Rapidez
+Rival: Danza Espada
+
+Turno 11:
+Entrenador: Rapidez
+Rival: Danza Espada
+
+Turno 13:
+Entrenador: Placaje
+Rival: Danza Espada
+
+Turno 15:
+Entrenador: Placaje
+Rival: Danza Espada
+
+Turno 17:
+Entrenador: Placaje
+Rival: Danza Espada
+
+Turno 19:
+Entrenador: Rapidez
+Rival: Placaje
+
+Turno 21:
+Entrenador: Rapidez
+Rival: Placaje
+
+Turno 23:
+Entrenador: Rapidez
+Rival: Ascuas
+
+Turno 25:
+Entrenador: Rapidez
+Rival: Placaje
+
+Turno 27:
+Entrenador: Placaje
+Rival: Placaje
+
+Turno 29:
+Entrenador: Rapidez
+Rival: Golpe Cuerpo
+
+Turno 31:
+Entrenador: Rapidez
+Rival: Golpe Cuerpo
+

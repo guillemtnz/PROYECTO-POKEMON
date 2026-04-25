@@ -1,0 +1,5 @@
+2026-04-25 10:30:32.749 INFO inicioCombate pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"FEEBAS", 5, entrenador7, OK}, turno=1
+2026-04-25 10:30:45.936 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"FEEBAS", 5, entrenador7, KO}, turno=2
+2026-04-25 10:31:19.205 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"FEEBAS", 5, entrenador7, KO}, turno=3
+2026-04-25 10:32:33.147 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"FEEBAS", 6, entrenador7, KO}, turno=4
+2026-04-25 10:32:36.508 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"FEEBAS", 6, entrenador7, KO}, turno=5

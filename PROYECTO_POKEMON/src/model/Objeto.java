@@ -12,6 +12,8 @@ public class Objeto {
     private int defEsp;
     private int velocidad;
     
+    private int cantidad;
+    
     //CONSTRUCTORES
     
 	public Objeto(int idObjeto, String nombre, int ataque, int defensa, int ataEsp, int defEsp, int velocidad) {
@@ -48,6 +50,14 @@ public class Objeto {
 	}
 	
 	//GETTERS Y SETTERS
+	
+	public int getCantidad() {
+        return cantidad;
+    }
+	
+	public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
 
 	public int getIdObjeto() {
 		return idObjeto;

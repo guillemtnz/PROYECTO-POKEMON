@@ -175,6 +175,7 @@ public class CapturaController {
     @FXML
     public void handleVolver(ActionEvent event) {
         navegarA("/view/MenuPrincipal.fxml", event);
+        mediaPlayer.stop();
     }
 
     private void navegarA(String ruta, ActionEvent event) {

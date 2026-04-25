@@ -19,26 +19,39 @@ public class MovimientoEstado extends Movimiento {
 	public void setProbabilidadEfecto(int probabilidadEfecto) { this.probabilidadEfecto = probabilidadEfecto; }
 
 	@Override
-	public void ejecutarMovimiento(Pokemon atacante, Pokemon defensor) {
-		if (!this.consumirPP()) return;
+	public String ejecutarMovimiento(Pokemon atacante, Pokemon defensor) {
+	    StringBuilder log = new StringBuilder();
 
-		Pokemon objetivo = (this.blanco == Blanco.RIVAL) ? defensor : atacante;
+	    // 1. Comprobar PP
+	    if (!this.consumirPP()) {
+	        return "▶ A " + this.nombreMovimiento + " no le quedan PP...\n";
+	    }
 
-		if (this.precision != ACIERTA_SIEMPRE && (Math.random() * 100) > this.precision) {
-			System.out.println("¡" + atacante.getNombre() + " falló su movimiento!");
-			return;
-		}
+	    // Registramos que se ha usado el movimiento
+	    log.append("▶ ¡").append(atacante.getNombre()).append(" usó ").append(this.nombreMovimiento).append("!\n");
 
-		if (objetivo.getEstado() != null && this.efecto != Estado.CONFUSO && this.efecto != Estado.ENAMORADO) {
-			System.out.println("¡" + objetivo.getNombre() + " ya tiene un problema de estado!");
-			return;
-		}
+	    Pokemon objetivo = (this.blanco == Blanco.RIVAL) ? defensor : atacante;
 
-		if ((Math.random() * 100) <= this.probabilidadEfecto) {
-			objetivo.setEstado(this.efecto);
-			System.out.println("¡" + objetivo.getNombre() + " ahora está " + this.efecto + "!");
-		} else {
-			System.out.println("El movimiento no tuvo efecto esta vez.");
-		}
+	    // 2. Comprobar Precisión
+	    if (this.precision != ACIERTA_SIEMPRE && (Math.random() * 100) > this.precision) {
+	        log.append("   ¡Pero falló!\n");
+	        return log.toString();
+	    }
+
+	    // 3. Comprobar si ya tiene un estado (y no es ni confuso ni enamorado)
+	    if (objetivo.getEstado() != null && this.efecto != Estado.CONFUSO && this.efecto != Estado.ENAMORADO) {
+	        log.append("   ¡Pero ").append(objetivo.getNombre()).append(" ya tiene un problema de estado!\n");
+	        return log.toString();
+	    }
+
+	    // 4. Aplicar el estado si entra en la probabilidad
+	    if ((Math.random() * 100) <= this.probabilidadEfecto) {
+	        objetivo.setEstado(this.efecto);
+	        log.append("   ¡").append(objetivo.getNombre()).append(" ahora está ").append(this.efecto).append("!\n");
+	    } else {
+	        log.append("   Pero no tuvo ningún efecto...\n");
+	    }
+
+	    return log.toString();
 	}
 }

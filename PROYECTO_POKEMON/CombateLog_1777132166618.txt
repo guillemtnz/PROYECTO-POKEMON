@@ -1,0 +1,48 @@
+Turno 1:
+Entrenador: Placaje
+Rival: Placaje
+
+Turno 3:
+Entrenador: Placaje
+Rival: Confusión
+
+Turno 5:
+Entrenador: Placaje
+Rival: Placaje
+
+Turno 7:
+Entrenador: Rapidez
+Rival: Placaje
+
+Turno 9:
+Entrenador: Fuego Fatuo
+Rival: Confusión
+
+Turno 11:
+Entrenador: Fuego Fatuo
+Rival: Confusión
+
+Turno 13:
+Entrenador: Látigo
+Rival: Confusión
+
+Turno 15:
+Entrenador: Látigo
+Rival: Confusión
+
+Turno 17:
+Entrenador: Látigo
+Rival: Confusión
+
+Turno 19:
+Entrenador: Látigo
+Rival: Confusión
+
+Turno 21:
+Entrenador: Placaje
+Rival: Confusión
+
+Turno 23:
+Entrenador: Placaje
+Rival: Látigo
+

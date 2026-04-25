@@ -1,0 +1,4 @@
+2026-04-25 14:55:33.999 INFO inicioCombate pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"LOTAD", 4, entrenador3, OK}, turno=1
+2026-04-25 14:55:45.566 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"LOTAD", 4, entrenador3, KO}, turno=2
+2026-04-25 14:55:50.061 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"SEEDOT", 4, entrenador3, KO}, turno=3
+2026-04-25 14:56:12.954 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"SHROOMISH", 5, entrenador3, KO}, turno=4

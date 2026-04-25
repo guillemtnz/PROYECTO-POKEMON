@@ -14,6 +14,7 @@ import java.util.Random;
 
 import model.Combate;
 import model.Entrenador;
+import model.Log;
 import model.Movimiento;
 import model.Pokemon;
 
@@ -23,35 +24,56 @@ import java.io.File;
 
 public class CombateController {
 
-    // --- ELEMENTOS DEL FXML ---
+    // ELEMENTOS DEL FXML 
     @FXML private ImageView imgRival, imgPropio;
     @FXML private Label lblNombreRival, lblNombrePropio, lblMensajeHuir;
     
     @FXML private AnchorPane barraVidaRival, barraExpRival;
     @FXML private AnchorPane barraVidaPropia, barraExpPropia;
     
-    @FXML private TextArea txtLog;
+    @FXML
+	protected TextArea txtLog;
     @FXML private AnchorPane panelAtaques;
     @FXML private Button btnAtaque1, btnAtaque2, btnAtaque3, btnAtaque4;
-    @FXML private Button btnLuchar, btnObjeto, btnCambiar, btnHuir;
+    @FXML
+	protected Button btnLuchar;
+	@FXML
+	private Button btnCuracion;
+	@FXML
+	private Button btnCambiar;
+	@FXML
+	private Button btnHuir;
 
-    // --- ATRIBUTOS DEL CONTROLADOR ---
-    private Combate combateActivo;
-    private Entrenador jugador;
-    private Entrenador rival;
+    //ATRIBUTOS DEL CONTROLADOR 
+    protected Combate combateActivo;
+    protected Entrenador jugador;
+    protected Entrenador rival;
 
-    // Anchura máxima de las barras según tu FXML
+    
     private final double WIDTH_BARRA_RIVAL = 160.0;
     private final double WIDTH_BARRA_PROPIA = 200.0;
     
-    private boolean cambioGratis = false; // Para saber si el cambio es por muerte
+
+    
+    private Log historialTecnico = new Log();
     
     private MediaPlayer mediaPlayer;
 
     @FXML
     public void initialize() {
+    	//texto del log en negro   :DDDDDDDDDDD
+    	txtLog.setStyle("-fx-text-fill: black; -fx-opacity: 1.0;");
         
         jugador = Entrenador.entrenadorLogueado;
+        
+        if (jugador != null && jugador.getEquipoPrincipal() != null) {
+            for (Pokemon p : jugador.getEquipoPrincipal()) {
+                p.setVitalidadActual(p.getVitalidad());
+                // Les quito cualquier estado alterado que pudieran tener
+                p.setEstado(null);
+            }
+            
+        
         
         java.sql.Connection conexionReal = dao.Conexion.conectar();
         
@@ -63,6 +85,14 @@ public class CombateController {
 
         dao.CombateDAO cDao = new dao.CombateDAO(conexionReal); 
         rival = cDao.obtenerRivalAleatorio();
+      //curo a los pokemon del rival tambien
+        if (rival != null && rival.getEquipoPrincipal() != null) {
+            for (Pokemon p : rival.getEquipoPrincipal()) {
+                p.setVitalidadActual(p.getVitalidad());
+                p.setEstado(null); 
+                }
+            }
+        }
 
         // Inicializar el combate si ambos tienen equipo
         if (jugador != null && rival != null && !jugador.getEquipoPrincipal().isEmpty() && !rival.getEquipoPrincipal().isEmpty()) {
@@ -76,8 +106,9 @@ public class CombateController {
             );
 
             actualizarUI();
-            escribirEnLog("¡Un " + rival.getNombre() + " salvaje ha aparecido!");
-            escribirEnLog("¡Ve, " + pokeJugador.getNombre() + "!");
+            escribirEnLog("¡Comienza el combate!");
+         // Llamada a tu clase Log:
+            historialTecnico.registrarInicioCombate(pokeJugador, pokeRival);
         } else {
             System.err.println("❌ ERROR: El jugador o el rival no tienen Pokémon en su equipo.");
             escribirEnLog("Error: Faltan entrenadores o equipos.");
@@ -86,8 +117,8 @@ public class CombateController {
         iniciarMusica();
     }
 
-    // --- ACTUALIZACIÓN DE LA VISTA ---
-    private void actualizarUI() {
+    //ACTUALIZACIÓN DE LA VISTA 
+    protected void actualizarUI() {
         Pokemon pPropio = combateActivo.getPokemonActivoJugador();
         Pokemon pRival = combateActivo.getPokemonActivoRival();
 
@@ -107,6 +138,26 @@ public class CombateController {
         double pctR = vitR / vitTotalR;
         barraVidaRival.setPrefWidth(WIDTH_BARRA_RIVAL * Math.max(0, Math.min(1, pctR)));
         cambiarColorBarra(barraVidaRival, pctR);
+        
+        //BARRAS DE EXPERIENCIA
+        
+        double expMaxP = pPropio.getNivel() * 50.0; 
+        if (expMaxP <= 0) expMaxP = 1; 
+        
+        double pctExpP = (double) pPropio.getExperiencia() / expMaxP;
+        pctExpP = Math.max(0.0, Math.min(1.0, pctExpP)); 
+        
+        barraExpPropia.setPrefWidth(WIDTH_BARRA_PROPIA * pctExpP);
+        barraExpPropia.setStyle("-fx-background-color: #33ccff; -fx-background-radius: 5;");
+
+        double expMaxR = pRival.getNivel() * 50.0;
+        if (expMaxR <= 0) expMaxR = 1;
+        
+        double pctExpR = (double) pRival.getExperiencia() / expMaxR;
+        pctExpR = Math.max(0.0, Math.min(1.0, pctExpR));
+        
+        barraExpRival.setPrefWidth(WIDTH_BARRA_RIVAL * pctExpR);
+        barraExpRival.setStyle("-fx-background-color: #33ccff; -fx-background-radius: 5;");
 
         //IMÁGENES 
         String imgP = "/Back/" + pPropio.getNumPokedex() + "b.png";
@@ -133,8 +184,11 @@ public class CombateController {
         else barra.setStyle("-fx-background-color: #dd4444; -fx-background-radius: 5;");
     }
 
-    private void escribirEnLog(String mensaje) {
+    protected void escribirEnLog(String mensaje) {
         txtLog.appendText(mensaje + "\n");
+        // Esto hace que el scroll baje automáticamente al final
+        txtLog.setScrollTop(Double.MAX_VALUE); 
+        txtLog.selectPositionCaret(txtLog.getLength()); 
     }
 
     // MANEJO DE BOTONES
@@ -168,24 +222,26 @@ public class CombateController {
     @FXML private void handleAtaque4() { ejecutarTurnoAtaque(3); }
 
     private void ejecutarTurnoAtaque(int indiceMovimiento) {
-        panelAtaques.setVisible(false);
-        Movimiento movJugador = combateActivo.getPokemonActivoJugador().getMovimientos()[indiceMovimiento];
+    	panelAtaques.setVisible(false);
         
-        escribirEnLog("\n--- TURNO " + combateActivo.getTurno() + " ---");
-        
-        Movimiento movRival = elegirMovimientoRival(combateActivo.getPokemonActivoRival());
+        Movimiento movJ = combateActivo.getPokemonActivoJugador().getMovimientos()[indiceMovimiento];
+        Movimiento movR = elegirMovimientoRival(combateActivo.getPokemonActivoRival());
 
-        
-        combateActivo.resolverTurno(movJugador, movRival);
-        
+        escribirEnLog("\n--- TURNO " + combateActivo.getTurno() + " ---");
+
+
+        String resumenTurno = combateActivo.resolverTurno(movJ, movR);
+        escribirEnLog(resumenTurno);
+
         actualizarUI();
         comprobarEstadoPostTurno();
     }
 
-    // BOTÓN DE USAR OBJETOS
+ //BOTÓN DE CURACIÓN 
     @FXML
-    private void handleObjeto() { 
+    private void handleCuracion() { 
         Pokemon pPropio = combateActivo.getPokemonActivoJugador();
+        Pokemon pRival = combateActivo.getPokemonActivoRival();
         
         if (pPropio.getVitalidadActual() == pPropio.getVitalidad()) {
             escribirEnLog(pPropio.getNombre() + " ya tiene la salud al máximo.");
@@ -194,25 +250,19 @@ public class CombateController {
 
         escribirEnLog("\n--- TURNO " + combateActivo.getTurno() + " ---");
         
-        // Usar objeto 
-        combateActivo.usarObjeto(jugador, pPropio);
+        // Aplicamos la curación
+        combateActivo.curacion(jugador, pPropio);
         
-       
-        Movimiento movRival = elegirMovimientoRival(combateActivo.getPokemonActivoRival());
-        Pokemon pRival = combateActivo.getPokemonActivoRival();
+        escribirEnLog("¡Has usado una curación! " + pPropio.getNombre() + " recupera PS.");
+        historialTecnico.registrarTurnoGeneral(pPropio, pRival, "Curacion");
+        
+        // 2. El rival ataca 
+        Movimiento movRival = elegirMovimientoRival(pRival);
         
         if (movRival != null) {
             escribirEnLog("¡" + pRival.getNombre() + " usó " + movRival.getNombreMovimiento() + "!");
             movRival.ejecutarMovimiento(pRival, pPropio);
-            
-            // Comprobamos si nos ha debilitado tras usar el objeto
-            if (pPropio.getVitalidadActual() <= 0) {
-                combateActivo.procesarDebilitamiento(pPropio);
-            }
         }
-
-
-        combateActivo.registrarTurno("Usó Objeto", movRival != null ? movRival.getNombreMovimiento() : "Ninguno");
         
         actualizarUI();
         comprobarEstadoPostTurno();
@@ -234,15 +284,16 @@ public class CombateController {
         return elegido;
     }
 
-    private void comprobarEstadoPostTurno() {
+    protected void comprobarEstadoPostTurno() {
         Pokemon pRival = combateActivo.getPokemonActivoRival();
         Pokemon pPropio = combateActivo.getPokemonActivoJugador();
 
-        // Si rival debilitado
+        // Rival sin hp
         if (pRival.getVitalidadActual() <= 0) {
             escribirEnLog("¡El " + pRival.getNombre() + " enemigo se ha debilitado!");
+            historialTecnico.registrarDebilitado2(pPropio, pRival);
             
-            //para que el rival saque el siguiente
+            // Buscamos si al rival le quedan más Pokémon
             Pokemon proximoRival = null;
             for (Pokemon p : rival.getEquipoPrincipal()) {
                 if (p.getVitalidadActual() > 0) {
@@ -256,67 +307,110 @@ public class CombateController {
                 escribirEnLog(rival.getNombre() + " envía a " + proximoRival.getNombre() + ".");
                 actualizarUI();
             } else {
+                // VICTORIA
                 escribirEnLog("¡" + rival.getNombre() + " no tiene más Pokémon! ¡HAS GANADO!");
+                finalizarYGuardar();
                 desactivarBotones();
+
+                // Esperamos 3 segundos y volvemos al menú principal
+                javafx.animation.Timeline timeline = new javafx.animation.Timeline(
+                    new javafx.animation.KeyFrame(javafx.util.Duration.seconds(3), e -> volverAlMenu())
+                );
+                timeline.play();
             }
         } 
         
-        // Se debilita mi pokemon
+        // Mi pokemon se debilita
         else if (pPropio.getVitalidadActual() <= 0) {
-            escribirEnLog("¡Tu " + pPropio.getNombre() + " se ha debilitado! ¡Cambia!");
-            // NO llamamos a desactivarBotones() porque quieres que sigan activos
-            cambioGratis = true; // El siguiente cambio no recibirá ataque del rival
+            escribirEnLog("¡Tu " + pPropio.getNombre() + " se ha debilitado!");
+            
+            // Comprobar si al jugador le quedan más Pokémon vivos en el equipo
+            boolean tieneMas = false;
+            for (Pokemon p : jugador.getEquipoPrincipal()) {
+                if (p.getVitalidadActual() > 0) {
+                    tieneMas = true;
+                    break;
+                }
+            }
+
+            if (tieneMas) {
+                escribirEnLog("¡Cambia a otro Pokémon para continuar!");
+                btnLuchar.setDisable(true);
+                btnCuracion.setDisable(true);
+                btnHuir.setDisable(true);
+                btnCambiar.setDisable(false);
+            } else {
+                // DERROTA
+                escribirEnLog("¡No te quedan Pokémon funcionales! Has perdido...");
+                desactivarBotones();
+
+                // Esperamos 3 segundos y volvemos al menú principal
+                javafx.animation.Timeline timeline = new javafx.animation.Timeline(
+                    new javafx.animation.KeyFrame(javafx.util.Duration.seconds(3), e -> volverAlMenu())
+                );
+                timeline.play();
+            }
         }
     }
 
     @FXML
     private void handleCambiar() {
-        //Obtener la lista de nombres de los Pokémon del equipo que no estén debilitados
+        
         java.util.List<String> nombresPokemon = jugador.getEquipoPrincipal().stream()
                 .filter(p -> p.getVitalidadActual() > 0)
                 .map(p -> p.getNombre())
                 .collect(java.util.stream.Collectors.toList());
 
-        if (nombresPokemon.size() <= 1) {
-            escribirEnLog("No tienes más Pokémon disponibles para cambiar.");
+
+        if (nombresPokemon.isEmpty() || (nombresPokemon.size() == 1 && nombresPokemon.get(0).equals(combateActivo.getPokemonActivoJugador().getNombre()))) {
+            escribirEnLog("No te quedan otros Pokémon sanos para salir a luchar.");
             return;
         }
 
-        //Crear el "menú desplegable"
         javafx.scene.control.ChoiceDialog<String> dialog = new javafx.scene.control.ChoiceDialog<>(nombresPokemon.get(0), nombresPokemon);
         dialog.setTitle("Cambiar Pokémon");
         dialog.setHeaderText("¿A quién quieres sacar a combatir?");
         dialog.setContentText("Selecciona un Pokémon:");
 
-       
         java.util.Optional<String> resultado = dialog.showAndWait();
 
         resultado.ifPresent(nombreElegido -> {
-            
             Pokemon nuevoActivo = jugador.getEquipoPrincipal().stream()
                     .filter(p -> p.getNombre().equals(nombreElegido))
                     .findFirst().orElse(null);
 
-            // Si es distinto al que ya está peleando, hacemos el cambio
-            if (nuevoActivo != null && nuevoActivo != combateActivo.getPokemonActivoJugador()) {
+            Pokemon pokemonActual = combateActivo.getPokemonActivoJugador();
+
+            if (nuevoActivo != null && nuevoActivo != pokemonActual) {
                 
+            
+                // Comprobamos la vida del pokemon antes de cambiarlo
+                boolean esCambioPorMuerte = (pokemonActual.getVitalidadActual() <= 0);
+
                 escribirEnLog("\n--- CAMBIO DE POKÉMON ---");
-                escribirEnLog("¡" + combateActivo.getPokemonActivoJugador().getNombre() + ", vuelve!");
+                escribirEnLog("¡" + pokemonActual.getNombre() + ", vuelve!");
                 
                 combateActivo.setPokemonActivoJugador(nuevoActivo);
                 escribirEnLog("¡Adelante, " + nuevoActivo.getNombre() + "!");
 
-                // El rival ataca porque cambiar consume el turno del jugador
-                Movimiento movRival = elegirMovimientoRival(combateActivo.getPokemonActivoRival());
-                if (movRival != null) {
-                    escribirEnLog("¡El rival aprovecha el cambio y usa " + movRival.getNombreMovimiento() + "!");
-                    movRival.ejecutarMovimiento(combateActivo.getPokemonActivoRival(), nuevoActivo);
+                // Si NO estaba muerto, es un cambio voluntario y el rival ataca
+                if (!esCambioPorMuerte) {
+                    Movimiento movRival = elegirMovimientoRival(combateActivo.getPokemonActivoRival());
+                    if (movRival != null) {
+                        escribirEnLog("¡El rival aprovecha el cambio y usa " + movRival.getNombreMovimiento() + "!");
+                        movRival.ejecutarMovimiento(combateActivo.getPokemonActivoRival(), nuevoActivo);
+                    }
+                } else {
+                    escribirEnLog("Cambio seguro. Ahora es tu turno.");
                 }
+
+                // Volvemos a activar los botones por si estaban bloqueados por la muerte
+                btnLuchar.setDisable(false);
+                btnCuracion.setDisable(false);
+                btnHuir.setDisable(false);
 
                 actualizarUI(); 
                 comprobarEstadoPostTurno();
-            } else {
-                escribirEnLog(nombreElegido + " ya está en el campo de batalla.");
             }
         });
     }
@@ -328,6 +422,8 @@ public class CombateController {
         lblMensajeHuir.setVisible(true);
         escribirEnLog("¡Has huido del combate!");
         desactivarBotones();
+        
+        volverAlMenu();
     }
 
     @FXML 
@@ -342,7 +438,7 @@ public class CombateController {
         reproducirSonido(numPokedex); 
     }
 
-    // --- MÉTODO PARA REPRODUCIR EL AUDIO ---
+
     private void reproducirSonido(int numPokedex) {
         try {
             
@@ -354,23 +450,23 @@ public class CombateController {
                 Media media = new Media(url.toString());
                 MediaPlayer mediaPlayer = new MediaPlayer(media);
                 mediaPlayer.play();
-                System.out.println("♪ Reproduciendo: " + rutaArchivo);
+                System.out.println("Reproduciendo: " + rutaArchivo);
             } else {
-                System.out.println("⚠️ No se encontró el archivo de audio: " + rutaArchivo);
+                System.out.println("No se encontró el archivo de audio: " + rutaArchivo);
             }
         } catch (Exception e) {
             System.out.println("Error al reproducir audio: " + e.getMessage());
         }
     }
 
-    private void desactivarBotones() {
+    public void desactivarBotones() {
         btnLuchar.setDisable(true);
-        btnObjeto.setDisable(true);
+        btnCuracion.setDisable(true);
         btnCambiar.setDisable(true);
         btnHuir.setDisable(true);
     }
     
-    private void iniciarMusica() {
+    protected void iniciarMusica() {
         try {
             File archivo = new File("./Media/Music/Combate.mp3");
             if (!archivo.exists()) return;
@@ -380,6 +476,33 @@ public class CombateController {
             mediaPlayer.play();
         } catch (Exception e) {
             System.out.println("Error al cargar música: " + e.getMessage());
+        }
+    }
+    
+    protected void finalizarYGuardar() {
+        dao.PokemonDAO pDao = new dao.PokemonDAO();
+        
+        // Recorremos todo el equipo principal para guardar el progreso de todos
+        for (Pokemon p : jugador.getEquipoPrincipal()) {
+            pDao.guardarProgreso(p);
+        }
+        
+        escribirEnLog("¡Los datos de tu equipo han sido guardados!");
+    }
+    
+    protected void volverAlMenu() {
+        try {
+            
+            if (mediaPlayer != null) mediaPlayer.stop();
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/view/MenuPrincipal.fxml"));
+            javafx.scene.Parent root = loader.load();
+
+            javafx.stage.Stage stage = (javafx.stage.Stage) btnLuchar.getScene().getWindow();
+            stage.setScene(new javafx.scene.Scene(root));
+            stage.show();
+            
+        } catch (java.io.IOException e) {
+            System.err.println("Error al volver al menú principal: " + e.getMessage());
         }
     }
     

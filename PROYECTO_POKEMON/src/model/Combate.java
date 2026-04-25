@@ -52,49 +52,74 @@ public class Combate {
 	public void setListadoTurnos(LinkedList<Turno> listadoTurnos) { this.listadoTurnos = listadoTurnos; }
 
 	// LÓGICA DEL TURNO
-	public void resolverTurno(Movimiento movJugador, Movimiento movRival) {
-		System.out.println("\n--- TURNO " + this.turno + " ---");
+	public String resolverTurno(Movimiento movJugador, Movimiento movRival) {
+	    // Creamos el constructor de texto para el Log
+	    StringBuilder logTurno = new StringBuilder();
 
-		Pokemon primero, segundo;
-		Movimiento movPrimero, movSegundo;
+	    Pokemon primero, segundo;
+	    Movimiento movPrimero, movSegundo;
 
-		if (movJugador.getPrioridad() > movRival.getPrioridad()) {
-			primero = pokemonActivoJugador; segundo = pokemonActivoRival;
-			movPrimero = movJugador; movSegundo = movRival;
-		} else if (movRival.getPrioridad() > movJugador.getPrioridad()) {
-			primero = pokemonActivoRival; segundo = pokemonActivoJugador;
-			movPrimero = movRival; movSegundo = movJugador;
-		} else {
-			if (pokemonActivoJugador.getVelocidadEnCombate() >= pokemonActivoRival.getVelocidadEnCombate()) {
-				primero = pokemonActivoJugador; segundo = pokemonActivoRival;
-				movPrimero = movJugador; movSegundo = movRival;
-			} else {
-				primero = pokemonActivoRival; segundo = pokemonActivoJugador;
-				movPrimero = movRival; movSegundo = movJugador;
-			}
-		}
+	    // --- CÁLCULO DE QUIÉN ATACA PRIMERO ---
+	    if (movJugador.getPrioridad() > movRival.getPrioridad()) {
+	        primero = pokemonActivoJugador; segundo = pokemonActivoRival;
+	        movPrimero = movJugador; movSegundo = movRival;
+	    } else if (movRival.getPrioridad() > movJugador.getPrioridad()) {
+	        primero = pokemonActivoRival; segundo = pokemonActivoJugador;
+	        movPrimero = movRival; movSegundo = movJugador;
+	    } else {
+	        if (pokemonActivoJugador.getVelocidadEnCombate() >= pokemonActivoRival.getVelocidadEnCombate()) {
+	            primero = pokemonActivoJugador; segundo = pokemonActivoRival;
+	            movPrimero = movJugador; movSegundo = movRival;
+	        } else {
+	            primero = pokemonActivoRival; segundo = pokemonActivoJugador;
+	            movPrimero = movRival; movSegundo = movJugador;
+	        }
+	    }
 
-		if (puedeAtacar(primero)) {
-			System.out.println("¡" + primero.getNombre() + " usará " + movPrimero.getNombreMovimiento() + "!");
-			movPrimero.ejecutarMovimiento(primero, segundo);
-			if (segundo.getVitalidadActual() <= 0) procesarDebilitamiento(segundo);
-		}
+	    // --- ATAQUE DEL PRIMER POKÉMON ---
+	    if (puedeAtacar(primero)) {
+	        // Aquí capturamos el texto que configuramos en ejecutarMovimiento (el de las flechas ▶)
+	        logTurno.append(movPrimero.ejecutarMovimiento(primero, segundo));
+	        
+	        if (segundo.getVitalidadActual() <= 0) {
+	            procesarDebilitamiento(segundo);
+	            // NOTA: Si procesarDebilitamiento devuelve un String en tu código, 
+	            // cámbialo a: logTurno.append(procesarDebilitamiento(segundo));
+	        }
+	    }
 
-		if (segundo.getVitalidadActual() > 0 && this.idGanador == 0) {
-			if (puedeAtacar(segundo)) {
-				System.out.println("¡" + segundo.getNombre() + " usará " + movSegundo.getNombreMovimiento() + "!");
-				movSegundo.ejecutarMovimiento(segundo, primero);
-				if (primero.getVitalidadActual() <= 0) procesarDebilitamiento(primero);
-			}
-		}
+	    // --- ATAQUE DEL SEGUNDO POKÉMON (Si sigue vivo) ---
+	    if (segundo.getVitalidadActual() > 0 && this.idGanador == 0) {
+	        if (puedeAtacar(segundo)) {
+	            // Capturamos el texto del segundo ataque
+	            logTurno.append(movSegundo.ejecutarMovimiento(segundo, primero));
+	            
+	            if (primero.getVitalidadActual() <= 0) {
+	                procesarDebilitamiento(primero);
+	            }
+	        }
+	    }
 
-		if (pokemonActivoJugador.getVitalidadActual() > 0 && this.idGanador == 0) aplicarEfectosDeEstado(pokemonActivoJugador);
-		if (pokemonActivoRival.getVitalidadActual() > 0 && this.idGanador == 0) aplicarEfectosDeEstado(pokemonActivoRival);
+	    // --- APLICAR EFECTOS DE ESTADO (Veneno, quemadura...) ---
+	    if (pokemonActivoJugador.getVitalidadActual() > 0 && this.idGanador == 0) {
+	        aplicarEfectosDeEstado(pokemonActivoJugador);
+	        // NOTA: Si aplicarEfectosDeEstado devuelve un texto, pon: logTurno.append(...)
+	    }
+	    if (pokemonActivoRival.getVitalidadActual() > 0 && this.idGanador == 0) {
+	        aplicarEfectosDeEstado(pokemonActivoRival);
+	    }
 
-		registrarTurno(movJugador.getNombreMovimiento(), movRival.getNombreMovimiento());
+	    // Registramos en tu historial técnico
+	    registrarTurno(movJugador.getNombreMovimiento(), movRival.getNombreMovimiento());
+	    
+	    // Avanzamos el contador de turnos (asegúrate de que sume 1)
+	    this.turno++; 
+
+	    // ¡ESTO ES LO QUE ARREGLA EL ERROR! Devolvemos todo el texto unido.
+	    return logTurno.toString();
 	}
 
-	public void usarObjeto(Entrenador entrenador, Pokemon objetivo) {
+	public void curacion(Entrenador entrenador, Pokemon objetivo) {
 		int curacion = 20; 
 		if (objetivo.getVitalidadActual() > 0 && objetivo.getVitalidadActual() < objetivo.getVitalidad()) {
 			objetivo.setVitalidadActual(Math.min(objetivo.getVitalidad(), objetivo.getVitalidadActual() + curacion));

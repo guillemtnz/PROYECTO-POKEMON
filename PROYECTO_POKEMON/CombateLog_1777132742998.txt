@@ -1,0 +1,36 @@
+Turno 1:
+Entrenador: Rapidez
+Rival: Placaje
+
+Turno 3:
+Entrenador: Rapidez
+Rival: Rapidez
+
+Turno 5:
+Entrenador: Rapidez
+Rival: Fuego Fatuo
+
+Turno 7:
+Entrenador: Rapidez
+Rival: Placaje
+
+Turno 9:
+Entrenador: Rapidez
+Rival: Fuego Fatuo
+
+Turno 11:
+Entrenador: Rapidez
+Rival: Placaje
+
+Turno 13:
+Entrenador: Rapidez
+Rival: Placaje
+
+Turno 15:
+Entrenador: Rapidez
+Rival: Placaje
+
+Turno 17:
+Entrenador: Rapidez
+Rival: Placaje
+

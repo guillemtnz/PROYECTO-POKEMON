@@ -1,0 +1,20 @@
+Turno 1:
+Entrenador: Placaje
+Rival: Confusión
+
+Turno 2:
+Entrenador: Placaje
+Rival: Confusión
+
+Turno 3:
+Entrenador: Placaje
+Rival: Placaje
+
+Turno 4:
+Entrenador: Placaje
+Rival: Confusión
+
+Turno 5:
+Entrenador: Placaje
+Rival: Látigo
+

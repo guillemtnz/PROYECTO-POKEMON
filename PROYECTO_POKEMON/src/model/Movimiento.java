@@ -18,6 +18,7 @@ public abstract class Movimiento {
 	protected int nivel;
 	protected int precision; 
 	protected int pp;
+	protected int maxPp;
 	protected int prioridad;
 	protected Blanco blanco;
 	protected String efectoEspecial; 
@@ -29,17 +30,19 @@ public abstract class Movimiento {
 	}
 
 	public Movimiento(int idMovimiento, String nombreMovimiento, Tipo tipoMovimiento, int nivel, 
-			int precision, int pp, int prioridad, Blanco blanco, String efectoEspecial) {
-		this.idMovimiento = idMovimiento; this.nombreMovimiento = nombreMovimiento; this.tipoMovimiento = tipoMovimiento;
-		this.nivel = nivel; this.precision = precision; this.pp = pp;
-		this.prioridad = prioridad; this.blanco = blanco; this.efectoEspecial = efectoEspecial;
+	        int precision, int pp, int prioridad, Blanco blanco, String efectoEspecial) {
+	    this.idMovimiento = idMovimiento; 
+	    this.nombreMovimiento = nombreMovimiento; 
+	    this.tipoMovimiento = tipoMovimiento;
+	    this.nivel = nivel; 
+	    this.precision = precision; 
+	    this.pp = pp;
+	    this.maxPp = pp; 
+	    this.prioridad = prioridad; 
+	    this.blanco = blanco; 
+	    this.efectoEspecial = efectoEspecial;
 	}
 	
-	public Movimiento(Movimiento m) {
-		this.idMovimiento = m.idMovimiento; this.nombreMovimiento = m.nombreMovimiento; this.tipoMovimiento = m.tipoMovimiento;
-		this.nivel = m.nivel; this.precision = m.precision; this.pp = m.pp;
-		this.prioridad = m.prioridad; this.blanco = m.blanco; this.efectoEspecial = m.efectoEspecial;
-	}
 
 	// GETTERS Y SETTERS ORIGINALES
 	public int getIdMovimiento() { return idMovimiento; }
@@ -60,6 +63,8 @@ public abstract class Movimiento {
 	public void setBlanco(Blanco blanco) { this.blanco = blanco; }
 	public String getEfectoEspecial() { return efectoEspecial; }
 	public void setEfectoEspecial(String efectoEspecial) { this.efectoEspecial = efectoEspecial; }
+	public int getMaxPp() { return maxPp; }
+	public void setMaxPp(int maxPp) { this.maxPp = maxPp; }
 	
 	// --- CONTROL DE PP ---
 	public boolean consumirPP() {
@@ -71,5 +76,5 @@ public abstract class Movimiento {
 		return false;
 	}
 
-	public abstract void ejecutarMovimiento(Pokemon atacante, Pokemon defensor);
+	public abstract String ejecutarMovimiento(Pokemon atacante, Pokemon defensor);
 }

@@ -18,27 +18,44 @@ public class MovimientoStat extends Movimiento {
 	public void setCantidadModificacion(int cantidadModificacion) { this.cantidadModificacion = cantidadModificacion; }
 
 	@Override
-	public void ejecutarMovimiento(Pokemon atacante, Pokemon defensor) {
-		if (!this.consumirPP()) return;
+	public String ejecutarMovimiento(Pokemon atacante, Pokemon defensor) {
+	    StringBuilder log = new StringBuilder();
 
-		Pokemon objetivo = (this.blanco == Blanco.RIVAL) ? defensor : atacante;
+	    // 1. Comprobar PP
+	    if (!this.consumirPP()) {
+	        return "▶ A " + this.nombreMovimiento + " no le quedan PP...\n";
+	    }
 
-		if (this.precision != ACIERTA_SIEMPRE && (Math.random() * 100) > this.precision) {
-			System.out.println("¡" + atacante.getNombre() + " falló!");
-			return;
-		}
-		
-		int mod = this.cantidadModificacion;
-		switch (this.statModificado) {
-			case ATAQUE: objetivo.setModAtaque(objetivo.getModAtaque() + mod); break;
-			case DEFENSA: objetivo.setModDefensa(objetivo.getModDefensa() + mod); break;
-			case ATAQUE_ESPECIAL: objetivo.setModAtaqueEspecial(objetivo.getModAtaqueEspecial() + mod); break;
-			case DEFENSA_ESPECIAL: objetivo.setModDefensaEspecial(objetivo.getModDefensaEspecial() + mod); break;
-			case VELOCIDAD: objetivo.setModVelocidad(objetivo.getModVelocidad() + mod); break;
-			default: break; 
-		}
+	    // Registramos en el log qué movimiento se está usando
+	    log.append("▶ ¡").append(atacante.getNombre()).append(" usó ").append(this.nombreMovimiento).append("!\n");
 
-		String accion = this.cantidadModificacion > 0 ? "aumentado" : "disminuido";
-		System.out.println("¡El stat " + this.statModificado + " de " + objetivo.getNombre() + " ha " + accion + "!");
+	    Pokemon objetivo = (this.blanco == Blanco.RIVAL) ? defensor : atacante;
+
+	    // 2. Comprobar Precisión
+	    if (this.precision != ACIERTA_SIEMPRE && (Math.random() * 100) > this.precision) {
+	        log.append("   ¡Pero falló!\n");
+	        return log.toString();
+	    }
+	    
+	    // 3. Modificar el Stat correspondiente
+	    int mod = this.cantidadModificacion;
+	    switch (this.statModificado) {
+	        case ATAQUE: objetivo.setModAtaque(objetivo.getModAtaque() + mod); break;
+	        case DEFENSA: objetivo.setModDefensa(objetivo.getModDefensa() + mod); break;
+	        case ATAQUE_ESPECIAL: objetivo.setModAtaqueEspecial(objetivo.getModAtaqueEspecial() + mod); break;
+	        case DEFENSA_ESPECIAL: objetivo.setModDefensaEspecial(objetivo.getModDefensaEspecial() + mod); break;
+	        case VELOCIDAD: objetivo.setModVelocidad(objetivo.getModVelocidad() + mod); break;
+	        default: break; 
+	    }
+
+	    // 4. Registrar en el log el cambio de característica
+	    // Añadimos una pequeña distinción visual (subió/bajó) para que quede más "Pokémon"
+	    String accion = this.cantidadModificacion > 0 ? "aumentado" : "disminuido";
+	    
+	    log.append("   ¡El stat ").append(this.statModificado)
+	       .append(" de ").append(objetivo.getNombre())
+	       .append(" ha ").append(accion).append("!\n");
+
+	    return log.toString();
 	}
 }

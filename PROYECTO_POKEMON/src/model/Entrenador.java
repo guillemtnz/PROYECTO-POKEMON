@@ -28,6 +28,9 @@ public class Entrenador {
 		this.mochila = mochila;
 	
 	}
+	public Entrenador() {
+		// TODO Auto-generated constructor stub
+	}
 	//getter setters
 	public int getIdEntrenador() {
 		return idEntrenador;

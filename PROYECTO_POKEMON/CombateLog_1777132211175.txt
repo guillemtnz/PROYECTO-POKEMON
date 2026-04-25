@@ -1,0 +1,40 @@
+Turno 1:
+Entrenador: Placaje
+Rival: Golpe Cuerpo
+
+Turno 3:
+Entrenador: Placaje
+Rival: Golpe Cuerpo
+
+Turno 5:
+Entrenador: Placaje
+Rival: Golpe Cuerpo
+
+Turno 7:
+Entrenador: Placaje
+Rival: Golpe Cuerpo
+
+Turno 9:
+Entrenador: Placaje
+Rival: Látigo
+
+Turno 11:
+Entrenador: Placaje
+Rival: Látigo
+
+Turno 13:
+Entrenador: Placaje
+Rival: Danza Espada
+
+Turno 15:
+Entrenador: Placaje
+Rival: Látigo
+
+Turno 17:
+Entrenador: Placaje
+Rival: Látigo
+
+Turno 19:
+Entrenador: Placaje
+Rival: Danza Espada
+
