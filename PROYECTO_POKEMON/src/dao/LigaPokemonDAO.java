@@ -15,7 +15,7 @@ public class LigaPokemonDAO {
         this.conexion = conexion;
     }
 
-    // 1. OBTENER RIVAL POR NOMBRE EXACTO
+
     public Entrenador obtenerEntrenadorPorNombre(String nombre) {
         Entrenador rival = null;
         String sql = "SELECT * FROM entrenador WHERE NOM_ENTRENADOR = ?";

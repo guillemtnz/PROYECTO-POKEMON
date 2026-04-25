@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 public class SeleccionCombateController {
 
-    @FXML private VBox rootPane; // Añade esto (y pon fx:id="rootPane" en el FXML)
+    @FXML private VBox rootPane; 
 
     @FXML
     private void handleCombateNormal() {
@@ -29,7 +29,7 @@ public class SeleccionCombateController {
     private void navegar(String ruta) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(ruta));
-            // Esta es la forma que NO falla:
+
             Stage stage = (Stage) rootPane.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (Exception e) { 
