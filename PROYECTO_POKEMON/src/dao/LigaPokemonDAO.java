@@ -42,10 +42,10 @@ public class LigaPokemonDAO {
         return rival;
     }
 
-    // 2. OBTENER AL CAMPEÓN ACTUAL
+    // 
     public Entrenador obtenerCampeonActual() {
         Entrenador campeon = null;
-        // Asumo que tu columna se llama TIPO_ENTRENADOR o TIPO. Cambia TIPO_ENTRENADOR a TIPO si te da error en SQL.
+       
         String sql = "SELECT * FROM entrenador WHERE TIPO_ENTRENADOR = 3 AND CAMPEON = 1";
 
         try (PreparedStatement stmt = conexion.prepareStatement(sql);
@@ -67,7 +67,7 @@ public class LigaPokemonDAO {
         return campeon;
     }
 
-    // 3. ACTUALIZAR AL NUEVO CAMPEÓN
+    //
     public void actualizarCampeon(int idNuevoCampeon) {
         String sql1 = "UPDATE entrenador SET CAMPEON = 0 WHERE TIPO_ENTRENADOR = 3 AND CAMPEON = 1";
         String sql2 = "UPDATE entrenador SET TIPO_ENTRENADOR = 3, CAMPEON = 1 WHERE ID_ENTRENADOR = ?";

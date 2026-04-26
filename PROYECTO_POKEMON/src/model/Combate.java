@@ -76,19 +76,18 @@ public class Combate {
 	        }
 	    }
 
-	    // --- ATAQUE DEL PRIMER POKÉMON ---
+	    //ATAQUE DEL PRIMER POKÉMON 
 	    if (puedeAtacar(primero)) {
-	        // Aquí capturamos el texto que configuramos en ejecutarMovimiento (el de las flechas ▶)
+	        
 	        logTurno.append(movPrimero.ejecutarMovimiento(primero, segundo));
 	        
 	        if (segundo.getVitalidadActual() <= 0) {
 	            procesarDebilitamiento(segundo);
-	            // NOTA: Si procesarDebilitamiento devuelve un String en tu código, 
-	            // cámbialo a: logTurno.append(procesarDebilitamiento(segundo));
+	            
 	        }
 	    }
 
-	    // --- ATAQUE DEL SEGUNDO POKÉMON (Si sigue vivo) ---
+	    //  ATAQUE DEL SEGUNDO POKÉMON (Si sigue vivo) 
 	    if (segundo.getVitalidadActual() > 0 && this.idGanador == 0) {
 	        if (puedeAtacar(segundo)) {
 	            // Capturamos el texto del segundo ataque
@@ -100,10 +99,10 @@ public class Combate {
 	        }
 	    }
 
-	    // --- APLICAR EFECTOS DE ESTADO (Veneno, quemadura...) ---
+	    // APLICAR EFECTOS DE ESTADO 
 	    if (pokemonActivoJugador.getVitalidadActual() > 0 && this.idGanador == 0) {
 	        aplicarEfectosDeEstado(pokemonActivoJugador);
-	        // NOTA: Si aplicarEfectosDeEstado devuelve un texto, pon: logTurno.append(...)
+	       
 	    }
 	    if (pokemonActivoRival.getVitalidadActual() > 0 && this.idGanador == 0) {
 	        aplicarEfectosDeEstado(pokemonActivoRival);
@@ -112,10 +111,10 @@ public class Combate {
 	    // Registramos en tu historial técnico
 	    registrarTurno(movJugador.getNombreMovimiento(), movRival.getNombreMovimiento());
 	    
-	    // Avanzamos el contador de turnos (asegúrate de que sume 1)
+	    // Avanzamos el contador de turnos 
 	    this.turno++; 
 
-	    // ¡ESTO ES LO QUE ARREGLA EL ERROR! Devolvemos todo el texto unido.
+	    // 
 	    return logTurno.toString();
 	}
 

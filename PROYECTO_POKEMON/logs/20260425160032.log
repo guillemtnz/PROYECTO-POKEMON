@@ -1,7 +1,0 @@
-2026-04-25 16:00:32.311 INFO inicioCombate pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"RALTS", 4, entrenador5, OK}, turno=1
-2026-04-25 16:00:34.804 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"RALTS", 4, entrenador5, KO}, turno=2
-2026-04-25 16:00:42.087 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"SKITTY", 5, entrenador5, KO}, turno=3
-2026-04-25 16:00:45.175 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"PLUSLE", 6, entrenador5, KO}, turno=4
-2026-04-25 16:00:46.110 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"MINUN", 6, entrenador5, KO}, turno=5
-2026-04-25 16:00:46.996 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"SPOINK", 5, entrenador5, KO}, turno=6
-2026-04-25 16:00:47.912 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"CASTFORM", 6, entrenador5, KO}, turno=7

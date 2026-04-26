@@ -1,8 +1,0 @@
-2026-04-25 16:29:57.118 INFO inicioCombate pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"Sceptile", 50, entrenador12, OK}, turno=1
-2026-04-25 16:30:10.192 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"Sceptile", 50, entrenador12, KO}, turno=2
-2026-04-25 16:30:25.380 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"Swellow", 50, entrenador12, KO}, turno=3
-2026-04-25 16:30:33.649 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"Manectric", 50, entrenador12, KO}, turno=4
-2026-04-25 16:30:41.050 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"Absol", 50, entrenador12, KO}, turno=5
-2026-04-25 16:30:45.053 INFO debilitado2 pokemon={"ELXOKAS", 71, entrenador11, OK}, pokemonRival={"Flygon", 50, entrenador12, KO}, turno=6
-2026-04-25 16:30:53.864 INFO debilitado2 pokemon={"ELXOKAS", 71, entrenador11, OK}, pokemonRival={"Crawdaunt", 50, entrenador12, KO}, turno=7
-2026-04-25 16:30:53.867 INFO inicioCombate pokemon={"ELXOKAS", 71, entrenador11, OK}, pokemonRival={"Swampert", 50, entrenador13, OK}, turno=8

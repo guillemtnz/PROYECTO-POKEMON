@@ -1,3 +1,0 @@
-2026-04-25 13:30:22.440 INFO inicioCombate pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"WURMPLE", 4, entrenador2, OK}, turno=1
-2026-04-25 13:30:40.732 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"WURMPLE", 4, entrenador2, KO}, turno=2
-2026-04-25 13:31:48.301 INFO debilitado2 pokemon={"ELXOKAS", 70, entrenador11, OK}, pokemonRival={"SILCOON", 5, entrenador2, KO}, turno=3

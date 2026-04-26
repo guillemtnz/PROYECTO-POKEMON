@@ -171,7 +171,7 @@ public class EquipoController {
         } else {
             Objeto objetoNuevo = obtenerObjetoPorNombre(seleccion); 
             
-            // CORREGIDO: Usamos getIdObjeto()
+            
             if (objetoViejo != null && objetoViejo.getIdObjeto() != objetoNuevo.getIdObjeto()) {
                 devolverObjetoAMochila(objetoViejo); 
             }
@@ -185,7 +185,7 @@ public class EquipoController {
         }
     }
     
-    // --- MÉTODOS AUXILIARES PARA LOS OBJETOS ---
+    // MÉTODOS AUXILIARES PARA LOS OBJETOS 
 
     private Objeto obtenerObjetoPorNombre(String nombre) {
         if (jugador.getMochila() != null) {
@@ -207,10 +207,10 @@ public class EquipoController {
         obj.setCantidad(obj.getCantidad() - 1);
         objetoDAO.actualizarCantidadMochila(jugador.getIdEntrenador(), obj.getIdObjeto(), obj.getCantidad());
     }
+   
     
-    // --- MÉTODO QUE FALTABA PARA GUARDAR EL POKÉMON ---
     private void actualizarPokemonBD(Pokemon p) {
-        // Llama al método de tu PokemonDAO
+        
         pokemonDAO.actualizarObjetoEquipado(p);
     }
 }

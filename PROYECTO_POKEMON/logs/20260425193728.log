@@ -1,0 +1,7 @@
+2026-04-25 19:37:28.494 INFO inicioCombate pokemon={"ELXOKAS", 80, entrenador11, OK}, pokemonRival={"ZIGZAGOON", 5, entrenador1, OK}, turno=1
+2026-04-25 19:37:33.128 INFO debilitado2 pokemon={"ELXOKAS", 80, entrenador11, OK}, pokemonRival={"ZIGZAGOON", 5, entrenador1, KO}, turno=2
+2026-04-25 19:37:34.984 INFO debilitado2 pokemon={"ELXOKAS", 80, entrenador11, OK}, pokemonRival={"TAILLOW", 4, entrenador1, KO}, turno=3
+2026-04-25 19:37:59.859 INFO debilitado2 pokemon={"ELXOKAS", 80, entrenador11, OK}, pokemonRival={"WHISMUR", 5, entrenador1, KO}, turno=4
+2026-04-25 19:38:01.218 INFO debilitado2 pokemon={"ELXOKAS", 80, entrenador11, OK}, pokemonRival={"POOCHYENA", 4, entrenador1, KO}, turno=5
+2026-04-25 19:38:14.005 INFO debilitado2 pokemon={"ELXOKAS", 80, entrenador11, OK}, pokemonRival={"SKITTY", 5, entrenador1, KO}, turno=6
+2026-04-25 19:38:15.125 INFO debilitado2 pokemon={"ELXOKAS", 80, entrenador11, OK}, pokemonRival={"SPINDA", 6, entrenador1, KO}, turno=7

@@ -274,7 +274,7 @@ public class PokemonDAO {
         }
     }
     
- // LOCALIZACIÓN: dao.PokemonDAO.java
+ 
     public void actualizarObjetoEquipado(Pokemon p) {
         String sql = "UPDATE pokemon SET ID_OBJETO = ? WHERE ID_POKEMON = ?";
         
