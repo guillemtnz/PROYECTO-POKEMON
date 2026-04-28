@@ -1,0 +1,72 @@
+Turno 1:
+Entrenador: Placaje
+Rival: Danza Espada
+
+Turno 3:
+Entrenador: Placaje
+Rival: Látigo
+
+Turno 5:
+Entrenador: Placaje
+Rival: Placaje
+
+Turno 7:
+Entrenador: Placaje
+Rival: Placaje
+
+Turno 9:
+Entrenador: Placaje
+Rival: Látigo
+
+Turno 11:
+Entrenador: Placaje
+Rival: Látigo
+
+Turno 13:
+Entrenador: Placaje
+Rival: Látigo
+
+Turno 15:
+Entrenador: Placaje
+Rival: Látigo
+
+Turno 17:
+Entrenador: Placaje
+Rival: Danza Espada
+
+Turno 19:
+Entrenador: Placaje
+Rival: Látigo
+
+Turno 21:
+Entrenador: Placaje
+Rival: Danza Espada
+
+Turno 23:
+Entrenador: Placaje
+Rival: Vozarrón
+
+Turno 25:
+Entrenador: Placaje
+Rival: Danza Espada
+
+Turno 27:
+Entrenador: Placaje
+Rival: Placaje
+
+Turno 29:
+Entrenador: Placaje
+Rival: Placaje
+
+Turno 31:
+Entrenador: Placaje
+Rival: Danza Espada
+
+Turno 33:
+Entrenador: Placaje
+Rival: Látigo
+
+Turno 35:
+Entrenador: Placaje
+Rival: Danza Espada
+

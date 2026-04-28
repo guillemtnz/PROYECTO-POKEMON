@@ -1,0 +1,60 @@
+Turno 1:
+Entrenador: Placaje
+Rival: Látigo
+
+Turno 3:
+Entrenador: Placaje
+Rival: Placaje
+
+Turno 5:
+Entrenador: Placaje
+Rival: Placaje
+
+Turno 7:
+Entrenador: Placaje
+Rival: Fuego Fatuo
+
+Turno 9:
+Entrenador: Placaje
+Rival: Rapidez
+
+Turno 11:
+Entrenador: Placaje
+Rival: Placaje
+
+Turno 13:
+Entrenador: Placaje
+Rival: Látigo
+
+Turno 15:
+Entrenador: Placaje
+Rival: Placaje
+
+Turno 17:
+Entrenador: Placaje
+Rival: Fuego Fatuo
+
+Turno 19:
+Entrenador: Placaje
+Rival: Fuego Fatuo
+
+Turno 21:
+Entrenador: Placaje
+Rival: Fuego Fatuo
+
+Turno 23:
+Entrenador: Placaje
+Rival: Látigo
+
+Turno 25:
+Entrenador: Placaje
+Rival: Placaje
+
+Turno 27:
+Entrenador: Placaje
+Rival: Placaje
+
+Turno 29:
+Entrenador: Placaje
+Rival: Látigo
+

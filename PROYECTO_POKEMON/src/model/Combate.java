@@ -2,6 +2,12 @@ package model;
 
 import java.util.LinkedList;
 
+/**
+ * Representa un combate entre dos entrenadores Pokémon.
+ * Gestiona el estado del combate, los turnos, los ataques, las alteraciones de estado
+ * y las condiciones de victoria o derrota.
+ */
+
 public class Combate {
 	
 	private int idCombate;
@@ -18,6 +24,20 @@ public class Combate {
 	private Pokemon pokemonActivoRival;
 	
 	private LinkedList<Turno> listadoTurnos;
+	
+	/**
+	 * Constructor de la clase Combate.
+	 * * @param idCombate Identificador del combate. (Es único)
+	 * @param jugador Es el jugador. El que se ha logueado.
+	 * @param rival Entrenador controlado por el PC.
+	 * @param idGanador Ganador. 0 si el combate está en curso, 1 si gana jugador, 2 si gana el rival.
+	 * @param turno Número de turno actual.
+	 * @param pokemonKOJugador Contador de Pokémon debilitados del jugador.
+	 * @param pokemonKORival Contador de Pokémon debilitados del rival.
+	 * @param pokemonActivoJugador Pokémon que el jugador tiene en el campo.
+	 * @param pokemonActivoRival Pokémon que el rival tiene en el campo.
+	 * @param listadoTurnos Historial de los turnos jugados en el combate.
+	 */
 	
 	public Combate(int idCombate, Entrenador jugador, Entrenador rival, int idGanador, int turno, int pokemonKOJugador,
 			int pokemonKORival, Pokemon pokemonActivoJugador, Pokemon pokemonActivoRival,
@@ -52,6 +72,16 @@ public class Combate {
 	public void setListadoTurnos(LinkedList<Turno> listadoTurnos) { this.listadoTurnos = listadoTurnos; }
 
 	// LÓGICA DEL TURNO
+	
+	/**
+	 * Resuelve las acciones de un turno completo, determinando el orden de ataque
+	 * en base a la prioridad de los movimientos y la velocidad de los Pokémon.
+	 * Además, aplica daño de ataques, gestiona estados alterados y registra el turno.
+	 * * @param movJugador Movimiento seleccionado por el jugador.
+	 * @param movRival Movimiento seleccionado por el rival.
+	 * @return Un String (log) con lo que ha ocurrido en el turno.
+	 */
+	
 	public String resolverTurno(Movimiento movJugador, Movimiento movRival) {
 	    // Creamos el constructor de texto para el Log
 	    StringBuilder logTurno = new StringBuilder();
@@ -59,7 +89,7 @@ public class Combate {
 	    Pokemon primero, segundo;
 	    Movimiento movPrimero, movSegundo;
 
-	    // --- CÁLCULO DE QUIÉN ATACA PRIMERO ---
+	    // CÁLCULO DE QUIÉN ATACA PRIMERO
 	    if (movJugador.getPrioridad() > movRival.getPrioridad()) {
 	        primero = pokemonActivoJugador; segundo = pokemonActivoRival;
 	        movPrimero = movJugador; movSegundo = movRival;
@@ -108,16 +138,22 @@ public class Combate {
 	        aplicarEfectosDeEstado(pokemonActivoRival);
 	    }
 
-	    // Registramos en tu historial técnico
+	    // Registramos 
 	    registrarTurno(movJugador.getNombreMovimiento(), movRival.getNombreMovimiento());
 	    
-	    // Avanzamos el contador de turnos 
+	    // Aumentamos el contador de turno
 	    this.turno++; 
 
 	    // 
 	    return logTurno.toString();
 	}
 
+	/**
+	 * Cura 20 puntos de salud (PS) a un Pokémon objetivo.
+	 * * @param entrenador Entrenador que curará al pokemon.
+	 * @param objetivo Pokemon al que se curará.
+	 */
+	
 	public void curacion(Entrenador entrenador, Pokemon objetivo) {
 		int curacion = 20; 
 		if (objetivo.getVitalidadActual() > 0 && objetivo.getVitalidadActual() < objetivo.getVitalidad()) {
@@ -128,6 +164,13 @@ public class Combate {
 		}
 	}
 
+	/**
+	 * Comprueba si un Pokémon es capaz de efectuar su ataque en el turno actual,
+	 * evaluando las restricciones causadas por sus alteraciones de estado (parálisis, sueño, etc.).
+	 * * @param p El Pokémon que intenta atacar.
+	 * @return true si el Pokémon puede atacar, false si su estado se lo impide.
+	 */
+	
 	private boolean puedeAtacar(Pokemon p) {
 		if (p.getEstado() == null) return true;
 
@@ -170,6 +213,12 @@ public class Combate {
 		}
 		return true;
 	}
+	
+	/**
+	 * Aplica el daño al final del turno causado por alteraciones de estado
+	 * como veneno o quemaduras.
+	 * * @param p El Pokémon que sufre el estado alterado.
+	 */
 
 	private void aplicarEfectosDeEstado(Pokemon p) {
 		if (p.getEstado() == null) return;
@@ -198,6 +247,12 @@ public class Combate {
 		}
 	}
 	
+	/**
+	 * Procesa cuando los PS de un pokemon llegan a 0. Actualiza los contadores de KO,
+	 * reparte experiencia si el debilitado es del rival y comprueba si el combate debe finalizar.
+	 * * @param pokemonDebilitado El Pokémon que acaba de perder todos sus PS.
+	 */
+	
 	public void procesarDebilitamiento(Pokemon pokemonDebilitado) {
 		System.out.println("¡" + pokemonDebilitado.getNombre() + " se ha debilitado!");
 		pokemonDebilitado.setEstado(Estado.DEBILITADO);
@@ -214,6 +269,11 @@ public class Combate {
 		}
 		comprobarFinCombate();
 	}
+	
+	/**
+	 * Verifica si alguno de los entrenadores ha perdido a sus 6 Pokémon
+	 * para finalizar el combate y declarar un ganador.
+	 */
 
 	private void comprobarFinCombate() {
 		if (this.pokemonKOJugador >= 6) {
@@ -222,6 +282,12 @@ public class Combate {
 			finalizarCombate(1); 
 		}
 	}
+	
+	/**
+	 * Concluye el combate, gestiona la transferencia de Pokédolares del perdedor al ganador,
+	 * resetea los modificadores de los Pokémon activos en ese momento y exporta el historial del combate.
+	 * * @param ganador numero que representa quién gana el combate (1 para el jugador, 2 para el rival).
+	 */
 
 	private void finalizarCombate(int ganador) {
 		this.idGanador = ganador;
@@ -241,17 +307,33 @@ public class Combate {
 		exportarHistorial();
 	}
 
+	/**
+	 * Permite al jugador huir del combate. Esto cuenta como una derrota,
+	 * penalizándolo como si sus 6 Pokémon hubieran sido debilitados.
+	 */
+	
 	public void retirarse() {
 		System.out.println("¡" + this.jugador.getNombre() + " ha huido del combate!");
 		this.pokemonKOJugador = 6; 
 		finalizarCombate(2);
 	}
 	
+	/**
+	 * Añade el registro de las acciones de los jugadores al historial del combate.
+	 * * @param accionJugador El movimiento o acción ejecutada por el jugador.
+	 * @param accionRival El movimiento o acción ejecutada por el rival.
+	 */
+	
 	public void registrarTurno(String accionJugador, String accionRival) {
 		Turno nuevoTurno = new Turno(this.turno, accionJugador, accionRival);
 		this.listadoTurnos.add(nuevoTurno);
 		this.turno++; 
 	}
+	
+	/**
+	 * Exporta el historial completo de los turnos de la batalla a un archivo .txt.
+	 * El nombre del archivo se genera usando la hora actual para evitar colisiones.
+	 */
 
 	private void exportarHistorial() {
 		String nombreFichero = "CombateLog_" + System.currentTimeMillis() + ".txt";
